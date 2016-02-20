@@ -20,9 +20,14 @@ class TipoActividadController extends Controller
     public function index(Request $request)
     {
         $buscarTipoActividad = $request->input('buscarTipoActividad');
-        $tipoActividad = DB::table('tipo_actividad')
-            ->join( 'clasificacion_actividad','tipo_actividad.id_clasificacion_actividad','=','clasificacion_actividad.id_clasificacion_actividad')
-            ->select('tipo_actividad.*','clasificacion_actividad.descripcion_clasificacion')
+        $tipoActividad = DB::table('tipo_actividad')->orderBy('id_tipo_actividad')
+            ->join( 'clasificacion_actividad',
+                    'tipo_actividad.id_clasificacion_actividad','=',
+                    'clasificacion_actividad.id_clasificacion_actividad')
+            ->join('sector_actividad',
+                    'sector_actividad.id_sector_ac','=',
+                    'clasificacion_actividad.id_sector_ac')
+            ->select('tipo_actividad.*','clasificacion_actividad.descripcion_clasificacion','sector_actividad.descripcion_sector')
 //            ->where('tipo_actividad.descripcion_actividad','=','%'.$buscarTipoActividad.'%')
             ->paginate(5);
         $tipoActividad->setPath('tipoActividad');

@@ -20,12 +20,9 @@ class ClasificacionActividadController extends Controller
     public function index()
     {
         $clasificacionActividad = DB::table('clasificacion_actividad')
-                                            ->join('sector_clasificacion_actividad',
-                                                    'sector_clasificacion_actividad.id_clasificacion_actividad','=',
-                                                    'clasificacion_actividad.id_clasificacion_actividad')
                                             ->join('sector_actividad',
                                                     'sector_actividad.id_sector_ac','=',
-                                                    'sector_clasificacion_actividad.id_sector_ac')
+                                                    'clasificacion_actividad.id_sector_ac')
                                             ->select('clasificacion_actividad.*',
                                                         'sector_actividad.descripcion_sector')
                                             ->paginate(5);
@@ -43,23 +40,19 @@ class ClasificacionActividadController extends Controller
     {
         $clasificacionActividad = new ClasificacionActividad();
         $clasificacionActividad->descripcion_clasificacion = \Request::Input('descripcionClasificacion');
-        $sectorActividad = \Request::Input('sectorActividad');
+        $clasificacionActividad->id_sector_ac = \Request::Input('sectorActividad');
         $clasificacionActividad->save();
-        $clasificacionActividad->sectorActividad()->attach([$sectorActividad]);
         return redirect('clasificacionActividad')->with('status','Clasificación Creada con Exito');
     }
 
     public function edit($id)
     {
         $clasificacionActividad = DB::table('clasificacion_actividad')
-                                    ->join('sector_clasificacion_actividad',
-                                            'sector_clasificacion_actividad.id_clasificacion_actividad','=',
-                                            'clasificacion_actividad.id_clasificacion_actividad')
                                     ->join('sector_actividad',
                                             'sector_actividad.id_sector_ac','=',
-                                            'sector_clasificacion_actividad.id_sector_ac')
+                                            'clasificacion_actividad.id_sector_ac')
                                     ->select('clasificacion_actividad.*',
-                                             'sector_actividad.*')
+                                             'sector_actividad.descripcion_sector')
                                     ->where('clasificacion_actividad.id_clasificacion_actividad','=',$id )->first();
         $sectorActividad = SectorActividad::all()->pluck('descripcion_sector','id_sector_ac');
 
@@ -72,10 +65,8 @@ class ClasificacionActividadController extends Controller
     {
         $clasificacionActividad = ClasificacionActividad::find($id);
         $clasificacionActividad->descripcion_clasificacion = \Request::Input('descripcionClasificacion');
-        $sectorActividad = \Request::Input('sectorActividad');
+        $clasificacionActividad->id_sector_ac = \Request::Input('sectorActividad');
         $clasificacionActividad->save();
-
-        $clasificacionActividad->sectorActividad()->sync([$sectorActividad]);
         return redirect('clasificacionActividad')->with('message','Clasificación modificada con exito');
     }
 

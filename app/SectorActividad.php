@@ -12,6 +12,6 @@ class SectorActividad extends Model
 
     public function clasificacionActividad()
     {
-        $this->belongsToMany(ClasificacionActividad::class);
+        return $this->belongsTo(ClasificacionActividad::class,'id_clasificacion_actividad','id_sector_ac');
     }
 }

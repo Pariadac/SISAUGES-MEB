@@ -17,9 +17,7 @@ class ClasificacionActividad extends Model
 
     public function sectorActividad()
     {
-        return $this->belongsToMany(SectorActividad::class,'sector_clasificacion_actividad',
-                                                            'id_clasificacion_actividad',
-                                                            'id_sector_ac')->withPivot('id_sa_ca');
+        return $this->hasMany(SectorActividad::class,'id_sector_ac','id_clasificacion_actividad');
     }
 }
 
