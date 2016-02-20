@@ -35,7 +35,7 @@ class UserController extends Controller
         $usuario->email=\Request::Input('email');
         $usuario->telefono=\Request::Input('telefono');
         $usuario->username=\Request::Input('nombreUsuario');
-        $usuario->password=\Hash::make(\Request::Input('contraseña'));
+        $usuario->password=\Hash::make(\Request::Input('password'));
 
         $usuario->save();
         return redirect('usuario')->with('message','Se ha agregado a un Usuario con Exito');
@@ -55,7 +55,7 @@ class UserController extends Controller
         $usuario->apellido=\Request::Input('apellido');
         $usuario->email=\Request::Input('email');
         $usuario->telefono=\Request::Input('telefono');
-        $usuario->nombre_usuario=\Request::Input('carrera');
+        $usuario->password = \Hash::make(\Request::Input('password'));
         $usuario->save();
         return redirect('usuario')->with('message','El usuario N°'.$id.' ha sido editado');
     }

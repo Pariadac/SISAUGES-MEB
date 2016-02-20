@@ -7,8 +7,9 @@
     <table class="table table-responsive table-bordered">
         <tr>
             <th>N° Actividad</th>
-            <th>Descripción Tipo Actividad</th>
-            <th>Descripcion Clasificación Actividad</th>
+            <th>Tipo Actividad</th>
+            <th>Clasificación Actividad</th>
+            <th>Sector Involucrado</th>
             <th>Acción</th>
         </tr>
         @foreach($tipoActividad as $tA)
@@ -16,6 +17,7 @@
                 <td>{{$tA->id_tipo_actividad}}</td>
                 <td>{{$tA->descripcion_actividad}}</td>
                 <td>{{$tA->descripcion_clasificacion}}</td>
+                <td>{{$tA->descripcion_sector}}</td>
                 <td width="60" align="center">
                     {!! Html::link('tipoActividad/editar/'.$tA->id_tipo_actividad, 'Editar', ['class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs']) !!}
                 </td>
@@ -27,4 +29,5 @@
             </tr>
         @endforeach
     </table>
+    {!! $tipoActividad->render() !!}
 @endsection

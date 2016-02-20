@@ -41,18 +41,6 @@ CREATE TABLE IF NOT EXISTS PERSONA
 --	'Mixto'
 --);
 
-
-CREATE TABLE IF NOT EXISTS CLASIFICACION_ACTIVIDAD
-(
-	id_clasificacion_actividad serial,
-	descripcion_clasificacion varchar(60) not null,
-	id_tipo_actividad integer,
-	constraint pk_clasificacion_actividad
-		primary key (id_clasificacion_actividad)
-);
-
---drop table clasificacion_actividad
-
 CREATE TABLE IF NOT EXISTS SECTOR_ACTIVIDAD
 (
 	id_sector_ac serial,
@@ -61,7 +49,21 @@ CREATE TABLE IF NOT EXISTS SECTOR_ACTIVIDAD
 		primary key (id_sector_ac)
 );
 
---drop table sector_actividad
+--drop table sector_actividad;
+
+
+CREATE TABLE IF NOT EXISTS CLASIFICACION_ACTIVIDAD
+(
+	id_clasificacion_actividad serial,
+	descripcion_clasificacion varchar(60) not null,
+	id_sector_ac integer,
+	constraint pk_clasificacion_actividad
+		primary key (id_clasificacion_actividad),
+	constraint fk_sector_ac
+		foreign key (id_sector_ac) references sector_actividad (id_sector_ac)
+);
+
+--drop table clasificacion_actividad;
 
 CREATE TABLE IF NOT EXISTS TIPO_ACTIVIDAD
 (
@@ -74,23 +76,8 @@ CREATE TABLE IF NOT EXISTS TIPO_ACTIVIDAD
 		foreign key (id_clasificacion_actividad) references clasificacion_actividad(id_clasificacion_actividad)
 );
 
---drop table tipo_actividad
+--drop table tipo_actividad;
 
-CREATE TABLE IF NOT EXISTS SECTOR_CLASIFICACION_ACTIVIDAD
-(
-	id_sector_ac integer,
-	id_clasificacion_actividad integer,
-	constraint pk_sc_ac
-		primary key (id_sector_ac, id_clasificacion_actividad),
-	constraint fk_sc_actividad
-		foreign key (id_clasificacion_actividad) references clasificacion_actividad(id_clasificacion_actividad),
-	constraint fk_sc_sector
-		foreign key (id_sector_ac) references sector_actividad(id_sector_ac)
-	
-	
-);
-
---drop table sector_clasificacion_actividad
 
 CREATE TABLE IF NOT EXISTS ACTIVIDAD
 (
@@ -111,7 +98,7 @@ CREATE TABLE IF NOT EXISTS ACTIVIDAD
 		foreign key (id_sector_ac) references sector_actividad(id_sector_ac)
 );
 
---drop table actividad
+--drop table actividad;
 
 
 

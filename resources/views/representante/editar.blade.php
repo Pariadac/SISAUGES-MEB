@@ -1,5 +1,5 @@
 @extends('app')
-
+<?php $title =" Editar Representante" ?>
 @section('content')
 
     @if (Session::has('message'))

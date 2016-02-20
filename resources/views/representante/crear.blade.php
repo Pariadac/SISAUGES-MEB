@@ -1,5 +1,5 @@
 @extends('app')
-
+<?php $title ="Crear Representante" ?>
 @section('content')
 
 

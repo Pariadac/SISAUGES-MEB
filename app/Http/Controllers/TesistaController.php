@@ -18,7 +18,6 @@ class TesistaController extends Controller
     public function index()
     {
         $tesista=Tesista::all();
-
         return view('tesista.index')->with('tesista',$tesista);
     }
 

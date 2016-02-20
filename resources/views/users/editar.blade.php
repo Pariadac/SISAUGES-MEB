@@ -1,5 +1,5 @@
 @extends('app')
-
+<?php $title = "Editar Tesista"?>
 @section('content')
 
     @if (Session::has('message'))
@@ -31,7 +31,11 @@
             </div>
             <div class="col-md-6">
                 {{Form::label('nombreUsuario','nombre Usuario')}}
-                {{Form::text('nombreUsuario',$usuario->nombre_usuario,['class'=>'form-control','type'=>'text'])}}
+                {{Form::text('nombreUsuario',$usuario->username,['class'=>'form-control','type'=>'text'])}}
+            </div>
+            <div class="col-md-6">
+                {{Form::label('password','nombre Usuario')}}
+                {{Form::text('password',$usuario->password,['class'=>'form-control','type'=>'text'])}}
             </div>
         </div>
     </div>
