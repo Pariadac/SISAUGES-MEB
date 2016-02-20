@@ -26,13 +26,11 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function ()
-{
-
+Route::group(['middleware' => ['web']], function () {
+    //
 });
 
-Route::group(['middleware' => ['web']], function ()
-{
+Route::group(['middleware' => 'web'], function () {
     Route::auth();
 
     Route::get('tesista','TesistaController@index');
@@ -41,6 +39,7 @@ Route::group(['middleware' => ['web']], function ()
     Route::get('tesista/editar/{id}','TesistaController@edit'); //Te redirige a la vista editar con los datos de existir luego de darle al boton
     Route::post('actualizarTesista/{id}','TesistaController@update'); //guarda los datos modificados y te redirige al index
     Route::delete('tesista/eliminar/{id}','TesistaController@destroy');
+
 
 //Rutas para usuarios
 
@@ -95,11 +94,36 @@ Route::group(['middleware' => ['web']], function ()
     Route::post('actualizarSectorActividad/{id}','SectorActividadController@update');
     Route::delete('sectorActividad/eliminar{id}','SectorActividadController@destroy');
 
+
+
+
+//rutas para Institucion
+
+
+
+    Route::get('institucion','InstitucionController@index');
+    Route::get('institucion/crear','InstitucionController@create');
+    Route::post('institucion/guardar','InstitucionController@store');
+    Route::get('institucion/editar/{id}','InstitucionController@edit');
+    Route::post('institucion/edita/{id}','InstitucionController@update');
+    Route::get('institucion/eliminar/{id}','InstitucionController@destroy');
+
+
+//rutas para muestras
+
+
+
+    Route::get('muestras','MuestraController@index');
+    Route::get('muestras/crear','MuestraController@create');
+    Route::post('muestras/guardar','MuestraController@store');
+    Route::post('muestras/ajaxvalidar','MuestraController@ajaxvalidar');
+    Route::get('muestras/lista','MuestraController@listar');
+    Route::get('muestras/editar/{id}','MuestraController@edit');
+    Route::post('muestras/edita/{id}','MuestraController@update');
+    Route::delete('muestras/eliminar{id}','MuestraController@destroy');
+
+
     //Route::get('/home', 'HomeController@index');
-});
-
-Route::group(['web','usuario'], function(){
-
 });
 
 

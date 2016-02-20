@@ -1,0 +1,145 @@
+body{
+	background-color: #010326!important;
+}
+
+
+.navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
+	background-color: #365073!important;
+}
+
+
+.navbar-inverse{
+	background-color: #010326!important; 
+	border-color: #010326!important;
+}
+
+#principal-suit img{
+	width: 100%!important;
+
+}
+
+.ultima img{
+	width: 100%;
+}
+
+#principal-suit{
+	background-color: #DEECF9;
+}
+
+.contenedores{
+	padding-bottom: 20px;
+}
+
+.breadcrumb{
+	background-color: #DEECF9!important;
+}
+.alinear{
+	width: 30%;
+	margin: auto;
+}
+.pasos-registro{
+	width: 100%;
+	overflow:hidden;
+    position:relative;
+    display:inline-block;
+}
+.paso{
+	padding: 10px;
+	border-radius: 40px 40px 40px 40px;
+	-moz-border-radius: 40px 40px 40px 40px;
+	-webkit-border-radius: 40px 40px 40px 40px;
+	background-color:#010326;
+	color: #fff;
+	width: 40px; 
+	text-align: center;
+	float: left;
+}
+
+.separador{
+	width: 40px;
+	border-bottom: solid 2px #010326;
+	position: relative;
+	float: left;
+	margin: 30px 10px 0px 10px;
+}
+
+.activado{
+	background-color:#365073!important;
+}
+
+.contenedor-imagen{
+	max-width: 60px;
+}
+.contenedor-imagen img{
+	width: 100%;
+	padding-right: 10px;
+}
+
+/* layout.css Style */
+.upload-drop-zone {
+  height: 200px;
+  border-width: 2px;
+  margin-bottom: 20px;
+}
+
+/* skin.css Style*/
+.upload-drop-zone {
+  color: #ccc;
+  border-style: dashed;
+  border-color: #ccc;
+  line-height: 200px;
+  text-align: center
+}
+.upload-drop-zone.drop {
+  color: #222;
+  border-color: #222;
+}
+
+
+.imgcargada{
+	display: none;
+}
+
+
+#eltraslado2{
+	display: none;
+}
+
+.paralela {
+    width: 40px;
+    background: #0D1826;
+    position: fixed;
+    float: left;
+    z-index: 999;
+    margin-top: 60px;
+    height: 100px;
+    border-radius: 0px 10px 10px 0px;
+	-moz-border-radius: 0px 10px 10px 0px;
+	-webkit-border-radius: 0px 10px 10px 0px;
+	border: 0px solid #000000;
+}
+
+.alineador{
+	width: 40%;
+	margin:auto;
+	position: relative;
+}
+.alineador img{
+	width: 100%;
+}
+
+.paralela:hover{
+	background:#365073;
+}
+
+@media only screen and (max-width: 992px) and (min-width: 768px) {
+	#page-wrapper{
+		min-height: 600px; 
+	}	
+}
+
+@media only screen and (min-width: 993px){
+	#page-wrapper{
+		min-height: 800px; 
+	}	
+}
