@@ -120,16 +120,29 @@ body{
 }
 
 .alineador{
-	width: 40%;
+	width: 80%;
 	margin:auto;
 	position: relative;
 }
 .alineador img{
 	width: 100%;
+	margin: 10px 0px;
 }
 
 .paralela:hover{
 	background:#365073;
+}
+
+.table th{
+	width: 20%;
+}
+
+.botones-principal{
+	text-align: center;
+}
+
+.botn{
+	margin-top: 15px;
 }
 
 @media only screen and (max-width: 992px) and (min-width: 768px) {
@@ -140,6 +153,6 @@ body{
 
 @media only screen and (min-width: 993px){
 	#page-wrapper{
-		min-height: 800px; 
+		min-height: 720px; 
 	}	
 }

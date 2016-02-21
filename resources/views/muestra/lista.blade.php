@@ -25,31 +25,38 @@
                                     <th>Imagen</th>
                                     <th>Codigo</th>
                                     <th>Fecha</th>
+                                    <th>Acción</th>
                             </tr>
 
                             <?php
 
-                                foreach ($datos as $key) {
+                                foreach ($datos as $key=> $value) {
+
+
+                                    if ($key % 2!= 0) {
+                                        $col="info";
+                                    }else{
+                                        $col="";
+                                    }
+
                                     echo '
 
 
-                                        <tr>
+                                        <tr class="'.$col.'">
                                             <td class="contenedor-imagen">
-                                                <img src="'.url("/storage").'/'.$key->ruta_img_muestra.'"
+                                                <img src="'.url("/storage").'/'.$value->ruta_img_muestra.'"
                                             </td>
                                             <td>
-                                                '.$key->codigo_muestra.'
+                                                '.$value->codigo_muestra.'
                                             </td>
                                             <td>
-                                                '.$key->fecha_analisis.'
+                                                '.$value->fecha_analisis.'
                                             </td>
-                                            <td>
+                                            <td >
                                                 <a href="'.url("/storage").'" id="singlebutton" name="singlebutton" class="btn btn-primary">Detalles</a>
-                                            </td>
-                                            <td>
+
                                                 <a href="vistaformulario_siguiente.php" id="singlebutton" name="singlebutton" class="btn btn-primary">Modificar</a>
-                                            </td>
-                                            <td>
+
                                                 <a href="vistaformulario_siguiente.php" id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</a>
                                             </td>
                                         </tr>    

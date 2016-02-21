@@ -31,17 +31,19 @@ class MuestraController extends Controller
     	$datos=DB::table('muestra')->orderBy('id_muestra','desc')->get();
 
 
-    	$public_path = public_path();
+    	if ($datos) {
+            $public_path = public_path();
 
-	    $url = $public_path.'/storage/'.$datos[0]->ruta_img_muestra;
+            $url = $public_path.'/storage/'.$datos[0]->ruta_img_muestra;
 
-	    //verificamos si el archivo existe y lo retornamos
+            //verificamos si el archivo existe y lo retornamos
 
-	    if (Storage::exists($datos[0]->ruta_img_muestra))
-	    {
+            if (Storage::exists($datos[0]->ruta_img_muestra))
+            {
 
-	     	$datos['ruta_img_muestra']=$url;  
-	    }
+                $datos['ruta_img_muestra']=$url;  
+            }
+        }
 
 
         return view('muestra.index',compact('datos'));

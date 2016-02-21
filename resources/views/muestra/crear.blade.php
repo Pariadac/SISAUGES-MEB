@@ -44,111 +44,124 @@
 
                     <fieldset>
 
-                        <div class="col-md-12">
-                          <div>
-                            <div class="panel-body">
+                        <div class="col-md-4">
 
                               <!-- Standar Form -->
-                                <div class="form-group">
+                                <div class="form-group botn">
 
-                                    <button type="button" class="btn btn-primary" id="imagenescarga">Cargar Muestra</button>
+                                    <div class="col-md-12 botones-principal">
+                                      <button type="button" class="btn btn-primary" id="imagenescarga">Cargar Muestra</button>
+                                    </div>
 
                                     <input id="filebutton" style="display:none" name="filebutton" class="input-file" type="file">
-
-                                    <div class="col-md-12">
-                                        
-                                    </div>
 
                                     <div class="col-md-12 imgcargada">
                                         <div class="alineador">
                                             <img src="" id="thumbnil">
                                         </div>
-                                    </div>
+                                    </div>                    
 
                                 </div>
 
-
-                            </div>
-                          </div>
                         </div> 
 
-                        <div class="col-md-12">
-                            <!-- Text input-->
-                            <div class="form-group ">
-                              <label class="control-label" for="textinput">Codigo de La muestra</label>  
-                              <div class="col-md-12">
-                              <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control"> 
-                              </div>
-                            </div>
+                        <div class="col-md-8">
+                          
 
+                          <div class="row">
+                          
 
-                            <div class="form-group ">
-                              <label class="control-label" for="textinput">Fecha de Recepcion</label>  
-                              <div class="col-md-12">
-                              <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" class="form-control"> 
-                              </div>
-                            </div>
-
-                            <div class="form-group ">
-                              <label class="control-label" for="textinput">Fecha de Analisis</label>  
-                              <div class="col-md-12">
-                              <input id="fecha_recepcion" name="fecha_analisis" type="text" placeholder="placeholder" class="form-control"> 
-                              </div>
-                            </div>
-
-
-                            <!-- Button Drop Down -->
-                            <div class="form-group">
-                              <label class="control-label" for="buttondropdown">Tipo de Muestra</label>
-                              <div class="col-md-12">
-                                <div class="input-group">
-                                  <input id="buttondropdown" name="tip_mues" class="form-control" placeholder="placeholder" type="text">
-                                  <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                      Action
-                                      <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                      <li><a href="#">TIPO 1</a></li>
-                                      <li><a href="#">TIPO 2</a></li>
-                                      <li><a href="#">TIPO 3</a></li>
-                                    </ul>
+                            <div class="col-md-6">
+                                <!-- Text input-->
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Codigo de La muestra</label>  
+                                  <div class="col-md-12">
+                                  <input id="textinput" name="textinput" type="text" placeholder="placeholder" class="form-control"> 
                                   </div>
                                 </div>
-                              </div>
+
+
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Fecha de Recepcion</label>  
+                                  <div class="col-md-12">
+                                  <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" class="form-control"> 
+                                  </div>
+                                </div>
+
                             </div>
 
-                            <!-- Textarea -->
-                            <div class="form-group">
-                              <label class="control-label" for="textarea">Descripccion de la muestra</label>
-                              <div class="col-md-12">                     
-                                <textarea class="form-control" id="textarea" name="textarea">Lorem</textarea>
-                              </div>
-                            </div>
-                        </div>
-
-                        <div class="col-md-12">
+                            <div class="col-md-6">
+                                    
                                 
+
                                 <!-- Button Drop Down -->
-                            <div class="form-group">
-                              <label class="control-label" for="buttondropdown">Tipo de Atividad</label>
-                              <div class="col-md-12">
-                                <div class="input-group">
-                                  <input id="buttondropdown" name="tip_act" class="form-control" placeholder="placeholder" type="text">
-                                  <div class="input-group-btn">
-                                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                      Action
-                                      <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu pull-right">
-                                      <li><a href="#">ACTIVIDAD 1</a></li>
-                                      <li><a href="#">ACTIVIDAD 2</a></li>
-                                      <li><a href="#">ACTIVIDAD 3</a></li>
-                                    </ul>
+                                <div class="form-group">
+                                  <label class="control-label" for="buttondropdown">Tipo de Muestra</label>
+                                  <div class="col-md-12">
+                                    <div class="input-group">
+                                      <input id="buttondropdown" name="tip_mues" class="form-control" placeholder="placeholder" type="text">
+                                      <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                          Action
+                                          <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                          <li><a href="#">TIPO 1</a></li>
+                                          <li><a href="#">TIPO 2</a></li>
+                                          <li><a href="#">TIPO 3</a></li>
+                                        </ul>
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
-                              </div>
+
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Fecha de Analisis</label>  
+                                  <div class="col-md-12">
+                                  <input id="fecha_recepcion" name="fecha_analisis" type="text" placeholder="placeholder" class="form-control"> 
+                                  </div>
+                                </div>
+
+                                <!-- Button Drop Down -->
+                                <div class="form-group">
+                                  <label class="control-label" for="buttondropdown">Tipo de Atividad</label>
+                                  <div class="col-md-12">
+                                    <div class="input-group">
+                                      <input id="buttondropdown" name="tip_act" class="form-control" placeholder="placeholder" type="text">
+                                      <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                          Action
+                                          <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu pull-right">
+                                          <li><a href="#">ACTIVIDAD 1</a></li>
+                                          <li><a href="#">ACTIVIDAD 2</a></li>
+                                          <li><a href="#">ACTIVIDAD 3</a></li>
+                                        </ul>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+
+
+
                             </div>
+
+
+                            <div class="col-md-12">
+                              
+                              <!-- Textarea -->
+                              <div class="form-group">
+                                <label class="control-label" for="textarea">Descripccion de la muestra</label>
+                                <div class="col-md-12">                     
+                                  <textarea class="form-control" id="textarea" name="textarea">Lorem</textarea>
+                                </div>
+                              </div>
+
+                            </div>
+
+
+                          </div>
 
 
                         </div>
@@ -157,7 +170,7 @@
                         <!-- Button -->
                         <div class="form-group">
 
-                            <div class="col-md-2 col-md-offset-8">
+                            <div class="col-md-12 botones-principal">
 
                                 <button id="singlebutton" name="singlebutton" class="btn btn-success">Terminar</button>
 
