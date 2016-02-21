@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Muestrario</title>
+    <title>Muestrario2</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/css/bootstrap.min.css') }}" rel="stylesheet">
