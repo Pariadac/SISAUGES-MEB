@@ -77,6 +77,31 @@ $(document).ready(function(){
 		    }
 		});
 
+	});
+
+
+	$('#boton-inst').on('click',function(event){
+
+		event.preventDefault();
+
+		var form=$('.busqueda-inst');
+		var data=form.serialize();
+		var url=form.attr('action');
+
+		$.ajax({
+		    url: url, 
+		    type: "POST",             
+		    data: data,      
+		    cache: false,              
+		    success: function(data) {
+
+		    	$('.borrables').remove();
+
+		    	$('.table').append(data);
+
+		    }
+		});
+
 	})
 
 

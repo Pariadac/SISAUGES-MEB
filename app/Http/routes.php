@@ -107,6 +107,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('institucion/editar/{id}','InstitucionController@edit');
     Route::post('institucion/edita/{id}','InstitucionController@update');
     Route::get('institucion/eliminar/{id}','InstitucionController@destroy');
+    Route::post('institucion/buscar','InstitucionController@buscar');
 
 
 //rutas para muestras

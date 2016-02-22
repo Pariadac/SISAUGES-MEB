@@ -4,7 +4,7 @@ namespace SISAUGES;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Insticion extends Model
+class institucion extends Model
 {
     public $timestamps=false;
     protected $table="institucion";
