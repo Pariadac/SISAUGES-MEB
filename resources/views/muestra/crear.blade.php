@@ -55,6 +55,8 @@
 
                                     <input id="filebutton" style="display:none" name="filebutton" class="input-file" type="file">
 
+                                    <input name="rutamuestra" id="rutamuestra" type="hidden">
+
                                     <div class="col-md-12 imgcargada">
                                         <div class="alineador">
                                             <img src="" id="thumbnil">
@@ -93,27 +95,16 @@
                             <div class="col-md-6">
                                     
                                 
-
-                                <!-- Button Drop Down -->
-                                <div class="form-group">
-                                  <label class="control-label" for="buttondropdown">Tipo de Muestra</label>
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Tipo de Muestra</label>  
                                   <div class="col-md-12">
-                                    <div class="input-group">
-                                      <input id="buttondropdown" name="tip_mues" class="form-control" placeholder="placeholder" type="text">
-                                      <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                          Action
-                                          <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                          <li><a href="#">TIPO 1</a></li>
-                                          <li><a href="#">TIPO 2</a></li>
-                                          <li><a href="#">TIPO 3</a></li>
-                                        </ul>
-                                      </div>
-                                    </div>
+                                  <select id="tipo_muestra" name="tipo_muestra" type="text" placeholder="placeholder" class="form-control">
+                                    
+                                  </select> 
                                   </div>
                                 </div>
+
+
 
                                 <div class="form-group ">
                                   <label class="control-label" for="textinput">Fecha de Analisis</label>  
@@ -122,24 +113,13 @@
                                   </div>
                                 </div>
 
-                                <!-- Button Drop Down -->
-                                <div class="form-group">
-                                  <label class="control-label" for="buttondropdown">Tipo de Atividad</label>
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Tipo de Atividad</label>  
                                   <div class="col-md-12">
-                                    <div class="input-group">
-                                      <input id="buttondropdown" name="tip_act" class="form-control" placeholder="placeholder" type="text">
-                                      <div class="input-group-btn">
-                                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                                          Action
-                                          <span class="caret"></span>
-                                        </button>
-                                        <ul class="dropdown-menu pull-right">
-                                          <li><a href="#">ACTIVIDAD 1</a></li>
-                                          <li><a href="#">ACTIVIDAD 2</a></li>
-                                          <li><a href="#">ACTIVIDAD 3</a></li>
-                                        </ul>
-                                      </div>
-                                    </div>
+                                  <select id="tipo_actividad" name="tipo_actividad" class="form-control">
+                                    
+
+                                  </select>
                                   </div>
                                 </div>
 

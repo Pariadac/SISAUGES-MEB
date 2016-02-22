@@ -8,6 +8,8 @@ use Illuminate\Contracts\Validation\ValidationException;
 
 use Storage;
 
+use Imagick;
+
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use SISAUGES\Http\Controllers\Controller;
@@ -65,11 +67,32 @@ class MuestraController extends Controller
 
     	$data=Input::all();
 
-    	$file = $data['filebutton'];
+        if (strlen($data['rutamuestra'])>0) {
+            
+            $valores=explode('/', $data['rutamuestra']);
+
+            Storage::delete($valores[count($valores)-1]);
+
+        }
+
+
+        $file=$data['filebutton'];
+
+        $ruta=$_SERVER['DOCUMENT_ROOT']."/storage/";
+
+        $image = new Imagick($data['filebutton']->getRealPath());
+
+        $fecha=date("d_m_Y_H_i_s");
+
+        $ruta=$ruta.'aux-'.$fecha.".jpg";
+
+        $image->setImageFormat('jpg');
+
+        $image->writeImage($ruta);
 
     	$error=0;
 
-    	if ($file->getSize()>200000)
+    	if ($file->getSize()>1000000)
 		{$msg="El archivo es mayor que 200KB";
 		$error=1;
 		}else
@@ -78,10 +101,9 @@ class MuestraController extends Controller
  
        return response()->json([
        		'msn'=>$msg,
-       		'errorm'=>$error
+       		'errorm'=>$error,
+            'ruta'=>'/storage/'.'aux-'.$fecha.".jpg"
        	]);
-
-		
 
 
     }
@@ -93,6 +115,14 @@ class MuestraController extends Controller
     	$retorno=0;
 
     	$data=Input::all();
+
+        if (strlen($data['rutamuestra'])>0) {
+            
+            $valores=explode('/', $data['rutamuestra']);
+
+            Storage::delete($valores[count($valores)-1]);
+
+        }
 
     	$file = $data['filebutton'];
 

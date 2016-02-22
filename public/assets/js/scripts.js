@@ -64,13 +64,15 @@ $(document).ready(function(){
 		    url: url, 
 		    type: "POST",             
 		    data: data,
-		    contentType: false,       
+		    contentType: false,
+		    dataType: "json",       
 		    cache: false,             
 		    processData:false, 
 		    success: function(data) {
 
-		    	showMyImage($('#filebutton'));
+		    	$('#thumbnil').attr('src',data.ruta);
 		    	$('.imgcargada').fadeIn();
+		    	$('#rutamuestra').val($('#thumbnil').attr('src'));
 
 		    }
 		});
