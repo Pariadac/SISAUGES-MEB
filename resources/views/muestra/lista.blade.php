@@ -2,6 +2,8 @@
 
 @section('content')
 
+                <?php $murl='muestras/guardar'; ?>
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -16,6 +18,24 @@
                     </div>
                 </div>
                 <!-- /.row -->
+
+                <div id="imgconttemp">
+                    {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform imgcontenedortemporal', 'enctype'=> "multipart/form-data"])!!}
+
+
+                        <?php
+
+                            foreach ($datos as $keys) {
+                                
+                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys->ruta_img_muestra.'">';
+
+                            }
+
+                        ?>
+
+
+                    {!! Form::close() !!}
+                </div>
 
 
 

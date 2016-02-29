@@ -90,7 +90,7 @@
 
                                     <input id="filebutton" style="display:none" name="filebutton" class="input-file" type="file">
 
-                                    <input name="rutamuestra" id="rutamuestra" type="hidden">
+                                    <input name="rutamuestra[]" id="rutamuestra" type="hidden">
 
                                     <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
                                         <div class="alineador">

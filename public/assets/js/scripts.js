@@ -133,7 +133,13 @@ $(document).ready(function(){
     function borrar_img(){
 
 		var form=$('.muestraform');
-    	var url=form.attr('action').replace('guardar','ajaxborrarimg');	
+    	var url=form.attr('action');
+
+    	url=url.split('/');
+
+    	url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxborrarimg';
+
+
     	var data=new FormData(form[0]);
 
     	$.ajax({
@@ -152,6 +158,17 @@ $(document).ready(function(){
 
     }
 
+
+
+    function borrar_img_iniciado(){
+    	var x=document.getElementById("imgconttemp");
+
+    	if (x) {
+    		borrar_img();
+    	};
+    }
+
+    borrar_img_iniciado();
 
 
 	$('#filebutton').on('change',function(){
@@ -180,7 +197,11 @@ $(document).ready(function(){
 		if (errores==0)
 		{
 
-			var url=form.attr('action').replace('guardar','ajaxvalidar');
+			var url=form.attr('action');
+
+			url=url.split('/');
+
+    		url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxvalidar';
 
 			$.ajax({
 			    url: url, 

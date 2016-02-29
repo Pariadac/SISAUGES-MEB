@@ -127,13 +127,25 @@ class MuestraController extends Controller
 
         $retorno=0;
 
-        if (strlen($data['rutamuestra'])>0) {
-            
-            $valores=explode('/', $data['rutamuestra']);
+        var_dump($data['rutamuestra']);
 
-            $retorno=Storage::delete($valores[count($valores)-1]);
+        foreach ($data['rutamuestra'] as $key) {
+
+          if (strlen($key)>0) {
+            
+                $valores=explode('/', $key);
+
+                if (Storage::exists($valores[count($valores)-1]))
+                {
+
+                    $retorno=Storage::delete($valores[count($valores)-1]);
+
+                }
+
+            }  
 
         }
+
 
         return response()->json([
             'msn'=>$retorno
