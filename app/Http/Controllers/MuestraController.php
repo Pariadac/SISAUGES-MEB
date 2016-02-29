@@ -367,6 +367,40 @@ class MuestraController extends Controller
         
     }
 
+    public function details($id){
+
+
+        $muestra=Muestra::find($id);
+
+        $tecnica_estudio_mues=DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$muestra->id_muestra)->get();
+
+        $muestracontenido=null;
+
+        if (Storage::exists($muestra->ruta_img_muestra))
+        {
+            $muestracontenido=Storage::size($muestra->ruta_img_muestra);
+            $muestra->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
+
+
+            if ($muestracontenido<1000000) {
+                $muestracontenido=$muestracontenido / 1000;
+                $ext='KB';
+            }else{
+                $muestracontenido=$muestracontenido / 1000000;
+                $ext='MB';
+            }
+
+            $muestracontenido=number_format($muestracontenido, 2,'.','').$ext;
+        }
+
+
+        $actividad=Actividad::all();
+        $tecnica=TecnicaEstudio::all();
+
+        return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
+
+    }
+
     public function destroy($id)
     {
         

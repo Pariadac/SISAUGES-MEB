@@ -15,7 +15,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Muestras <small>pagina principal</small>
+                            Muestras <small>pagina Listar</small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -120,6 +120,7 @@
                                     <th>Imagen</th>
                                     <th>Actividad</th>
                                     <th>Tipo de Actividad</th>
+                                    <th>Institucion</th>
                                     <th>Tecnica de estudio</th>
                                     <th>Fecha</th>
                                     <th class="tablaboton">Acción</th>
@@ -148,21 +149,24 @@
                                             <td></td>
                                             <td></td>
                                             <td></td>
+                                            <td></td>
                                             <td>
                                                 '.$value->fecha_analisis.'
                                             </td>
                                             <td >
-                                                <a href="'.url("/muestras/storage").'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
+                                                <a href="'.url("/muestras/detalles")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
 
                                                 <a href="'.url("/muestras/editar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
 
-                                                <a href="'.url("/muestras/eliminar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
+                                                
                                             </td>
                                         </tr>    
 
 
                                     ';
                                 }
+
+                                /*<a href="'.url("/muestras/eliminar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>*/
 
                             ?>
 
@@ -172,3 +176,4 @@
 
 
 @endsection
+

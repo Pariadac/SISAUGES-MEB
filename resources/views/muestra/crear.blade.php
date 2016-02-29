@@ -32,7 +32,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <h1 class="page-header">
-                            Muestras <small>pagina principal</small>
+                            Muestras <small>pagina <?php echo $titulo; ?></small>
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
@@ -128,6 +128,10 @@
                                 </div>
                               </div>
 
+                            </div>
+
+                            <div class="col-md-3">
+                              <a href="#" id="agregaactividad" class="glyphicon glyphicon-list btn btn-primary btn-xs">Agregar Actividad</a>
                             </div>
 
 

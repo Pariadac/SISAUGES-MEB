@@ -102,6 +102,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('muestras/buscar','MuestraController@buscarbdd');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
+    Route::get('muestras/detalles/{id}','MuestraController@details');
     Route::post('muestras/edita/{id}','MuestraController@update');
     Route::delete('muestras/eliminar{id}','MuestraController@destroy');
 
