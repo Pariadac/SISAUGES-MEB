@@ -99,6 +99,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('muestras/guardar','MuestraController@store');
     Route::post('muestras/ajaxvalidar','MuestraController@ajaxvalidar');
     Route::post('muestras/ajaxborrarimg','MuestraController@borrar_img');
+    Route::post('muestras/buscar','MuestraController@buscarbdd');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
     Route::post('muestras/edita/{id}','MuestraController@update');

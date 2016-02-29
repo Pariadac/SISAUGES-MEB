@@ -25,7 +25,6 @@
                   $clase=0;
                 }
 
-
                 ?>
 
 
@@ -90,11 +89,11 @@
 
                                     <input id="filebutton" style="display:none" name="filebutton" class="input-file" type="file">
 
-                                    <input name="rutamuestra[]" id="rutamuestra" type="hidden">
+                                    <input name="rutamuestra[]" id="rutamuestra" value="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" type="hidden">
 
                                     <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
                                         <div class="alineador">
-                                            <img src="<?php if ($datos) {echo $datos->ruta_img_muestra;} ?>" id="thumbnil">
+                                            <img src="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" id="thumbnil">
                                         </div>
                                     </div>                    
 
@@ -102,8 +101,8 @@
                                 <div class="col-md-12 datosimg">
                                     <div class="enfatizador">
                                       <div class="row">
-                                        <div class="col-md-12"><p><label>Nombre:</label> <span id="imgnom"></span></p></div>
-                                        <div class="col-md-12"><p><label>Tamaño:</label> <span id="imgtama"></span></p></div>
+                                        <div class="col-md-12"><p><label>Nombre:</label> <span id="imgnom"><?php if (isset($muestracontenido)) {echo $muestra->nombre_original_muestra;} ?></span></p></div>
+                                        <div class="col-md-12"><p><label>Tamaño:</label> <span id="imgtama"><?php if (isset($muestracontenido)) {echo $muestracontenido;} ?></span></p></div>
                                     </div>
                                     </div>
                                 </div>
@@ -171,7 +170,7 @@
                                 <div class="form-group ">
                                   <label class="control-label" for="textinput">Codigo de La muestra *</label>  
                                   <div class="col-md-12">
-                                  <input id="textinput" name="textinput" type="text" placeholder="Codigo" value="<?php if ($datos) {} ?>" class="form-control"> 
+                                  <input id="textinput" name="textinput" type="text" placeholder="Codigo" value="<?php if ($datos) {echo $datos->codigo_muestra;} ?>" class="form-control"> 
                                   </div>
                                 </div>
 
@@ -199,7 +198,15 @@
 
 
                                       foreach ($tecnica as $key) {
-                                        echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                        if ($datos) {
+                                            if ($tecnica_estudio_mues[0]->id_tecnica_estudio==$key->id_tecnica_estudio) {
+                                              echo '<option selected value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                            }else{
+                                              echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                            }
+                                        }else{
+                                          echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                        }
                                       }
 
 
@@ -207,12 +214,6 @@
                                   </select> 
                                   </div>
                                 </div>
-
-
-
-                                
-
-                                
 
 
 

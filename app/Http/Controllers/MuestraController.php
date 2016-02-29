@@ -243,17 +243,127 @@ class MuestraController extends Controller
     	return view('muestra.lista',compact('datos'));
     }
 
+
+    public function buscarbdd(){
+
+        $datos=Input::all();
+
+        $tablas=array('actividad','tecnica_estudio','institucion');
+        $campo1=array('id_actividad','id_tecnica_estudio','id_institucion');
+        $campo2=array('nombre_actividad','descripcion_tecnica_estudio','nombre_institucion');
+
+        $resultados=DB::table($tablas[$datos['bus']-1])->where($campo2[$datos['bus']-1],'like',$datos['valor'].'%')->get();
+
+        $datosdb="";
+
+        if ($resultados) {
+            foreach ($resultados as $key) {
+                $datosdb.='<li data-ids="'.$datos['bus'].'" data-value="'.$key->$campo1[$datos['bus']-1].'" data-valortx="'.$key->$campo2[$datos['bus']-1].'" > <p class="miminibuscador" >'.$key->$campo2[$datos['bus']-1].'</p> </li>';
+            }
+        }else{
+            $datosdb='<li><span>No se Encuentra ningun resultado</span></li>';
+        }
+
+        
+        $var=array('resultado'=>$datosdb);
+
+        return response()->json($var);
+    }
+
+
+    public function buscar_filtros(){
+        $datos=Input::all();
+
+
+
+
+    }
+
     public function edit($id)
     {
      
         $muestra=Muestra::find($id);
 
-        return view('muestra.crear',compact('muestra'));
+        $tecnica_estudio_mues=DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$muestra->id_muestra)->get();
+
+        $muestracontenido=null;
+
+        if (Storage::exists($muestra->ruta_img_muestra))
+        {
+            $muestracontenido=Storage::size($muestra->ruta_img_muestra);
+            $muestra->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
+
+
+            if ($muestracontenido<1000000) {
+                $muestracontenido=$muestracontenido / 1000;
+                $ext='KB';
+            }else{
+                $muestracontenido=$muestracontenido / 1000000;
+                $ext='MB';
+            }
+
+            $muestracontenido=number_format($muestracontenido, 2,'.','').$ext;
+        }
+
+
+        $actividad=Actividad::all();
+        $tecnica=TecnicaEstudio::all();
+
+        return view('muestra.crear',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
 
     }
 
     public function update($id)
     {
+
+        $data=Input::all(); 
+
+        $muestra=Muestra::find($id);
+
+        $fecha=date("d_m_Y_H_i_s");
+
+
+        $muestra->codigo_muestra=$data['textinput'];
+        $muestra->descripcion_muestra=$data['textarea'];
+        $muestra->fecha_recepcion=$data['fecha_recepcion'];
+        $muestra->fecha_analisis=$data['fecha_analisis'];
+
+
+        if (isset($data['filebutton'])) {
+
+           if (Storage::exists($muestra->ruta_img_muestra))
+            {
+
+                Storage::delete($muestra->ruta_img_muestra);
+
+            }
+
+            $muestra->nombre_original_muestra=$data['filebutton']->getClientOriginalName();
+
+            
+
+            $file = $data['filebutton'];
+
+            $muestra->ruta_img_muestra='imagen-'.$muestra->id_muestra."-".$fecha.".".$file->getClientOriginalExtension();
+
+            \Storage::disk('local')->put($muestra->ruta_img_muestra,  \File::get($file));
+
+
+
+        }
+
+
+        if ($muestra->save()) {
+            $retorno=0;
+        }else{
+            $retorno=1;
+        }
+
+        $actividad=Actividad::all();
+        $tecnica=TecnicaEstudio::all();
+
+        return view('muestra.crear',compact('retorno','actividad','tecnica'));
+
         
     }
 

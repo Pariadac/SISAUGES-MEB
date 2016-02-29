@@ -37,7 +37,9 @@ class UserController extends Controller
         $usuario->username=\Request::Input('nombreUsuario');
         $usuario->password=\Hash::make(\Request::Input('password'));
 
-        $usuario->save();
+        $validador=$usuario->save();
+
+
         return redirect('usuario')->with('message','Se ha agregado a un Usuario con Exito');
     }
 

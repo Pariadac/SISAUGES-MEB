@@ -4,6 +4,56 @@ $(document).ready(function(){
 	var fecha=new Date();
 
 
+	$('.mi-chosen').on('keyup',function(event){
+
+    	event.preventDefault();
+    	var llave=$(this).data('location');
+    	if ($(this).val().length>=2) {
+
+    		var form=$('.busquedas');
+			var urls=form.attr('action');
+
+			var moneda=$('#mimoneda input').val();
+
+
+    		$('#location'+llave).attr('class','buscadores');
+
+        	$.ajax({
+	            url:urls,
+	            cache: false,
+	            data:{'valor':$(this).val(),'_token':moneda,'bus':llave},
+	            type:"POST",
+	            dataType: "json",
+	            success: function(data) {
+	            	$('#location'+llave).empty();
+		            $('#location'+llave).append(data.resultado);
+
+	            }
+	            
+	        });
+
+    	}else{
+    		$('#location'+llave).attr('class','oculto1');
+    	}
+
+
+    });
+
+
+
+    $('.oculto1').on('click','li',function(event){
+		event.preventDefault();
+
+		var llave=$(this).data('ids');
+
+			$('#lock'+llave).val($(this).data('valortx'));
+			$('#lock'+llave).attr('data-valores',$(this).data('value'));
+			$('#location'+llave).attr('class','oculto1');
+
+	})
+
+
+
 	function validarEmail( email ) {
 	    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 	    if ( !expr.test(email) ){
@@ -87,6 +137,18 @@ $(document).ready(function(){
 	});
 
 	
+	$('#inicio_mues_bus').datetimepicker({
+	  format:'d-m-Y',
+	  timepicker:false,
+	  maxDate:fecha,
+	});
+
+	$('#fin_mues_bus').datetimepicker({
+	  format:'d-m-Y',
+	  timepicker:false,
+	  maxDate:fecha,
+	});
+
 
 	$('#fecha_analisis').datetimepicker({
 	  format:'d-m-Y',
@@ -162,13 +224,14 @@ $(document).ready(function(){
 
     function borrar_img_iniciado(){
     	var x=document.getElementById("imgconttemp");
+    	var y=document.getElementById("rutamuestra");
 
-    	if (x) {
+    	if (x||y) {
     		borrar_img();
     	};
     }
 
-    borrar_img_iniciado();
+    setTimeout(borrar_img_iniciado(),5000);
 
 
 	$('#filebutton').on('change',function(){
