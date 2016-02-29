@@ -4,6 +4,36 @@ $(document).ready(function(){
 	var fecha=new Date();
 
 
+	function validarEmail( email ) {
+	    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    if ( !expr.test(email) ){
+	    	return 1;
+	    }else{
+	    	return 0;
+	    }
+	        
+	}
+
+
+	$('.solo-numero').keyup(function (){
+	    this.value = (this.value + '').replace(/[^0-9]/g, '');
+	});
+
+
+
+	$('.alfanumericos').keyup(function (){
+
+		var vsCadena = $(this).val().toString();
+
+        if (vsCadena.match(/[^0-9A-Za-z]/g)) {
+        	vsCadena=vsCadena.replace(/[^0-9A-Za-z]/g, '')
+        };
+
+        $(this).val(vsCadena);
+
+	});
+
+
 	function alertaprincipal(){
 		var tipo=parseInt($('#alerta').data('estado'));
 		var clase=parseInt($('#alerta').data('clase'));
