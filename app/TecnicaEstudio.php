@@ -6,8 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class TecnicaEstudio extends Model
 {
+
     public $timestamps = false;
-    protected $table = 'tenica_estudio';
+    protected $table = 'tecnica_estudio';
     protected $primaryKey = 'id_tecnica_estudio';
     protected $fillable = ['descripcion_tecnica_estudio'];
     protected $guarded = ['id_tecnica_estudio'];
@@ -21,3 +22,4 @@ class TecnicaEstudio extends Model
     }
 
 }
+

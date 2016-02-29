@@ -18,6 +18,28 @@ body{
 
 }
 
+.enfatizador{
+	padding: 10px;
+	margin-bottom: 30px;
+	background-color: #eee;
+}
+
+.side-nav>li>a> span{
+
+	float: right;
+}
+
+.msnrequeridos{
+	text-align: right;
+	color: #B22222
+}
+
+.abajo{
+	padding: 10px 0px!important;
+    width: 25px!important;
+    float: left!important;
+}
+
 .ultima img{
 	width: 100%;
 }
@@ -68,7 +90,8 @@ body{
 }
 
 .contenedor-imagen{
-	max-width: 60px;
+	max-width: 100px;
+	margin: auto;
 }
 .contenedor-imagen img{
 	width: 100%;
@@ -95,11 +118,15 @@ body{
   border-color: #222;
 }
 
+.datosimg{
+	margin-top: 20px;
 
-.imgcargada{
-	display: none;
 }
 
+.datosimg .jumbotron{
+	padding: 5px!important;
+	min-height: 120px;
+}
 
 #eltraslado2{
 	display: none;
@@ -119,14 +146,27 @@ body{
 	border: 0px solid #000000;
 }
 
+.cabezera{
+	max-height: 80px;
+	width: 50%;
+	margin: auto;
+	overflow: hidden;
+}
+
+.cabezera img{
+	width: 100%;
+}
+
 .alineador{
-	width: 80%;
+	width: 100%;
 	margin:auto;
 	position: relative;
+	height: 260px;
+	overflow: hidden;
+	margin-top: 30px;
 }
 .alineador img{
 	width: 100%;
-	margin: 10px 0px;
 }
 
 .paralela:hover{
@@ -134,7 +174,14 @@ body{
 }
 
 .table th{
-	width: 20%;
+	text-align: center;
+}
+.table td{
+	text-align: center;
+}
+
+.tablaboton{
+	width: 30%!important;
 }
 
 .botones-principal{

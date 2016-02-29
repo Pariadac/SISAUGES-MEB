@@ -1,6 +1,68 @@
 $(document).ready(function(){
 
 
+	var fecha=new Date();
+
+
+	function validarEmail( email ) {
+	    expr = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+	    if ( !expr.test(email) ){
+	    	return 1;
+	    }else{
+	    	return 0;
+	    }
+	        
+	}
+
+
+	$('.solo-numero').keyup(function (){
+	    this.value = (this.value + '').replace(/[^0-9]/g, '');
+	});
+
+
+
+	$('.alfanumericos').keyup(function (){
+
+		var vsCadena = $(this).val().toString();
+
+        if (vsCadena.match(/[^0-9A-Za-z]/g)) {
+        	vsCadena=vsCadena.replace(/[^0-9A-Za-z]/g, '')
+        };
+
+        $(this).val(vsCadena);
+
+	});
+
+
+	function alertaprincipal(){
+		var tipo=parseInt($('#alerta').data('estado'));
+		var clase=parseInt($('#alerta').data('clase'));
+		var str="";
+
+		if (tipo==1) {
+			if (clase==0) {
+				str='alert alert-success';
+				$('#alerta strong').text('Bien hecho');
+				$('#alerta span').text('Operacion realizada con Exito');
+			};
+			if(clase==1){
+				str='alert alert-danger';
+				$('#alerta strong').text('Error');
+				$('#alerta span').text('La operacion a fallado, intente nuevamente');
+			};
+
+			$('#alerta').attr('class',str);
+			$('#alerta').fadeIn();
+
+
+		};
+
+	};
+
+	alertaprincipal();
+
+
+
 	$('#ocultar_escr').on('click',function(event){
 		event.preventDefault();
 
@@ -24,6 +86,20 @@ $(document).ready(function(){
 
 	});
 
+	
+
+	$('#fecha_analisis').datetimepicker({
+	  format:'d-m-Y',
+	  timepicker:false,
+	  maxDate:fecha,
+	});
+
+
+	$('#fecha_recepcion').datetimepicker({
+	  format:'d-m-Y',
+	  timepicker:false,
+	  maxDate:fecha,
+	});
 
 	$('#imagenescarga').on('click',function(event){
 		event.preventDefault();
@@ -54,13 +130,19 @@ $(document).ready(function(){
 
 
 
-	$('#filebutton').on('change',function(){
+    function borrar_img(){
 
 		var form=$('.muestraform');
-		var data=new FormData(form[0]);
-		var url=form.attr('action').replace('guardar','ajaxvalidar');
+    	var url=form.attr('action');
 
-		$.ajax({
+    	url=url.split('/');
+
+    	url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxborrarimg';
+
+
+    	var data=new FormData(form[0]);
+
+    	$.ajax({
 		    url: url, 
 		    type: "POST",             
 		    data: data,
@@ -70,12 +152,92 @@ $(document).ready(function(){
 		    processData:false, 
 		    success: function(data) {
 
-		    	$('#thumbnil').attr('src',data.ruta);
-		    	$('.imgcargada').fadeIn();
-		    	$('#rutamuestra').val($('#thumbnil').attr('src'));
 
 		    }
 		});
+
+    }
+
+
+
+    function borrar_img_iniciado(){
+    	var x=document.getElementById("imgconttemp");
+
+    	if (x) {
+    		borrar_img();
+    	};
+    }
+
+    borrar_img_iniciado();
+
+
+	$('#filebutton').on('change',function(){
+
+		var form=$('.muestraform');
+		var data=new FormData(form[0]);
+		var errores=0;
+
+		var extpermitidas=new Array('jpeg','tiff','png','gif','bmp');
+
+		for (var i = 0; i < extpermitidas.length; i++) {
+			if ($('#filebutton')[0].files[0].type!='image/'+extpermitidas[i]) {
+				errores++;
+			};
+		};
+
+		if (errores<extpermitidas.length) {
+			errores=0;
+		};
+
+		if ($('#filebutton')[0].files[0].size >5000000) {
+			errores++;
+		}
+
+
+		if (errores==0)
+		{
+
+			var url=form.attr('action');
+
+			url=url.split('/');
+
+    		url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxvalidar';
+
+			$.ajax({
+			    url: url, 
+			    type: "POST",             
+			    data: data,
+			    contentType: false,
+			    dataType: "json",       
+			    cache: false,             
+			    processData:false, 
+			    success: function(data) {
+
+			    	$('#thumbnil').attr('src',data.ruta);
+			    	$('.imgcargada').fadeIn();
+			    	$('#rutamuestra').val($('#thumbnil').attr('src'));
+
+			    	
+			    	if (data.tama<1000000) {
+			    		var mytama=data.tama / 1000;
+			    		var ext='KB';
+			    	}else{
+			    		var mytama=data.tama / 1000000;
+			    		var ext='MB';
+			    	}
+ 
+			    	$('#imgnom').empty();
+			    	$('#imgnom').append(data.orgnl);
+
+			    	$('#imgtama').empty();
+			    	$('#imgtama').append(mytama.toFixed(2)+ext);
+
+			    	setTimeout(borrar_img(),2000);
+
+
+			    }
+			});
+		}
 
 	});
 

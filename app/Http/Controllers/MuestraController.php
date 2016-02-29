@@ -14,6 +14,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
 use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\Muestra;
+use SISAUGES\Actividad;
+use SISAUGES\TecnicaEstudio;
 
 
 class MuestraController extends Controller
@@ -25,6 +27,25 @@ class MuestraController extends Controller
 
 
 
+
+    public function generar_imagen_visible($original_paht,$id){
+
+
+        $ruta=$_SERVER['DOCUMENT_ROOT']."/storage/";
+
+        $image = new Imagick($original_paht);
+
+        $fecha=date("d_m_Y_H_i_s");
+
+        $ruta=$ruta.$id.'aux-'.$fecha.".jpg";
+
+        $image->setImageFormat('jpg');
+
+        $image->writeImage($ruta);
+
+        return $id.'aux-'.$fecha.'.jpg';
+
+    }
 
 
     public function index()
@@ -38,12 +59,16 @@ class MuestraController extends Controller
 
             $url = $public_path.'/storage/'.$datos[0]->ruta_img_muestra;
 
+            $newimg=$this->generar_imagen_visible($url,1);
+
+            $url = $public_path.'/storage/'.$newimg;
+
             //verificamos si el archivo existe y lo retornamos
 
-            if (Storage::exists($datos[0]->ruta_img_muestra))
+            if (Storage::exists($newimg))
             {
 
-                $datos['ruta_img_muestra']=$url;  
+                $datos[0]->ruta_img_muestra=$newimg;  
             }
         }
 
@@ -53,13 +78,21 @@ class MuestraController extends Controller
 
 
 
+    public function prueba(){
+        $suma=4+5;
+    }
+
+
 
 
     public function create()
     {
+        $actividad=Actividad::all();
+        $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.crear');
+        return view('muestra.crear',compact('actividad','tecnica'));
     }
+
 
 
     public function ajaxvalidar(){
@@ -67,44 +100,56 @@ class MuestraController extends Controller
 
     	$data=Input::all();
 
-        if (strlen($data['rutamuestra'])>0) {
-            
-            $valores=explode('/', $data['rutamuestra']);
-
-            Storage::delete($valores[count($valores)-1]);
-
-        }
-
-
         $file=$data['filebutton'];
 
-        $ruta=$_SERVER['DOCUMENT_ROOT']."/storage/";
 
-        $image = new Imagick($data['filebutton']->getRealPath());
-
-        $fecha=date("d_m_Y_H_i_s");
-
-        $ruta=$ruta.'aux-'.$fecha.".jpg";
-
-        $image->setImageFormat('jpg');
-
-        $image->writeImage($ruta);
+        $ruta_n=$this->generar_imagen_visible($data['filebutton']->getRealPath(),1);
 
     	$error=0;
 
-    	if ($file->getSize()>1000000)
-		{$msg="El archivo es mayor que 200KB";
-		$error=1;
-		}else
-		{$msg="archivo guardado";}
+		$msg="archivo guardado";
 
  
        return response()->json([
        		'msn'=>$msg,
        		'errorm'=>$error,
-            'ruta'=>'/storage/'.'aux-'.$fecha.".jpg"
+            'ruta'=>'/storage/'.$ruta_n,
+            'orgnl'=>$file->getClientOriginalName(),
+            'tama'=>$file->getSize()
        	]);
 
+
+    }
+
+    public function borrar_img(){
+
+        $data=Input::all();
+
+        $retorno=0;
+
+        var_dump($data['rutamuestra']);
+
+        foreach ($data['rutamuestra'] as $key) {
+
+          if (strlen($key)>0) {
+            
+                $valores=explode('/', $key);
+
+                if (Storage::exists($valores[count($valores)-1]))
+                {
+
+                    $retorno=Storage::delete($valores[count($valores)-1]);
+
+                }
+
+            }  
+
+        }
+
+
+        return response()->json([
+            'msn'=>$retorno
+        ]);
 
     }
 
@@ -115,14 +160,6 @@ class MuestraController extends Controller
     	$retorno=0;
 
     	$data=Input::all();
-
-        if (strlen($data['rutamuestra'])>0) {
-            
-            $valores=explode('/', $data['rutamuestra']);
-
-            Storage::delete($valores[count($valores)-1]);
-
-        }
 
     	$file = $data['filebutton'];
 
@@ -149,14 +186,19 @@ class MuestraController extends Controller
 
 	    	$muestra->codigo_muestra=$data['textinput'];
 	    	$muestra->nombre_original_muestra=$file->getClientOriginalName();
-
-	    	$muestra->tipo_muestra=$data['tip_mues'];
 	    	$muestra->descripcion_muestra=$data['textarea'];
 	    	$muestra->fecha_recepcion=$data['fecha_recepcion'];
 	    	$muestra->fecha_analisis=$data['fecha_analisis'];
 
 
+
+
 	    	if ($muestra->save()) {
+
+                $asociacion=DB::table('muestra')->max('id_muestra');
+
+                DB::table('muestra_tecnica_estudio')->insert(['id_tecnica_estudio'=>$data['tipo_muestra'],'id_muestra'=>$asociacion]);
+
 
 		    	//obtenemos el campo file definido en el formulario
 		    	$file = $data['filebutton'];
@@ -171,7 +213,10 @@ class MuestraController extends Controller
     	}
 
 
-    	return view('muestra.crear',compact('retorno'));
+        $actividad=Actividad::all();
+        $tecnica=TecnicaEstudio::all();
+
+    	return view('muestra.crear',compact('retorno','actividad','tecnica'));
 
 
     }
@@ -179,12 +224,32 @@ class MuestraController extends Controller
 
     public function listar(){
     	$datos=Muestra::all();
+
+        $public_path = public_path();
+
+        foreach ($datos as $key => $value) {
+
+
+            if (Storage::exists($value->ruta_img_muestra))
+            {
+
+                $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
+            }
+            
+
+        }
+
+
     	return view('muestra.lista',compact('datos'));
     }
 
     public function edit($id)
     {
-        
+     
+        $muestra=Muestra::find($id);
+
+        return view('muestra.crear',compact('muestra'));
+
     }
 
     public function update($id)

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 <?php $title='epa'; ?>
 @section('content')
     @if (Session::has('message'))

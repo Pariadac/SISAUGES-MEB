@@ -150,7 +150,23 @@ ul.alert-dropdown {
     color: #999;
 }
 
+
+.side-nav>li>ul>li>ul{
+    padding: 0px;
+}
+
+.side-nav>li>ul>li>ul>li>a {
+    display: block;
+    padding: 10px 15px 10px 76px;
+    text-decoration: none;
+    color: #999;
+}
+
 .side-nav>li>ul>li>a:hover {
+    color: #fff;
+}
+
+.side-nav>li>ul>li>ul>li>a:hover {
     color: #fff;
 }
 
