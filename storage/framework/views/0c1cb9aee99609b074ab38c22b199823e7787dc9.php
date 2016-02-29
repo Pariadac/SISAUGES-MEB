@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Muestrario2</title>
+    <title>SISAUGES-MEB-<?php echo $__env->yieldContent('title'); ?></title>
 
     <!-- Bootstrap Core CSS -->
     <link href="<?php echo e(url('assets/css/bootstrap.min.css')); ?>" rel="stylesheet">

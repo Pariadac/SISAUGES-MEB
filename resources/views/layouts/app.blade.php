@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Muestrario2</title>
+    <title>SISAUGES-MEB-@yield('title')</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{url('assets/css/bootstrap.min.css') }}" rel="stylesheet">

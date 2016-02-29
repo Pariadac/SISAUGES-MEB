@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+@section('title','Crear Clasificacion Actividad')
 @section('content')
 
     <?php

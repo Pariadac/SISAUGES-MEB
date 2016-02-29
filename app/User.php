@@ -6,34 +6,22 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
 {
-
-    /**
-     * Atributo que asigna el nombre de la tabla
-     *
-     * @var string
-     */
-
     public $timestamps = false;
     protected $table="usuario";
     protected $primaryKey = "id_usuario";
+    protected $fillable = ['cedula','nombre', 'apellido','email','telefono','username', 'password'];
+    protected $guarded = ['id_usuario'];
+    protected $hidden = ['password', 'remember_token'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'cedula','nombre', 'apellido','email','telefono','username', 'password'
-    ];
+//    public function nivelDeUsuario()
+//    {
+//        return $this->hasMany(NivelDeUsuario::class,'id_nivel_de_usuario','id_usuario');
+//    }
 
-    /**
-     * The attributes excluded from the model's JSON form.
-     *
-     * @var array
-    */
-    protected $hidden = [
-        'password', 'remember_token'
-    ];
+    public function muestra()
+    {
+        return $this->belongsTo(Muestra::class,'id_muestra','id_usuario');
+    }
 
 
 }

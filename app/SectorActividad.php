@@ -10,8 +10,8 @@ class SectorActividad extends Model
     protected $table = 'sector_actividad';
     protected $primaryKey = 'id_sector_ac';
 
-    public function clasificacionActividad()
+    public function actividad()
     {
-        return $this->belongsTo(ClasificacionActividad::class,'id_clasificacion_actividad','id_sector_ac');
+        return $this->belongsTo(Actividad::class,'id_actividad','id_sector_ac');
     }
 }

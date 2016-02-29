@@ -52,33 +52,6 @@ CREATE TABLE IF NOT EXISTS SECTOR_ACTIVIDAD
 --drop table sector_actividad;
 
 
-CREATE TABLE IF NOT EXISTS CLASIFICACION_ACTIVIDAD
-(
-	id_clasificacion_actividad serial,
-	descripcion_clasificacion varchar(60) not null,
-	id_sector_ac integer,
-	constraint pk_clasificacion_actividad
-		primary key (id_clasificacion_actividad),
-	constraint fk_sector_ac
-		foreign key (id_sector_ac) references sector_actividad (id_sector_ac)
-);
-
---drop table clasificacion_actividad;
-
-CREATE TABLE IF NOT EXISTS TIPO_ACTIVIDAD
-(
-	id_tipo_actividad serial,
-	descripcion_actividad varchar(20) not null,
-	id_clasificacion_actividad integer,
-	constraint pk_tipo_actividad
-		primary key (id_tipo_actividad),
-	constraint fk_clasificacion_actividad
-		foreign key (id_clasificacion_actividad) references clasificacion_actividad(id_clasificacion_actividad)
-);
-
---drop table tipo_actividad;
-
-
 CREATE TABLE IF NOT EXISTS ACTIVIDAD
 (
 	id_actividad serial,
@@ -90,10 +63,6 @@ CREATE TABLE IF NOT EXISTS ACTIVIDAD
 	id_sector_ac integer,
 	constraint pk_actividad
 		primary key (id_actividad),
-	constraint fk_tipo_actividad
-		foreign key (id_tipo_actividad) references tipo_actividad(id_tipo_actividad),
-	constraint fk_clasificacion
-		foreign key (id_clasificacion_actividad) references clasificacion_actividad(id_clasificacion_actividad),
 	constraint fk_sector_actividad
 		foreign key (id_sector_ac) references sector_actividad(id_sector_ac)
 );
@@ -147,39 +116,39 @@ CREATE TABLE IF NOT EXISTS INSTITUCION
 	direccion_institucion varchar(50),
 	correo_institucional varchar(30) not null,
 	telefono_institucion varchar(11),
-	id_representante integer,
 	constraint pk_institicion
 		primary key (id_institucion)
 );
 
 --drop table institucion;
 
-CREATE TABLE IF NOT EXISTS REPRESENTANTE_INSTITUCION
+CREATE TABLE IF NOT EXISTS DEPARTAMENTO
 (
-	id_representante integer,
-	id_institucion integer,
-	constraint pk_ri
-		primary key (id_representante, id_institucion),
-	constraint fk_representante
-		foreign key (id_representante) references representante(id_representante),
-	constraint fk_institucion
-		foreign key (id_institucion) references institucion(id_institucion)
-	
+	id_departamento serial,
+	descripcion_departamento varchar(30),
+	constraint pk_departamento
+		primary key (id_departamento)
 );
 
---DROP TABLE REPRESENTANTE_INSTITUCION
+--DROP TABLE DEPARTAMENTO;
 
-CREATE TABLE IF NOT EXISTS USUARIO
+CREATE TABLE IF NOT EXISTS INSTITUCION_DEPARTAMENTO_REPRESENTANTE
 (
-	id_usuario serial,
-	username varchar(20),
-	password varchar(60),
-	remember_token varchar(100),
-	constraint pk_usuario
-		primary key (id_usuario)
-)INHERITS(PERSONA);
+	id_institucion integer,
+	id_departamento integer,
+	id_representante integer,
+	constraint pk_IDR
+		primary key (id_departamento, id_institucion, id_representante),
+	constraint fk_institucion
+		foreign key (id_institucion) references institucion (id_institucion),
+	constraint fk_departamento
+		foreign key (id_departamento) references departamento (id_departamento),
+	constraint fk_representante
+		foreign key (id_representante) references representante (id_representante)
+);
 
---drop table usuario;
+--DROP TABLE INSTITUCION_DEPARTAMENTO_REPRESENTANTE
+
 
 CREATE TABLE IF NOT EXISTS NIVEL_DE_USUARIO
 (
@@ -191,32 +160,32 @@ CREATE TABLE IF NOT EXISTS NIVEL_DE_USUARIO
 
 --drop table nivel_de_usuario;
 
-CREATE TABLE IF NOT EXISTS USUARIO_NIVEL_USUARIO
+CREATE TABLE IF NOT EXISTS USUARIO
 (
+	id_usuario serial,
+	username varchar(20),
+	password varchar(60),
 	id_nivel_de_usuario integer,
-	id_usuario integer,
-	constraint pk_usuario_nivelusuario 
-		primary key (id_nivel_de_usuario,id_usuario),
-	constraint fk_usuario_nivel_usuario
-		foreign key (id_nivel_de_usuario) references nivel_de_usuario(id_nivel_de_usuario),
-	constraint fk_usuario_nivel
-		foreign key (id_usuario) references usuario(id_usuario)
-);
+	remember_token varchar(100),
+	constraint pk_usuario
+		primary key (id_usuario),
+	constraint fk_ndu
+		foreign key (id_nivel_de_usuario) references nivel_de_usuario (id_nivel_de_usuario)
+)INHERITS(PERSONA);
 
---drop table usuario_nivel_usuario;
+--drop table usuario;
 
 CREATE TABLE IF NOT EXISTS MUESTRA
 (
-	id_muestra serial,
-	nombre_muestra varchar(30),
-	tipo_muestra varchar(30),
-	fecha_recepcion date,
-	fecha_analisis date,
-	id_usuario integer,
-	constraint pk_muestra 
-		primary key (id_muestra),
-	constraint fk_usuario
-		foreign key(id_usuario) references usuario(id_usuario)
+  id_muestra serial NOT NULL,
+  codigo_muestra varchar(200),
+  nombre_original_muestra character varying(200),
+  ruta_img_muestra character varying(200),
+  tipo_muestra character varying(200),
+  descripcion_muestra character varying(200),
+  fecha_recepcion date,
+  fecha_analisis date,
+  CONSTRAINT pk_muestra PRIMARY KEY (id_muestra)
 );
 
 --drop table muestra
@@ -259,7 +228,7 @@ CREATE TABLE IF NOT EXISTS MUESTRA_ACTIVIDAD
 		foreign key (id_muestra) references muestra (id_muestra)
 );
 
---drop table muestra_actividad
+--drop table muestra_actividad;
 
 CREATE TABLE IF NOT EXISTS LABORATORIO
 (

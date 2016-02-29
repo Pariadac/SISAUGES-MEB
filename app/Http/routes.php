@@ -68,23 +68,6 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('actualizarActividad/{id}','ActividadController@update');
     Route::delete('actividad/eliminar/{id}','ActividadController@destroy');
 
-//rutas para tipo de actividad
-    Route::get('tipoActividad','TipoActividadController@index');
-    Route::get('crearTipoActividad','TipoActividadController@create');
-    Route::post('tipoActividades','TipoActividadController@store');
-    Route::get('tipoActividad/editar/{id}','TipoActividadController@edit');
-    Route::post('actualizarTipoActividad/{id}','TipoActividadController@update');
-    Route::delete('tipoActividad/eliminar/{id}','TipoActividadController@destroy');
-
-//rutas para la clasificacion de Actividades
-
-    Route::get('clasificacionActividad','ClasificacionActividadController@index');
-    Route::get('crearClasificacionActividad','ClasificacionActividadController@create');
-    Route::post('clasificacionActividades','ClasificacionActividadController@store');
-    Route::get('clasificacionActividad/editar/{id}','ClasificacionActividadController@edit');
-    Route::post('actualizarClasificacionActividad/{id}','ClasificacionActividadController@update');
-    Route::delete('clasificacionActividad/eliminar/{id}','ClasificacionActividadController@destroy');
-
 //rutas para sector de actividades
 
     Route::get('sectorActividad','SectorActividadController@index');
@@ -95,10 +78,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::delete('sectorActividad/eliminar{id}','SectorActividadController@destroy');
 
 
-
-
 //rutas para Institucion
-
 
 
     Route::get('institucion','InstitucionController@index');
