@@ -23,9 +23,11 @@
                         <tbody>
                             <tr>
                                     <th>Imagen</th>
-                                    <th>Codigo</th>
+                                    <th>Actividad</th>
+                                    <th>Tipo de Actividad</th>
+                                    <th>Tecnica de estudio</th>
                                     <th>Fecha</th>
-                                    <th>Acción</th>
+                                    <th class="tablaboton">Acción</th>
                             </tr>
 
                             <?php
@@ -43,21 +45,23 @@
 
 
                                         <tr class="'.$col.'">
-                                            <td class="contenedor-imagen">
-                                                <img src="'.url("/storage").'/'.$value->ruta_img_muestra.'"
+                                            <td >
+                                                <div class="contenedor-imagen">
+                                                    <img src="'.url("/storage").'/'.$value->ruta_img_muestra.'">
+                                                </div>
                                             </td>
-                                            <td>
-                                                '.$value->codigo_muestra.'
-                                            </td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
                                             <td>
                                                 '.$value->fecha_analisis.'
                                             </td>
                                             <td >
-                                                <a href="'.url("/storage").'" id="singlebutton" name="singlebutton" class="btn btn-primary">Detalles</a>
+                                                <a href="'.url("/muestras/storage").'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
 
-                                                <a href="vistaformulario_siguiente.php" id="singlebutton" name="singlebutton" class="btn btn-primary">Modificar</a>
+                                                <a href="'.url("/muestras/editar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
 
-                                                <a href="vistaformulario_siguiente.php" id="singlebutton" name="singlebutton" class="btn btn-primary">Eliminar</a>
+                                                <a href="'.url("/muestras/eliminar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
                                             </td>
                                         </tr>    
 

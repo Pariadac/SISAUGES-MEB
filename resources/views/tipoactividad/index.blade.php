@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 <?php $title = "Tipo Actividad" ?>
 @section('content')
     @if (Session::has('message'))

@@ -1,4 +1,4 @@
-@extends('app')
+@extends('layouts.app')
 <?php $title ="Crear TipoActividad" ?>
 @section('content')
 

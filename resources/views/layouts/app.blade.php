@@ -34,6 +34,8 @@
     <!--Principal Style-->
     <link href="{{url('assets/css/principal-style.css') }}" rel="stylesheet">
 
+    <link href="{{url('assets/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -52,13 +54,6 @@
                 </button>
                 <a class="navbar-brand" href="{{ url('/') }}">Muestrario</a>
             </div>
-
-
-
-
-
-
-
 
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -180,64 +175,91 @@
 
                 @if (Auth::guest())<ul class="nav navbar-nav side-nav" id="eltraslado">@else <ul class="nav navbar-nav side-nav" id="eltraslado"> @endif
                     <li class="active">
-                        <a href="#" id="ocultar_escr"><i class="fa fa-fw fa-dashboard"></i> Ocultar</a>
+                        <a href="#" id="ocultar_escr"><i class="fa fa-chevron-left"></i> Ocultar</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<span><i class="fa fa-fw fa-caret-down"></i></span></span></a>
                         <ul id="field-1" class="collapse">
-                            <li>
-                                <a href="{{url('/muestras')}}">PRINCIPAL</a>
-                            </li>
                             <li>
                                 <a href="{{url('/muestras/crear')}}">AGREGAR</a>
                             </li>
                             <li>
                                 <a href="{{url('/muestras/lista')}}">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="{{url('/muestras/')}}">ELIMINAR</a>
-                            </li>
                         </ul>
                     </li>
+
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="{{url('/actividad')}}"><i class="fa fa-fw fa-folder-open"></i> Actividad</a>
+                    </li>
+
+                    <!--<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-2" class="collapse">
+
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-1"><i class="fa fa-fw fa-folder-open"></i>Clasificacion<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-1" class="collapse">
+                                    <li>
+                                        <a href="{{url('/crearClasificacionActividad')}}">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/clasificacionActividad')}}">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-2"><i class="fa fa-fw fa-folder-open"></i>Tipo<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-2" class="collapse">
+                                    <li>
+                                        <a href="{{url('/crearTipoActividad')}}">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/tipoActividad')}}">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-3"><i class="fa fa-fw fa-folder-open"></i>Sector<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-3" class="collapse">
+                                    <li>
+                                        <a href="{{url('/crearSectorActividad')}}">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{url('/sectorActividad')}}">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
                             <li>
                                 <a href="{{url('/crearActividad')}}">AGREGAR</a>
                             </li>
                             <li>
                                 <a href="{{url('/actividad')}}">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="{{url('/')}}">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/')}}">ELIMINAR</a>
-                            </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-3"><i class="fa fa-fw fa-suitcase"></i> Instituciones<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-3"><i class="fa fa-fw fa-suitcase"></i> Instituciones<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         
                         <ul id="field-3" class="collapse">
-                            <li>
-                                <a href="{{url('/institucion')}}">PRINCIPAL</a>
-                            </li>
                             <li>
                                 <a href="{{url('/institucion/crear')}}">AGREGAR</a>
                             </li>
                             <li>
-                                <a href="{{url('/')}}">LISTAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/')}}">ELIMINAR</a>
+                                <a href="{{url('/institucion')}}">LISTAR</a>
                             </li>
                         </ul>
 
                     </li>
                         
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-4"><i class="fa fa-fw fa-users"></i>Tesistas<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-4"><i class="fa fa-fw fa-users"></i>Tesistas<span><i class="fa fa-fw fa-caret-down"></i></span></a>
     
                         <ul id="field-4" class="collapse">
                             <li>
@@ -246,17 +268,11 @@
                             <li>
                                 <a href="{{url('/tesista')}}">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="{{url('/')}}">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/')}}">ELIMINAR</a>
-                            </li>
                         </ul>
 
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-5"><i class="fa fa-fw  fa-coffee"></i>Representantes<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-5"><i class="fa fa-fw  fa-coffee"></i>Representantes<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-5" class="collapse">
                             <li>
                                 <a href="{{url('/crearRepresentante')}}">AGREGAR</a>
@@ -264,16 +280,10 @@
                             <li>
                                 <a href="{{url('/representante')}}">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="{{url('/')}}">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/')}}">ELIMINAR</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-6"><i class="fa fa-fw fa-user"></i> Usuarios<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-6"><i class="fa fa-fw fa-user"></i> Usuarios<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         
                         <ul id="field-6" class="collapse">
                             <li>
@@ -282,17 +292,11 @@
                             <li>
                                 <a href="{{url('/usuario')}}">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="{{url('/')}}">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/')}}">ELIMINAR</a>
-                            </li>
                         </ul>
 
                     </li>
                     <!--<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">Dropdown Item</a>
@@ -305,9 +309,7 @@
                     <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-paste"></i>Reportes</a>
                     </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-pie-chart"></i>Estadisticas</a>
-                    </li>
+
                 </ul>
 
 
@@ -322,6 +324,15 @@
             <div id="page-wrapper">
 
                 <div class="container-fluid">
+
+                    <div class="col-md-12">
+                    
+                        <div class="cabezera">
+
+                            <img src="{{ url('/') }}/assets/complementos/BANNER1.png">
+                            
+                        </div>
+                    </div>
 
 
                     @yield('content')
@@ -347,6 +358,7 @@
         <script src="{{url('assets/js/plugins/morris/morris.min.js') }}"></script>
         <script src="{{url('assets/js/plugins/morris/morris-data.js') }}"></script>
         <script src="{{url('assets/js/draganddropquery.js') }}"></script>
+        <script src="{{url('assets/js/jquery.datetimepicker.full.js') }}"></script>
  
 
 </body>

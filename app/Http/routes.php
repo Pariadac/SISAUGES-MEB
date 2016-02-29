@@ -118,10 +118,12 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('muestras/crear','MuestraController@create');
     Route::post('muestras/guardar','MuestraController@store');
     Route::post('muestras/ajaxvalidar','MuestraController@ajaxvalidar');
+    Route::post('muestras/ajaxborrarimg','MuestraController@borrar_img');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
     Route::post('muestras/edita/{id}','MuestraController@update');
     Route::delete('muestras/eliminar{id}','MuestraController@destroy');
+
 
 
     //Route::get('/home', 'HomeController@index');
