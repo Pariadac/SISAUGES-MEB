@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title="index";?>
+@section('title', 'Agregar Actividad')
 @section('content')
 
     
@@ -23,22 +23,20 @@
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
-    <table class="table table-hover">
+    <table class="table table-bordered table-responsive">
         <tr>
-            <th>Representante N°</th>
-            <th>Cedula</th>
-            <th>Nombre</th>
-            <th>Apellido</th>
-            <th>Correo</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th>Actividad N°</th>
+            <th>Nombre Actividad</th>
+            <th>Status Actividad</th>
+            <th>Permisos</th>
+            <th>Accion</th>
         </tr>
         @foreach($actividad as $act)
             <tr>
                 <td>{{$act->id_actividad}}</td>
                 <td>{{$act->nombre_actividad}}</td>
                 <td>{{$act->status_actividad}}</td>
-                <td>{{$act->permisos_actividad}}</td>
+                <td>{{$act->permiso_actividad}}</td>
                 <td width="60" align="center">
                     {!! Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                 </td>

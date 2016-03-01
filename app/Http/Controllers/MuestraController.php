@@ -1,7 +1,7 @@
 <?php namespace SISAUGES\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Html\HtmlServiceProvider;
+use Collective\Html\HtmlServiceProvider;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Contracts\Validation\ValidationException;

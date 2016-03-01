@@ -26,13 +26,13 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 
     <!--Principal Style-->
     <link href="<?php echo e(url('assets/css/principal-style.css')); ?>" rel="stylesheet">
+
+    <link href="<?php echo e(url('assets/css/jquery.datetimepicker.css')); ?>" rel="stylesheet">
 
 </head>
 
@@ -52,13 +52,6 @@
                 </button>
                 <a class="navbar-brand" href="<?php echo e(url('/')); ?>">Muestrario</a>
             </div>
-
-
-
-
-
-
-
 
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -180,64 +173,91 @@
 
                 <?php if(Auth::guest()): ?><ul class="nav navbar-nav side-nav" id="eltraslado"><?php else: ?> <ul class="nav navbar-nav side-nav" id="eltraslado"> <?php endif; ?>
                     <li class="active">
-                        <a href="#" id="ocultar_escr"><i class="fa fa-fw fa-dashboard"></i> Ocultar</a>
+                        <a href="#" id="ocultar_escr"><i class="fa fa-chevron-left"></i> Ocultar</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-1" class="collapse">
-                            <li>
-                                <a href="<?php echo e(url('/muestras')); ?>">PRINCIPAL</a>
-                            </li>
                             <li>
                                 <a href="<?php echo e(url('/muestras/crear')); ?>">AGREGAR</a>
                             </li>
                             <li>
                                 <a href="<?php echo e(url('/muestras/lista')); ?>">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="<?php echo e(url('/muestras/')); ?>">ELIMINAR</a>
-                            </li>
                         </ul>
                     </li>
+
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="<?php echo e(url('/actividad')); ?>"><i class="fa fa-fw fa-folder-open"></i> Actividad</a>
+                    </li>
+
+                    <!--<li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-2" class="collapse">
+
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-1"><i class="fa fa-fw fa-folder-open"></i>Clasificacion<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-1" class="collapse">
+                                    <li>
+                                        <a href="<?php echo e(url('/crearClasificacionActividad')); ?>">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo e(url('/clasificacionActividad')); ?>">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-2"><i class="fa fa-fw fa-folder-open"></i>Tipo<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-2" class="collapse">
+                                    <li>
+                                        <a href="<?php echo e(url('/crearTipoActividad')); ?>">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo e(url('/tipoActividad')); ?>">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li>
+                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-3"><i class="fa fa-fw fa-folder-open"></i>Sector<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                                <ul id="field-2-3" class="collapse">
+                                    <li>
+                                        <a href="<?php echo e(url('/crearSectorActividad')); ?>">AGREGAR</a>
+                                    </li>
+                                    <li>
+                                        <a href="<?php echo e(url('/sectorActividad')); ?>">LISTAR</a>
+                                    </li>
+                                </ul>
+                            </li>
+
+
+
                             <li>
                                 <a href="<?php echo e(url('/crearActividad')); ?>">AGREGAR</a>
                             </li>
                             <li>
                                 <a href="<?php echo e(url('/actividad')); ?>">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">ELIMINAR</a>
-                            </li>
                         </ul>
-                    </li>
+                    </li>-->
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-3"><i class="fa fa-fw fa-suitcase"></i> Instituciones<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-3"><i class="fa fa-fw fa-suitcase"></i> Instituciones<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         
                         <ul id="field-3" class="collapse">
-                            <li>
-                                <a href="<?php echo e(url('/institucion')); ?>">PRINCIPAL</a>
-                            </li>
                             <li>
                                 <a href="<?php echo e(url('/institucion/crear')); ?>">AGREGAR</a>
                             </li>
                             <li>
-                                <a href="<?php echo e(url('/')); ?>">LISTAR</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">ELIMINAR</a>
+                                <a href="<?php echo e(url('/institucion')); ?>">LISTAR</a>
                             </li>
                         </ul>
 
                     </li>
                         
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-4"><i class="fa fa-fw fa-users"></i>Tesistas<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-4"><i class="fa fa-fw fa-users"></i>Tesistas<span><i class="fa fa-fw fa-caret-down"></i></span></a>
     
                         <ul id="field-4" class="collapse">
                             <li>
@@ -246,17 +266,11 @@
                             <li>
                                 <a href="<?php echo e(url('/tesista')); ?>">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">ELIMINAR</a>
-                            </li>
                         </ul>
 
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-5"><i class="fa fa-fw  fa-coffee"></i>Representantes<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-5"><i class="fa fa-fw  fa-coffee"></i>Representantes<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-5" class="collapse">
                             <li>
                                 <a href="<?php echo e(url('/crearRepresentante')); ?>">AGREGAR</a>
@@ -264,16 +278,10 @@
                             <li>
                                 <a href="<?php echo e(url('/representante')); ?>">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">ELIMINAR</a>
-                            </li>
                         </ul>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-6"><i class="fa fa-fw fa-user"></i> Usuarios<i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-6"><i class="fa fa-fw fa-user"></i> Usuarios<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         
                         <ul id="field-6" class="collapse">
                             <li>
@@ -282,17 +290,11 @@
                             <li>
                                 <a href="<?php echo e(url('/usuario')); ?>">LISTAR</a>
                             </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">CONSULTAR</a>
-                            </li>
-                            <li>
-                                <a href="<?php echo e(url('/')); ?>">ELIMINAR</a>
-                            </li>
                         </ul>
 
                     </li>
                     <!--<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="demo" class="collapse">
                             <li>
                                 <a href="#">Dropdown Item</a>
@@ -305,15 +307,12 @@
                     <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-paste"></i>Reportes</a>
                     </li>
-                    <li>
-                        <a href="index-rtl.html"><i class="fa fa-fw fa-pie-chart"></i>Estadisticas</a>
-                    </li>
-                </ul>
+                    </ul>
 
 
                 <div class="paralela" id="eltraslado2"></div>
 
-
+</ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
@@ -322,6 +321,15 @@
             <div id="page-wrapper">
 
                 <div class="container-fluid">
+
+                    <div class="col-md-12">
+                    
+                        <div class="cabezera">
+
+                            <img src="<?php echo e(url('/')); ?>/assets/complementos/BANNER1.png">
+                            
+                        </div>
+                    </div>
 
 
                     <?php echo $__env->yieldContent('content'); ?>
@@ -347,7 +355,8 @@
         <script src="<?php echo e(url('assets/js/plugins/morris/morris.min.js')); ?>"></script>
         <script src="<?php echo e(url('assets/js/plugins/morris/morris-data.js')); ?>"></script>
         <script src="<?php echo e(url('assets/js/draganddropquery.js')); ?>"></script>
- 
-
+        <script src="<?php echo e(url('assets/js/jquery.datetimepicker.full.js')); ?>"></script>
+        <?php echo $__env->yieldContent('scripts'); ?>
+    </div>
 </body>
 

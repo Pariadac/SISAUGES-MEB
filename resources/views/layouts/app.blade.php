@@ -26,8 +26,6 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
 
@@ -178,7 +176,7 @@
                         <a href="#" id="ocultar_escr"><i class="fa fa-chevron-left"></i> Ocultar</a>
                     </li>
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<span><i class="fa fa-fw fa-caret-down"></i></span></span></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-1"><i class="fa fa-fw fa-cubes"></i> Muestras<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         <ul id="field-1" class="collapse">
                             <li>
                                 <a href="{{url('/muestras/crear')}}">AGREGAR</a>
@@ -309,13 +307,12 @@
                     <li>
                         <a href="blank-page.html"><i class="fa fa-fw fa-paste"></i>Reportes</a>
                     </li>
-
-                </ul>
+                    </ul>
 
 
                 <div class="paralela" id="eltraslado2"></div>
 
-
+</ul>
             </div>
             <!-- /.navbar-collapse -->
         </nav>
@@ -359,7 +356,7 @@
         <script src="{{url('assets/js/plugins/morris/morris-data.js') }}"></script>
         <script src="{{url('assets/js/draganddropquery.js') }}"></script>
         <script src="{{url('assets/js/jquery.datetimepicker.full.js') }}"></script>
- 
-
+        @stack('scripts')
+    </div>
 </body>
 

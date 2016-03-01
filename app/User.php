@@ -20,7 +20,7 @@ class User extends Authenticatable
 
     public function muestra()
     {
-        return $this->belongsTo(Muestra::class,'id_muestra','id_usuario');
+        return $this->hasMany(Muestra::class,'id_muestra','id_usuario');
     }
 
 

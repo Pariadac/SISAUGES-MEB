@@ -9,9 +9,11 @@ class SectorActividad extends Model
     public $timestamps = false;
     protected $table = 'sector_actividad';
     protected $primaryKey = 'id_sector_ac';
+    protected $fillable = ['descripcion_sector'];
+    protected $guarded = ['id_sector_ac'];
 
-    public function actividad()
+    public function actividades()
     {
-        return $this->belongsTo(Actividad::class,'id_actividad','id_sector_ac');
+        return $this->hasMany(Actividad::class,'id_sector_ac','id_actividad');
     }
 }

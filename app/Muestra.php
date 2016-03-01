@@ -20,7 +20,7 @@ class Muestra extends Model
 
     public function usuario()
     {
-        return $this->hasMany(User::class,'id_usuario','id_muestra');
+        return $this->belongsTo(User::class,'id_usuario','id_muestra');
     }
 
     public function actividad()

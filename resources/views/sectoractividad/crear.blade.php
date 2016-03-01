@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Crear Sector Actividad"?>
+@section('title', 'sector Actividad')
 @section('content')
 
 

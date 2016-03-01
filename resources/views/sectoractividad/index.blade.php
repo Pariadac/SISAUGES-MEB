@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Sector de Actividades"?>
+@section('title','Sector involucrado en la Actividad')
 @section('content')
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>

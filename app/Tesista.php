@@ -12,6 +12,6 @@ class Tesista extends Model
 
     public function actividad()
     {
-        return $this->hasMany(Actividad::class,'id_actividad','id_tesista');
+        return $this->belongsTo(Actividad::class,'id_actividad','id_tesista');
     }
 }

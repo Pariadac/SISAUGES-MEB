@@ -12,23 +12,23 @@ class Actividad extends Model
     protected $fillable = ['nombre_Actividad','status_actividad','permiso_actividad','id_sector_ac'];
     protected $guarded = ['id_actividad'];
 
-    public function representante()
+    public function representantes()
     {
         return $this->belongsToMany(Representante::class,'representante_actividad','id_representante','id_actividad');
     }
 
-    public function tesista()
+    public function tesistas()
     {
-       return $this->belongsTo(Tesista::class,'id_tesista','id_atividad');
+       return $this->hasMany(Tesista::class,'id_tesista','id_atividad');
     }
 
-    public function muestra()
+    public function muestras()
     {
         return $this->belongsToMany(Muestra::class,'muestra_actividad','id_muestra','id_actividad');
     }
 
-    public function sectorActividad()
+    public function sectorActividades()
     {
-        return $this->hasMany(SectorActividad::class,'id_sector_ac','id_actividad');
+        return $this->belongsTo(SectorActividad::class,'id_sector_ac','id_actividad');
     }
 }

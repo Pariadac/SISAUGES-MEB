@@ -1,5 +1,22 @@
-<?php $__env->startSection('title','Crear Clasificacion Actividad'); ?>
+<?php $__env->startSection('title','Institucion'); ?>
 <?php $__env->startSection('content'); ?>
+
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Institución <small>pagina Principal</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
 
     <?php
 
@@ -10,13 +27,13 @@
     ?>
 
 
-    <div class="col-md-12">
+    <div class="col-md-4">
         <?php echo Form::open(['url' => '/institucion/buscar', 'class' => 'busqueda-inst']); ?>
 
 
             <input class="form-control" type="text" name="busqueda" placeholder="BUSCAR">
 
-            <button id="boton-inst">Enviar</button>
+            <button type="button" class="btn btn-primary">Buscar</button>
 
 
         <?php echo Form::close(); ?>
