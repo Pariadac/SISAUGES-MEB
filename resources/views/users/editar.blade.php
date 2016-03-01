@@ -1,6 +1,22 @@
 @extends('layouts.app')
-<?php $title = "Editar Tesista"?>
+<?php $title = "Editar Usuario"?>
 @section('content')
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Usuarios <small>pagina Editar</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Usuarios/Editar</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
 
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>

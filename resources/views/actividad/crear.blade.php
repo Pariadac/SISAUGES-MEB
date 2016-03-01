@@ -1,6 +1,23 @@
-@extends('app')
+@extends('layouts.app')
 <?php $title = "Crear Actividad" ?>
 @section('content')
+
+    
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Actividad <small>pagina Agregar</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Actividad/Agregar</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
 
 
     @if (Session::has('message'))

@@ -1,6 +1,23 @@
 @extends('layouts.app')
-@section('title','Crear Clasificacion Actividad')
+@section('title','Institucion')
 @section('content')
+
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Institución <small>pagina Principal</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
 
     <?php
 
@@ -11,12 +28,12 @@
     ?>
 
 
-    <div class="col-md-12">
+    <div class="col-md-4">
         {!!Form::open(['url' => '/institucion/buscar', 'class' => 'busqueda-inst'])!!}
 
             <input class="form-control" type="text" name="busqueda" placeholder="BUSCAR">
 
-            <button id="boton-inst">Enviar</button>
+            <button type="button" class="btn btn-primary">Buscar</button>
 
 
         {!! Form::close() !!}
