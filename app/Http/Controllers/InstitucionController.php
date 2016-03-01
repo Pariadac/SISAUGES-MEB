@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\Institucion;
+use SISAUGES\Representante;
 
 class InstitucionController extends Controller
 {
@@ -30,8 +31,10 @@ class InstitucionController extends Controller
 
     public function create()
     {
-        
-      return view('institucion.formulario');
+    
+        $representantes=Representante::all();
+
+        return view('institucion.formulario',compact('representantes'));
 
     }
 

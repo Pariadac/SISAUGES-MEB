@@ -45,10 +45,12 @@
 
                 <div class="col-md-12" id="contenido-princ">
 
-                <div id="alerta" style="display:none" class="" data-estado="<?php echo $alerta; ?>" data-clase="<?php echo $clase; ?>">
+                <div class="contenedoralertas">
+                  <div id="alerta" style="display:none" class="" data-estado="<?php echo $alerta; ?>" data-clase="<?php echo $clase; ?>">
                   
-                  <p><strong></strong> <span></span></p>
+                    <p><strong></strong>  <span></span></p>
 
+                  </div>
                 </div>
 
                 <!--<div class="pasos-registro">
@@ -71,172 +73,176 @@
                 </div>-->
 
 
-
-                    
-                {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform', 'enctype'=> "multipart/form-data"])!!}
-
-
-                    <fieldset>
-
-                        <div class="col-md-4">
-
-                                <div class="botn col-md-12">
+                <div class="validadorformularios">
+                      
+                  {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform', 'enctype'=> "multipart/form-data"])!!}
 
 
-                                    <div class="col-md-12 botones-principal">
-                                      <button type="button" class="btn btn-primary" id="imagenescarga">Muestra *</button>
-                                    </div>
+                      <fieldset>
 
-                                    <input id="filebutton" style="display:none" name="filebutton" class="input-file" type="file">
+                          <div class="col-md-4">
 
-                                    <input name="rutamuestra[]" id="rutamuestra" value="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" type="hidden">
-
-                                    <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
-                                        <div class="alineador">
-                                            <img src="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" id="thumbnil">
-                                        </div>
-                                    </div>                    
-
-                                </div>
-                                <div class="col-md-12 datosimg">
-                                    <div class="enfatizador">
-                                      <div class="row">
-                                        <div class="col-md-12"><p><label>Nombre:</label> <span id="imgnom"><?php if (isset($muestracontenido)) {echo $muestra->nombre_original_muestra;} ?></span></p></div>
-                                        <div class="col-md-12"><p><label>Tamaño:</label> <span id="imgtama"><?php if (isset($muestracontenido)) {echo $muestracontenido;} ?></span></p></div>
-                                    </div>
-                                    </div>
-                                </div>
-
-                        </div> 
-
-                        <div class="col-md-8">
-                          
-
-                          <div class="row">
-                          
-                            <div class="col-md-6">
-                              
-
-                              <div class="form-group ">
-                                <label class="control-label" for="textinput">Tipo de Atividad *</label>  
-                                <div class="col-md-12">
-                                <select id="tipo_actividad" name="tipo_actividad" data-value="<?php if ($datos) {} ?>" class="form-control">
-                                  
-                                  <option>uno</option>
-                                
-                                </select>
-                                </div>
-                              </div>
-
-                            </div>
-
-                            <div class="col-md-3">
-                              <a href="#" id="agregaactividad" class="glyphicon glyphicon-list btn btn-primary btn-xs">Agregar Actividad</a>
-                            </div>
+                                  <div class="botn col-md-12">
 
 
-                            <div class="col-md-12 detalles-actividad">
-                              
-                            <div class="enfatizador"> 
-                              <h4>Detalles</h4>
+                                      <div class="col-md-12 botones-principal">
+                                        <button type="button" class="btn btn-primary" id="imagenescarga">Muestra *</button>
+                                      </div>
 
-                              <div class="row">
-                                  <div class="col-md-4"><p>1</p></div>
-                                  <div class="col-md-4"><p>2</p></div>
-                                  <div class="col-md-4"><p>3</p></div>
-                              </div>
+                                      <input id="filebutton" name="filebutton" class="input-file  <?php if (!$datos) {echo 'camporequerido';} ?> " type="file">
 
-                              <div class="row">
-                                  <div class="col-md-4"><p>4</p></div>
-                                  <div class="col-md-4"><p>5</p></div>
-                                  <div class="col-md-4"><p>6</p></div>
-                              </div>
+                                      <input name="rutamuestra[]" id="rutamuestra" value="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" type="hidden">
 
-                            </div>
+                                      <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
+                                          <div class="alineador">
+                                              <img src="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" id="thumbnil">
+                                          </div>
+                                      </div>                    
 
-
-                            </div>
-
-
-                            <div class="col-md-6">
-
-
-                                <div class="form-group ">
-                                  <label class="control-label" for="textinput">Fecha de Recepcion *</label>  
-                                  <div class="col-md-12">
-                                  <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_recepcion;} ?>" class="form-control"> 
                                   </div>
-                                </div>
-
-
-
-                                <!-- Text input-->
-                                <div class="form-group ">
-                                  <label class="control-label" for="textinput">Codigo de La muestra *</label>  
-                                  <div class="col-md-12">
-                                  <input id="textinput" name="textinput" type="text" placeholder="Codigo" value="<?php if ($datos) {echo $datos->codigo_muestra;} ?>" class="form-control"> 
+                                  <div class="col-md-12 datosimg">
+                                      <div class="enfatizador">
+                                        <div class="row">
+                                          <div class="col-md-12"><p><label>Nombre:</label> <span id="imgnom"><?php if (isset($muestracontenido)) {echo $muestra->nombre_original_muestra;} ?></span></p></div>
+                                          <div class="col-md-12"><p><label>Tamaño:</label> <span id="imgtama"><?php if (isset($muestracontenido)) {echo $muestracontenido;} ?></span></p></div>
+                                      </div>
+                                      </div>
                                   </div>
-                                </div>
 
+                          </div> 
 
+                          <div class="col-md-8">
+                            
+
+                            <div class="row">
+                            
+                              <div class="col-md-6">
                                 
 
-                            </div>
-
-                            <div class="col-md-6">
+                                <div class="form-group ">
+                                  <label class="control-label" for="textinput">Tipo de Atividad *</label>  
+                                  <div class="col-md-12">
+                                  <select id="tipo_actividad" name="tipo_actividad" data-value="<?php if ($datos) {} ?>" class="form-control camporequerido">
                                     
-                                <div class="form-group ">
-                                  <label class="control-label" for="textinput">Fecha de Analisis *</label>  
-                                  <div class="col-md-12">
-                                  <input id="fecha_analisis" name="fecha_analisis" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_analisis;} ?>" class="form-control"> 
-                                  </div>
-                                </div>
-
-
-                                <div class="form-group ">
-                                  <label class="control-label" for="textinput">Tecnica de Estudio *</label>  
-                                  <div class="col-md-12">
-                                  <select id="tipo_muestra" name="tipo_muestra" data-value="<?php if ($datos) {echo $datos->tipo_muestra;} ?>" class="form-control">
                                     <option value="">Seleccione Tecnica...</option>
-                                    <?php
-
-
-                                      foreach ($tecnica as $key) {
-                                        if ($datos) {
-                                            if ($tecnica_estudio_mues[0]->id_tecnica_estudio==$key->id_tecnica_estudio) {
-                                              echo '<option selected value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
-                                            }else{
-                                              echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
-                                            }
-                                        }else{
-                                          echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
-                                        }
-                                      }
-
-
-                                    ?>
-                                  </select> 
+                                    <option>Prueba</option>
+                                  
+                                  </select>
                                   </div>
                                 </div>
 
+                              </div>
+
+                              <div class="col-md-3">
+                                <a href="#" id="agregaactividad" class="glyphicon glyphicon-list btn btn-primary btn-xs">Agregar Actividad</a>
+                              </div>
 
 
-                            </div>
+                              <div class="col-md-12 detalles-actividad">
+                                
+                              <div class="enfatizador"> 
+                                <h4>Detalles</h4>
 
-
-                            <div class="col-md-12">
-                              
-                              <!-- Textarea -->
-                              <div class="form-group">
-                                <label class="control-label" for="textarea">Descripccion de la muestra *</label>
-                                <div class="col-md-12">                     
-                                  <textarea class="form-control" id="textarea" name="textarea"><?php if ($datos) {echo $datos->descripcion_muestra;} ?></textarea>
+                                <div class="row">
+                                    <div class="col-md-4"><p>1</p></div>
+                                    <div class="col-md-4"><p>2</p></div>
+                                    <div class="col-md-4"><p>3</p></div>
                                 </div>
+
+                                <div class="row">
+                                    <div class="col-md-4"><p>4</p></div>
+                                    <div class="col-md-4"><p>5</p></div>
+                                    <div class="col-md-4"><p>6</p></div>
+                                </div>
+
                               </div>
 
-                              <div class="col-md-12 msnrequeridos">
-                                  <p>Todos los campos con (*) son obligatorios</p>
+
                               </div>
+
+
+                              <div class="col-md-6">
+
+
+                                  <div class="form-group ">
+                                    <label class="control-label" for="textinput">Fecha de Recepcion *</label>  
+                                    <div class="col-md-12">
+                                    <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_recepcion;} ?>" class="form-control camporequerido"> 
+                                    </div>
+                                  </div>
+
+
+
+                                  <!-- Text input-->
+                                  <div class="form-group ">
+                                    <label class="control-label" for="textinput">Codigo de La muestra *</label>  
+                                    <div class="col-md-12">
+                                    <input id="textinput" name="textinput" type="text" placeholder="Codigo" value="<?php if ($datos) {echo $datos->codigo_muestra;} ?>" class="form-control camporequerido"> 
+                                    </div>
+                                  </div>
+
+
+                                  
+
+                              </div>
+
+                              <div class="col-md-6">
+                                      
+                                  <div class="form-group ">
+                                    <label class="control-label" for="textinput">Fecha de Analisis *</label>  
+                                    <div class="col-md-12">
+                                    <input id="fecha_analisis" name="fecha_analisis" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_analisis;} ?>" class="form-control camporequerido"> 
+                                    </div>
+                                  </div>
+
+
+                                  <div class="form-group ">
+                                    <label class="control-label" for="textinput">Tecnica de Estudio *</label>  
+                                    <div class="col-md-12">
+                                    <select id="tipo_muestra" name="tipo_muestra" data-value="<?php if ($datos) {echo $datos->tipo_muestra;} ?>" class="form-control camporequerido">
+                                      <option value="">Seleccione Tecnica...</option>
+                                      <?php
+
+
+                                        foreach ($tecnica as $key) {
+                                          if ($datos) {
+                                              if ($tecnica_estudio_mues[0]->id_tecnica_estudio==$key->id_tecnica_estudio) {
+                                                echo '<option selected value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                              }else{
+                                                echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                              }
+                                          }else{
+                                            echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+                                          }
+                                        }
+
+
+                                      ?>
+                                    </select> 
+                                    </div>
+                                  </div>
+
+
+
+                              </div>
+
+
+                              <div class="col-md-12">
+                                
+                                <!-- Textarea -->
+                                <div class="form-group">
+                                  <label class="control-label" for="textarea">Descripccion de la muestra *</label>
+                                  <div class="col-md-12">                     
+                                    <textarea class="form-control camporequerido" id="textarea" name="textarea"><?php if ($datos) {echo $datos->descripcion_muestra;} ?></textarea>
+                                  </div>
+                                </div>
+
+                                <div class="col-md-12 msnrequeridos">
+                                    <p>Todos los campos con (*) son obligatorios</p>
+                                </div>
+
+                              </div>
+
 
                             </div>
 
@@ -244,23 +250,23 @@
                           </div>
 
 
-                        </div>
+                          <!-- Button -->
+                          <div class="form-group">
+
+                              <div class="col-md-12 botones-principal">
+
+                                  <button id="singlebutton" name="singlebutton" class="btn btn-success">Terminar</button>
+
+                              </div>
+                          </div>
 
 
-                        <!-- Button -->
-                        <div class="form-group">
+                      </fieldset>
 
-                            <div class="col-md-12 botones-principal">
+                  {!! Form::close() !!}
 
-                                <button id="singlebutton" name="singlebutton" class="btn btn-success">Terminar</button>
+                </div>
 
-                            </div>
-                        </div>
-
-
-                    </fieldset>
-
-                {!! Form::close() !!}
 
                 </div>
 

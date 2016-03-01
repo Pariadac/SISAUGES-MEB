@@ -154,9 +154,9 @@
                                                 '.$value->fecha_analisis.'
                                             </td>
                                             <td >
-                                                <a href="'.url("/muestras/detalles")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
+                                                <a href="'.url("/muestras/detalles")."/".$value->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
 
-                                                <a href="'.url("/muestras/editar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
+                                                <a href="'.url("/muestras/editar")."/".$value->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
 
                                                 
                                             </td>

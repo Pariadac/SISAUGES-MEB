@@ -64,6 +64,17 @@ $(document).ready(function(){
 	        
 	}
 
+	$('.solomails').on('change',function(){
+
+		var retorno=validarEmail($(this).val());
+
+		if (retorno==1) {
+			$(this).attr('style','border-color:red;');
+		}else{
+			$(this).attr('style','');
+		}
+
+	});
 
 	$('.solo-numero').keyup(function (){
 	    this.value = (this.value + '').replace(/[^0-9]/g, '');
@@ -102,7 +113,9 @@ $(document).ready(function(){
 			};
 
 			$('#alerta').attr('class',str);
-			$('#alerta').fadeIn();
+			$('#alerta').fadeIn(function(){
+				setTimeout(function(){$('#alerta').fadeOut();},3000);
+			});
 
 
 		};
@@ -328,6 +341,56 @@ $(document).ready(function(){
 		});
 
 	})
+
+
+
+	$('#singlebutton').on('click',function(event){
+		event.preventDefault();
+
+		var formulario=$('.validadorformularios form .camporequerido');
+		var error=0;
+
+		formulario.each(function(){
+
+			if ($(this).val()=="") {
+				error++;
+
+				$(this).attr('style','border-color:red;');
+
+				if ($(this).attr('type')=='file') {
+
+					$('#imagenescarga').attr('style','border-color:red;');
+
+				};
+
+			}else{
+
+				$(this).attr('style','');
+
+				if ($(this).attr('type')=='file') {
+
+					$('#imagenescarga').attr('style','');
+					
+				};
+
+			}
+
+		});
+
+		if (error!=0) {
+			
+			$('#alerta').attr('class','alert alert-danger');
+			$('#alerta strong').text('Error');
+			$('#alerta span').text('Complete los campos obligatorios');
+			$('#alerta').fadeIn(function(){
+				setTimeout(function(){$('#alerta').fadeOut();},3000);
+			});
+
+		}else{
+			$('.validadorformularios form').submit();
+		}
+
+	});
 
 
 })

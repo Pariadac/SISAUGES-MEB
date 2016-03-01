@@ -142,7 +142,7 @@ body{
 }
 
 .paralela {
-    width: 40px;
+    width: 20px;
     background: #0D1826;
     position: fixed;
     float: left;
@@ -190,7 +190,7 @@ body{
 }
 
 .tablaboton{
-	width: 30%!important;
+	width: 15%!important;
 }
 
 .botones-principal{
@@ -201,7 +201,11 @@ body{
 	margin-top: 15px;
 }
 
-
+td a{
+	width: 60%;
+    margin: auto!important;
+    margin-bottom: 5px!important;
+}
 
 .oculto1{
 	display: none;
@@ -248,8 +252,28 @@ body{
 
 }
 
+.validadorformularios{
+	margin-top: 25px;
 
+}
 
+.contenedoralertas{
+	width: 81%;
+    position: fixed;
+    margin-top: -190px;
+    margin-left: -15px;
+    z-index: 100;
+}
+
+#filebutton{
+	display: none;
+}
+
+#agregaactividad{
+	float: right;
+    vertical-align: middle;
+    margin-top: 30px;
+}
 
 @media only screen and (max-width: 992px) and (min-width: 768px) {
 	#page-wrapper{
