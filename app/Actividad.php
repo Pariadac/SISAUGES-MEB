@@ -27,8 +27,8 @@ class Actividad extends Model
         return $this->belongsToMany(Muestra::class,'muestra_actividad','id_muestra','id_actividad');
     }
 
-    public function sectorActividades()
+    public function sector()
     {
-        return $this->belongsTo(SectorActividad::class,'id_sector_ac','id_actividad');
+        return $this->belongsTo(SectorActividad::class,'id_sector_ac');
     }
 }

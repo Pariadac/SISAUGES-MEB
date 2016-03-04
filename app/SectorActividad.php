@@ -14,6 +14,6 @@ class SectorActividad extends Model
 
     public function actividades()
     {
-        return $this->hasMany(Actividad::class,'id_sector_ac','id_actividad');
+        return $this->hasMany(Actividad::class,'id_sector_ac');
     }
 }

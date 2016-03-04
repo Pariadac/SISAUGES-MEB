@@ -22,7 +22,7 @@ class ActividadController extends Controller
     public function index(Request $request)
     {
         $nombreActividad=$request->input('nombreActividad');
-        $actividad = Actividad::all();
+        $actividad = Actividad::with('sector')->where('id_actividad','=',2)->get();
 
 //        $actividad->setPath('');
 
@@ -42,7 +42,7 @@ class ActividadController extends Controller
         $actividad->status_actividad = \Request::Input('statusActividad');
         $actividad->permiso_actividad = \Request::Input('permisoActividad');
         //$actividad->id_sector_ac = \Request::Input('sectorActividad');
-        $actividad->sectorActividades()->associate(\Request::Input('sectorActividad'));
+        $actividad->sector()->associate(\Request::Input('sectorActividad'));
         $actividad->save();
         return redirect('actividad')->with('message','Se ha agregado una Actividad con exito');
     }
@@ -72,6 +72,4 @@ class ActividadController extends Controller
         $actividad->destroy();
         return redirect('actividad')->with('message','Se ha eliminado una actividad con exito');
     }
-
-
 }

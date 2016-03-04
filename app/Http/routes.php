@@ -116,4 +116,6 @@ Route::group(['middleware' => 'web'], function () {
 
 //ruta de prueba
 
-Route::get('prueba', function(){return "hola";});
+Route::get('prueba', function() {
+    return "hola";
+});

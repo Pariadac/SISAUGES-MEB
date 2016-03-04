@@ -29,6 +29,7 @@
             <th>Nombre Actividad</th>
             <th>Status Actividad</th>
             <th>Permisos</th>
+            <th>Involucrados</th>
             <th>Accion</th>
         </tr>
         @foreach($actividad as $act)
@@ -37,6 +38,8 @@
                 <td>{{$act->nombre_actividad}}</td>
                 <td>{{$act->status_actividad}}</td>
                 <td>{{$act->permiso_actividad}}</td>
+                <td>{{$act->sector->descripcion_sector}}</td>
+
                 <td width="60" align="center">
                     {!! Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                 </td>

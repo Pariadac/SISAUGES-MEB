@@ -2,6 +2,23 @@
 
 <?php $__env->startSection('content'); ?>
 
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Usuarios <small>pagina Principal</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Usuarios</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+
     <?php if(Session::has('message')): ?>
         <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
     <?php endif; ?>
@@ -39,4 +56,4 @@
         <?php endforeach; ?>
     </table>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

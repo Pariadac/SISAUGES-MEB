@@ -8,6 +8,7 @@ use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\User;
 
+
 class UserController extends Controller
 {
     public function __construct()

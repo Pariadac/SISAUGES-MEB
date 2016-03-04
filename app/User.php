@@ -9,7 +9,7 @@ class User extends Authenticatable
     public $timestamps = false;
     protected $table="usuario";
     protected $primaryKey = "id_usuario";
-    protected $fillable = ['cedula','nombre', 'apellido','email','telefono','username', 'password'];
+    protected $fillable = ['cedula','nombre','apellido','email','telefono','username', 'password'];
     protected $guarded = ['id_usuario'];
     protected $hidden = ['password', 'remember_token'];
 
