@@ -99,6 +99,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('muestras/guardar','MuestraController@store');
     Route::post('muestras/ajaxvalidar','MuestraController@ajaxvalidar');
     Route::post('muestras/ajaxborrarimg','MuestraController@borrar_img');
+    Route::post('muestras/ajaxrelacionesact','MuestraController@relacionesact');
     Route::post('muestras/buscar','MuestraController@buscarbdd');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
@@ -116,6 +117,4 @@ Route::group(['middleware' => 'web'], function () {
 
 //ruta de prueba
 
-Route::get('prueba', function() {
-    return "hola";
-});
+Route::get('prueba', function(){return "hola";});

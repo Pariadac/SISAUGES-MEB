@@ -41,14 +41,84 @@ $(document).ready(function(){
 
 
 
+    $('.mi-chosen-dos').on('keyup',function(event){
+
+    	event.preventDefault();
+    	var llave=$(this).data('location');
+    	var str1=$(this).val().toUpperCase();
+    	if ($(this).val().length>=1) {
+
+    		$('#location'+llave).attr('class','buscadores');
+
+    		$('.referencias').each(function(){
+
+    			var str2=$(this).data('valortx').toUpperCase();
+
+    			if (str2.search(str1)==-1) {
+    				$(this).attr('style',"display:none;");
+    			}else{
+    				$(this).attr('style',"display:block;");
+    			}
+
+    		});
+
+    	}else{
+    		$('#location'+llave).attr('class','oculto1');
+    	}
+
+
+    });
+
+
+    function busca_relaciones_actividad(){
+
+    	var form=$('.muestraform');
+		var urls=form.attr('action');
+		var buscador=$('#lock1').data('valr');
+
+		urls=urls.split('/');
+
+    	urls=urls[0]+'/'+urls[1]+'/'+urls[2]+'/muestras/ajaxrelacionesact';
+
+		var moneda=$('#mimoneda input').val();
+
+    	$.ajax({
+            url:urls,
+            cache: false,
+            data:{'_token':moneda,'bus':buscador},
+            type:"POST",
+            dataType: "json",
+            success: function(data) {
+            	$('.estatusact p').text(data.act);
+            	$('.sectact p').text(data.sect);
+            	$('.repreci').text(data.cirepre);
+            	$('.reprenom').text(data.nomrepre);
+            }
+            
+        });
+    }
+
+
     $('.oculto1').on('click','li',function(event){
 		event.preventDefault();
 
+		
+
 		var llave=$(this).data('ids');
+		var nameact=$('#lock'+llave).attr('name');
 
 			$('#lock'+llave).val($(this).data('valortx'));
 			$('#lock'+llave).attr('data-valores',$(this).data('value'));
 			$('#location'+llave).attr('class','oculto1');
+
+			if (nameact.search('tipo_actividad')>-1) {
+
+				$('#lock'+llave).attr('data-valr',($(this).data('ids')));
+				$('#finact').attr('value',$('#lock1').data('valr'));
+
+				busca_relaciones_actividad();
+			};
+
 
 	})
 

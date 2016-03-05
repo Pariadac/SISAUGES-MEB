@@ -28,6 +28,10 @@
                 ?>
 
 
+                <div id="mimoneda">
+                    {!! Form::token() !!}
+                </div>
+
                 <!-- Page Heading -->
                 <div class="row">
                     <div class="col-lg-12">
@@ -122,12 +126,22 @@
                                 <div class="form-group ">
                                   <label class="control-label" for="textinput">Tipo de Atividad *</label>  
                                   <div class="col-md-12">
-                                  <select id="tipo_actividad" name="tipo_actividad" data-value="<?php if ($datos) {} ?>" class="form-control camporequerido">
-                                    
-                                    <option value="">Seleccione Tecnica...</option>
-                                    <option>Prueba</option>
-                                  
-                                  </select>
+
+                                    <input type="text" id="lock1" name="tipo_actividad" class="form-control mi-chosen-dos" data-location="1" data-valr="" placeholder="Actividad">
+                                    <input name="tipo_actividad_fin" id="finact" type="hidden" value="">
+                                    <ul class="oculto1" id="location1">
+                                        <?php                                     
+
+                                          foreach ($actividad as $value):
+
+                                              echo '<li class="referencias" data-ids="'.$value->id_actividad.'" data-value="'.$value->nombre_actividad.'" data-valortx="'.$value->nombre_actividad.'" > <p class="miminibuscador" >'.$value->nombre_actividad.'</p> </li>';
+
+                                           endforeach 
+
+                                       ?>
+                                    </ul>
+
+
                                   </div>
                                 </div>
 
@@ -144,16 +158,16 @@
                                 <h4>Detalles</h4>
 
                                 <div class="row">
-                                    <div class="col-md-4"><p>1</p></div>
-                                    <div class="col-md-4"><p>2</p></div>
-                                    <div class="col-md-4"><p>3</p></div>
+                                    <div class="col-md-6"><label>Estatus de la Actividad</label></div>
+                                    <div class="col-md-6"><p><label>Sector de la Actividad</label></p></div>
+                                    <div class="col-md-6 estatusact"><div class="col-md-12"><p><br></p></div></div>
+                                    <div class="col-md-6 sectact"><div class="col-md-12"><p><br></p></div></div>
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-4"><p>4</p></div>
-                                    <div class="col-md-4"><p>5</p></div>
-                                    <div class="col-md-4"><p>6</p></div>
-                                </div>
+                                    <div class="col-md-12"><p><label>Representante de la Actividad</label></p></div>
+                                    <div class="col-md-12"><div class="col-md-6">Nombre:<span class="reprenom"></span></div><div class="col-md-6">Cedula:<span class="repreci"></span></div></div>
+                                </div> 
 
                               </div>
 

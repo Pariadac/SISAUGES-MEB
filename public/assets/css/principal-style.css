@@ -238,7 +238,8 @@ td a{
 
 .buscadores li{
 	padding-left:5px;
-	padding-top: 10px; 
+	padding-top: 10px;
+	overflow: hidden; 
 }
 
 .buscadores li:hover{
