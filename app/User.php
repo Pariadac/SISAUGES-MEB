@@ -23,5 +23,10 @@ class User extends Authenticatable
         return $this->hasMany(Muestra::class,'id_muestra','id_usuario');
     }
 
+    public function nivelUsuarios()
+    {
+        return $this->belongsToMany(NivelUsuario::class,'usuarios_niveles','id_usuario','id_nivel_de_usuario');
+    }
+
 
 }

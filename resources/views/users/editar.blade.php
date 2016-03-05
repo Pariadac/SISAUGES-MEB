@@ -27,31 +27,33 @@
         <div class="panel-body">
             <div class="col-md-6">
                 {{Form::label('cedula','Cedula Usuario')}}
-                {{Form::text('cedula',$usuario->cedula,['class'=>'form-control','type'=>'text'])}}
+                {{Form::text('cedula',\Crypt::decrypt($usuario->cedula),['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombre','Nombre Usuario')}}
+                {{Form::label('nombre','Nombre')}}
                 {{Form::text('nombre',$usuario->nombre,['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('apellido','Apellido Usuario')}}
+                {{Form::label('apellido','Apellido')}}
                 {{Form::text('apellido',$usuario->apellido,['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('email','Correo Electronico Usuario')}}
+                {{Form::label('email','Correo Electronico')}}
                 {{Form::text('email',$usuario->email,['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('telefono','Telefono Usuario')}}
+                {{Form::label('telefono','Telefono')}}
                 {{Form::text('telefono',$usuario->telefono,['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombreUsuario','nombre Usuario')}}
+                {{Form::label('nombreUsuario','Nombre de Acceso')}}
                 {{Form::text('nombreUsuario',$usuario->username,['class'=>'form-control','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('password','nombre Usuario')}}
-                {{Form::text('password',$usuario->password,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('password','Contraseña')}}
+                {{Form::text('password','',['class'=>'form-control',
+                                            'type'=>'text',
+                                            'placeholder'=> 'Introduzca nueva contraseña'])}}
             </div>
         </div>
     </div>

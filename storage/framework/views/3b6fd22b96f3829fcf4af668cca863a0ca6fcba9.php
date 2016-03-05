@@ -26,6 +26,12 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
+                    <?php echo e(Form::label('nivel_usuario','Nivel Usuario')); ?>
+
+                    <?php echo e(Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
+
+                </div>
+                <div class="col-md-6">
                     <?php echo e(Form::label('cedula','Cedula Usuario')); ?>
 
                     <?php echo e(Form::text('cedula',null,['class'=>'form-control','type'=>'text'])); ?>
@@ -78,4 +84,9 @@
     <?php echo Form::close(); ?>
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script src="<?php echo e(asset ('bower_components/bootstrap-select/dist/js/bootstrap-select.js')); ?>"></script>
+<link href="<?php echo e(asset('bower_components/bootstrap-select/dist/css/bootstrap-select.css')); ?>" rel="stylesheet" type="text/css">
+<?php $__env->appendSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

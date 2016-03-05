@@ -24,25 +24,25 @@
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
 
-    <table class="table table-hover">
+    <table class="table table-bordered table-responsive">
         <tr>
             <th>Usuario N°</th>
             <th>Cedula</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th>Nombre de Usuario</th>
+            <th colspan="2">Acción</th>
         </tr>
         @foreach($usuario as $user)
             <tr>
                 <td>{{$user->id_usuario}}</td>
-                <td>{{$user->cedula}}</td>
+                <td>{{\Crypt::decrypt($user->cedula)}}</td>
                 <td>{{$user->nombre}}</td>
                 <td>{{$user->apellido}}</td>
-                <td>{{$user->correo_electronico}}</td>
-                <td>{{$user->nombre_usuario}}</td>
-                <td width="60" align="center">
+                <td>{{$user->email}}</td>
+                <td>{{$user->username}}</td>
+                <td width="120" align="center">
                     {!! Html::link('usuario/editar/'.$user->id_usuario, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
                 </td>
                 <td width="60" align="center">

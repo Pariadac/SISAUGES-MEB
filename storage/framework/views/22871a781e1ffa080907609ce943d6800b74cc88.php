@@ -39,7 +39,7 @@
                 <td><?php echo e($act->permiso_actividad); ?></td>
                 <td><?php echo e($act->sector->descripcion_sector); ?></td>
 
-                <td width="60" align="center">
+                <td width="120" align="center">
                     <?php echo Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
                 </td>
@@ -53,5 +53,7 @@
             </tr>
         <?php endforeach; ?>
     </table>
+    <?php echo $actividad->render(); ?>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

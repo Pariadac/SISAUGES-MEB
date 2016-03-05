@@ -23,25 +23,25 @@
         <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
     <?php endif; ?>
 
-    <table class="table table-hover">
+    <table class="table table-bordered table-responsive">
         <tr>
             <th>Usuario N°</th>
             <th>Cedula</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th>Nombre de Usuario</th>
+            <th colspan="2">Acción</th>
         </tr>
         <?php foreach($usuario as $user): ?>
             <tr>
                 <td><?php echo e($user->id_usuario); ?></td>
-                <td><?php echo e($user->cedula); ?></td>
+                <td><?php echo e(\Crypt::decrypt($user->cedula)); ?></td>
                 <td><?php echo e($user->nombre); ?></td>
                 <td><?php echo e($user->apellido); ?></td>
-                <td><?php echo e($user->correo_electronico); ?></td>
-                <td><?php echo e($user->nombre_usuario); ?></td>
-                <td width="60" align="center">
+                <td><?php echo e($user->email); ?></td>
+                <td><?php echo e($user->username); ?></td>
+                <td width="120" align="center">
                     <?php echo Html::link('usuario/editar/'.$user->id_usuario, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
                 </td>

@@ -33,10 +33,17 @@
     <link href="<?php echo e(url('assets/css/principal-style.css')); ?>" rel="stylesheet">
 
     <link href="<?php echo e(url('assets/css/jquery.datetimepicker.css')); ?>" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+    </script>
 
 </head>
 
-<body>
+<body  onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
     <?php if(Auth::guest()): ?><div id="wrapper" ><?php else: ?> <div id="wrapper"> <?php endif; ?>
 
@@ -137,7 +144,7 @@
                     </ul>
                 </li>-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php if(Auth::guest()): ?> Usuario <?php else: ?> { Auth::user()->name }} <?php endif; ?><b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> <?php if(Auth::guest()): ?> Usuario <?php else: ?> <?php echo e(Auth::user()->username); ?> <?php endif; ?><b class="caret"></b></a>
                     <ul class="dropdown-menu">
 
 

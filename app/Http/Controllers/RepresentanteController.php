@@ -114,5 +114,4 @@ class RepresentanteController extends Controller
         $representante->delete();
         return redirect('representante')->with('message','El representante '.$id.' ha sido eliminado');
     }
-
 }

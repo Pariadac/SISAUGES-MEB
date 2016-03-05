@@ -33,10 +33,17 @@
     <link href="{{url('assets/css/principal-style.css') }}" rel="stylesheet">
 
     <link href="{{url('assets/css/jquery.datetimepicker.css') }}" rel="stylesheet">
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+    </script>
 
 </head>
 
-<body>
+<body  onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
 
     @if (Auth::guest())<div id="wrapper" >@else <div id="wrapper"> @endif
 
@@ -137,7 +144,7 @@
                     </ul>
                 </li>-->
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @if (Auth::guest()) Usuario @else { Auth::user()->name }} @endif<b class="caret"></b></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> @if (Auth::guest()) Usuario @else {{Auth::user()->username }} @endif<b class="caret"></b></a>
                     <ul class="dropdown-menu">
 
 

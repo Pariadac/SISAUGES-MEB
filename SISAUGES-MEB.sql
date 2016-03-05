@@ -168,12 +168,20 @@ CREATE TABLE IF NOT EXISTS USUARIO
 	id_nivel_de_usuario integer,
 	remember_token varchar(100),
 	constraint pk_usuario
-		primary key (id_usuario),
-	constraint fk_ndu
-		foreign key (id_nivel_de_usuario) references nivel_de_usuario (id_nivel_de_usuario)
+		primary key (id_usuario)
 )INHERITS(PERSONA);
 
 --drop table usuario;
+
+CREATE TABLE IF NOT EXISTS USUARIOS_NIVELES
+(
+	id_usuario integer,
+	id_nivel_de_usuario integer,
+	FOREIGN KEY (id_nivel_de_usuario) references nivel_de_usuario (id_nivel_de_usuario),
+	FOREIGN KEY (id_usuario) references usuario (id_usuario)
+);
+
+--drop table usuarios_niveles;
 
 CREATE TABLE IF NOT EXISTS MUESTRA
 (

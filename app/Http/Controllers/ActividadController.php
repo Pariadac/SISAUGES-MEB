@@ -11,28 +11,26 @@ use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\SectorActividad;
 
-
 class ActividadController extends Controller
 {
+    protected $sector;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->sector=$sector=SectorActividad::all()->pluck('descripcion_sector','id_sector_ac');
     }
 
     public function index(Request $request)
     {
         $nombreActividad=$request->input('nombreActividad');
-        $actividad = Actividad::with('sector')->where('id_actividad','=',2)->get();
-
-//        $actividad->setPath('');
-
+        $actividad = Actividad::with('sector')->orderBy('id_actividad','asc')->paginate(2);
+        $actividad->setPath('actividad');
         return view('actividad.index')->with('actividad',$actividad);
     }
 
     public function create()
     {
-        $sectorActividad = SectorActividad::all()->pluck('descripcion_sector','id_sector_ac');
-        return view('actividad.crear')->with(['sectorActividad'=>$sectorActividad]);
+        return view('actividad.crear')->with(['sectorActividad'=>$this->sector]);
     }
 
     public function store()
@@ -41,7 +39,6 @@ class ActividadController extends Controller
         $actividad->nombre_actividad = \Request::Input('nombreActividad');
         $actividad->status_actividad = \Request::Input('statusActividad');
         $actividad->permiso_actividad = \Request::Input('permisoActividad');
-        //$actividad->id_sector_ac = \Request::Input('sectorActividad');
         $actividad->sector()->associate(\Request::Input('sectorActividad'));
         $actividad->save();
         return redirect('actividad')->with('message','Se ha agregado una Actividad con exito');
@@ -50,7 +47,7 @@ class ActividadController extends Controller
     public function edit($id)
     {
         $actividad = Actividad::find($id);
-        return view('actividad.editar')->with('actividad', $actividad);
+        return view('actividad.editar')->with(['actividad' => $actividad, 'sectorActividad'=>$this->sector]);
     }
 
     public function update($id)
@@ -58,10 +55,8 @@ class ActividadController extends Controller
         $actividad = Actividad::find($id);
         $actividad->nombre_actividad = \Request::Input('nombreActividad');
         $actividad->status_actividad = \Request::Input('statusActividad');
-        $actividad->permisos_actividad = \Request::Input('permisosActividad');
-        $actividad->id_tipo_actividad = \Request::Input('tipoActividad');
-        $actividad->id_clasificacion_actividad =\Request::Input('clasificacionActividad');
-        $actividad->id_sector_actividad = \Request::Input('sectorActividad');
+        $actividad->permiso_actividad = \Request::Input('permisoActividad');
+        $actividad->id_sector_ac = \Request::Input('sectorActividad');
         $actividad->save();
         return redirect('actividad')->with('message','Se ha modificado una Actividad con exito');
     }
@@ -69,7 +64,7 @@ class ActividadController extends Controller
     public function destroy($id)
     {
         $actividad = Actividad::find($id);
-        $actividad->destroy();
+        $actividad->delete();
         return redirect('actividad')->with('message','Se ha eliminado una actividad con exito');
     }
 }

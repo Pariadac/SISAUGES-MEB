@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
+use SISAUGES\NivelUsuario;
 use SISAUGES\User;
+use Illuminate\Support\Facades\Crypt;
 
 
 class UserController extends Controller
@@ -24,21 +26,28 @@ class UserController extends Controller
 
     public function create()
     {
-        return view('users.crear');
+        $nivel=NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
+        return view('users.crear')->with('nivel',$nivel);
     }
 
     public function store()
     {
         $usuario = new User();
-        $usuario->cedula =\Request::Input('cedula');
+        $usuario->cedula =\Crypt::encrypt(\Request::Input('cedula'));
         $usuario->nombre=\Request::Input('nombre');
         $usuario->apellido=\Request::Input('apellido');
         $usuario->email=\Request::Input('email');
         $usuario->telefono=\Request::Input('telefono');
         $usuario->username=\Request::Input('nombreUsuario');
         $usuario->password=\Hash::make(\Request::Input('password'));
+        $usuario->save();
 
-        $validador=$usuario->save();
+        $nivel=$usuario->id_nivel_usuario=\Request::Input('nivel_usuario');
+
+        foreach($nivel as $niveles)
+        {
+            $usuario->nivelUsuarios()->attach([$niveles]);
+        }
 
 
         return redirect('usuario')->with('message','Se ha agregado a un Usuario con Exito');
@@ -53,7 +62,7 @@ class UserController extends Controller
     public function update($id)
     {
         $usuario = User::find($id);
-        $usuario->cedula=\Request::Input('cedula');
+        $usuario->cedula=Crypt::encrypt(\Request::Input('cedula'));
         $usuario->nombre=\Request::Input('nombre');
         $usuario->apellido=\Request::Input('apellido');
         $usuario->email=\Request::Input('email');
