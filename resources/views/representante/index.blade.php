@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<? $title = "Indice de representantes"?>
+@section('title', 'Indice de Representante')
 @section('content')
 
 
@@ -29,8 +29,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th colspan="2">Acción</th>
         </tr>
         @foreach($representante as $rep)
             <tr>

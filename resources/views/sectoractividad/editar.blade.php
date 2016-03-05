@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Editar Sector de Actividad" ?>
+@section('title','Editar Sector')
 @section('content')
 
     @if (Session::has('message'))

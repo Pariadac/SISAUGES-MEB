@@ -1,4 +1,4 @@
-<?php $title='crear';?>
+<?php $__env->startSection('title', 'Agregar Usuarios'); ?>
 <?php $__env->startSection('content'); ?>
 
 
@@ -32,31 +32,31 @@
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('cedula','Cedula Usuario')); ?>
+                    <?php echo e(Form::label('cedula','Cedula')); ?>
 
                     <?php echo e(Form::text('cedula',null,['class'=>'form-control','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('nombre','Nombre Usuario')); ?>
+                    <?php echo e(Form::label('nombre','Nombre')); ?>
 
                     <?php echo e(Form::text('nombre',null,['class'=>'form-control','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('apellido','Apellido Usuario')); ?>
+                    <?php echo e(Form::label('apellido','Apellido')); ?>
 
                     <?php echo e(Form::text('apellido',null,['class'=>'form-control','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('email','Correo Electronico Usuario')); ?>
+                    <?php echo e(Form::label('email','Correo Electronico')); ?>
 
                     <?php echo e(Form::text('email',null,['class'=>'form-control','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('telefono','Telefono Usuario')); ?>
+                    <?php echo e(Form::label('telefono','Telefono')); ?>
 
                     <?php echo e(Form::text('telefono',null,['class'=>'form-control','type'=>'text'])); ?>
 
@@ -70,7 +70,7 @@
                 <div class="col-md-6">
                     <?php echo e(Form::label('contraseña','Contraseña')); ?>
 
-                    <?php echo e(Form::text('contraseña',null,['class'=>'form-control','type'=>'password'])); ?>
+                    <?php echo e(Form::password('contraseña',['class'=>'form-control'])); ?>
 
                 </div>
             </div>

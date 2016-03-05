@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Sector involucrado en la Actividad')
+@section('title','Indice del Sector')
 @section('content')
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
@@ -8,6 +8,7 @@
         <tr>
             <th>N° Actividad</th>
             <th>Descripción Sector Actividad</th>
+            <th colspan="2">Acción</th>
         </tr>
         @foreach($sectorActividad as $sA)
             <tr>

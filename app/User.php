@@ -13,11 +13,6 @@ class User extends Authenticatable
     protected $guarded = ['id_usuario'];
     protected $hidden = ['password', 'remember_token'];
 
-//    public function nivelDeUsuario()
-//    {
-//        return $this->hasMany(NivelDeUsuario::class,'id_nivel_de_usuario','id_usuario');
-//    }
-
     public function muestra()
     {
         return $this->hasMany(Muestra::class,'id_muestra','id_usuario');

@@ -56,7 +56,10 @@ class UserController extends Controller
     public function edit($id)
     {
         $usuario = User::find($id);
-        return view('users.editar')->with('usuario',$usuario);
+        $usuario->nivelUsuarios($id)->get();
+        dd($usuario->nivelUsuarios()->get());
+        $nivel=NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
+        return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$nivel]);
     }
 
     public function update($id)

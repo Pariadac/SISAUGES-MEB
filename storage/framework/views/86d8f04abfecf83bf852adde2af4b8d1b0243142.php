@@ -1,4 +1,4 @@
-<?php $title='epa'; ?>
+<?php $__env->startSection('title','Indice de Usuarios'); ?>
 
 <?php $__env->startSection('content'); ?>
 

@@ -26,6 +26,12 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
+                <?php echo e(Form::label('nivel_usuario','Nivel Usuario')); ?>
+
+                <?php echo e(Form::select('nivel_usuario[]',$nivel,$usuario->NivelUsuario->id_nivel_de_usuario,['class'=>'form-control selectpicker','multiple'])); ?>
+
+            </div>
+            <div class="col-md-6">
                 <?php echo e(Form::label('cedula','Cedula Usuario')); ?>
 
                 <?php echo e(Form::text('cedula',\Crypt::decrypt($usuario->cedula),['class'=>'form-control','type'=>'text'])); ?>
@@ -64,8 +70,7 @@
             <div class="col-md-6">
                 <?php echo e(Form::label('password','Contraseña')); ?>
 
-                <?php echo e(Form::text('password','',['class'=>'form-control',
-                                            'type'=>'text',
+                <?php echo e(Form::password('password',['class'=>'form-control',
                                             'placeholder'=> 'Introduzca nueva contraseña'])); ?>
 
             </div>
@@ -83,4 +88,9 @@
 
 
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+<script src="<?php echo e(asset ('bower_components/bootstrap-select/dist/js/bootstrap-select.js')); ?>"></script>
+<link href="<?php echo e(asset('bower_components/bootstrap-select/dist/css/bootstrap-select.css')); ?>" rel="stylesheet" type="text/css">
+<?php $__env->appendSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

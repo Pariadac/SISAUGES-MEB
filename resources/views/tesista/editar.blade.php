@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Editar Usuaraio"?>
+@section('title','Editar Tesistas')
 @section('content')
 
 

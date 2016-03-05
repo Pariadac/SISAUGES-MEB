@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Crear Tesista"?>
+@section('title','Crear Tesista')
 @section('content')
 
 

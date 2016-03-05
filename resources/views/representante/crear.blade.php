@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title ="Agregar Representante" ?>
+@section('title','Agregar Representante')
 @section('content')
 
     <!-- Page Heading -->

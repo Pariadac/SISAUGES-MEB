@@ -26,6 +26,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
+                {{Form::label('nivel_usuario','Nivel Usuario')}}
+                {{Form::select('nivel_usuario[]',$nivel,$usuario->NivelUsuario->id_nivel_de_usuario,['class'=>'form-control selectpicker','multiple'])}}
+            </div>
+            <div class="col-md-6">
                 {{Form::label('cedula','Cedula Usuario')}}
                 {{Form::text('cedula',\Crypt::decrypt($usuario->cedula),['class'=>'form-control','type'=>'text'])}}
             </div>
@@ -51,8 +55,7 @@
             </div>
             <div class="col-md-6">
                 {{Form::label('password','Contraseña')}}
-                {{Form::text('password','',['class'=>'form-control',
-                                            'type'=>'text',
+                {{Form::password('password',['class'=>'form-control',
                                             'placeholder'=> 'Introduzca nueva contraseña'])}}
             </div>
         </div>
@@ -67,3 +70,8 @@
 
 
 @endsection
+
+@push('scripts')
+<script src="{{asset ('bower_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
+<link href="{{asset('bower_components/bootstrap-select/dist/css/bootstrap-select.css')}}" rel="stylesheet" type="text/css">
+@endpush

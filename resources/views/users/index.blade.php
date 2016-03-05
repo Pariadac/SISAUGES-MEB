@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title='epa'; ?>
+@section('title','Indice de Usuarios')
 
 @section('content')
 

@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title='crear';?>
+@section('title', 'Agregar Usuarios')
 @section('content')
 
 
@@ -30,23 +30,23 @@
                     {{Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('cedula','Cedula Usuario')}}
+                    {{Form::label('cedula','Cedula')}}
                     {{Form::text('cedula',null,['class'=>'form-control','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('nombre','Nombre Usuario')}}
+                    {{Form::label('nombre','Nombre')}}
                     {{Form::text('nombre',null,['class'=>'form-control','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('apellido','Apellido Usuario')}}
+                    {{Form::label('apellido','Apellido')}}
                     {{Form::text('apellido',null,['class'=>'form-control','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('email','Correo Electronico Usuario')}}
+                    {{Form::label('email','Correo Electronico')}}
                     {{Form::text('email',null,['class'=>'form-control','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('telefono','Telefono Usuario')}}
+                    {{Form::label('telefono','Telefono')}}
                     {{Form::text('telefono',null,['class'=>'form-control','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
@@ -55,7 +55,7 @@
                 </div>
                 <div class="col-md-6">
                     {{Form::label('contraseña','Contraseña')}}
-                    {{Form::text('contraseña',null,['class'=>'form-control','type'=>'password'])}}
+                    {{Form::password('contraseña',['class'=>'form-control'])}}
                 </div>
             </div>
         </div>

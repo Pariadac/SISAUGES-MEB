@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title='epa'; ?>
+@section('title','Indice Tesistas')
 @section('content')
 
     <!-- Page Heading -->
@@ -28,8 +28,7 @@
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
-            <th>Editar</th>
-            <th>Eliminar</th>
+            <th colspan="2">Acción</th>
         </tr>
         @foreach($tesista as $tes)
             <tr>

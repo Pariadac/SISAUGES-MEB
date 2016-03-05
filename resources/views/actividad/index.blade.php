@@ -30,7 +30,7 @@
             <th>Status Actividad</th>
             <th>Permisos</th>
             <th>Involucrados</th>
-            <th>Accion</th>
+            <th colspan="2">Accion</th>
         </tr>
         @foreach($actividad as $act)
             <tr>
