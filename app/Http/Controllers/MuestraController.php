@@ -16,6 +16,7 @@ use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\Muestra;
 use SISAUGES\Actividad;
 use SISAUGES\TecnicaEstudio;
+use SISAUGES\Representante;
 
 
 class MuestraController extends Controller
@@ -180,7 +181,8 @@ class MuestraController extends Controller
     		if ($valor) {
     		$nombre=$muestra->ruta_img_muestra='imagen-'.$valor."-".$fecha.".".$file->getClientOriginalExtension();
 	    	}else{
-	    		$nombre=$muestra->ruta_img_muestra='imagen-1-'.$fecha.".".$file->getClientOriginalExtension();
+	    		$nombre=$muestra->ruta_img_muestra='imagen-0-'.$fecha.".".$file->getClientOriginalExtension();
+                $valor=0;
 	    	}
 
 
@@ -191,9 +193,9 @@ class MuestraController extends Controller
 	    	$muestra->fecha_analisis=$data['fecha_analisis'];
 
 
-
-
 	    	if ($muestra->save()) {
+
+                DB::table('muestra_actividad')->insert(['id_actividad'=>$data['tipo_actividad_fin'],'id_muestra'=>$muestra->id_muestra]);
 
                 $asociacion=DB::table('muestra')->max('id_muestra');
 
@@ -328,7 +330,6 @@ class MuestraController extends Controller
         $muestra->fecha_recepcion=$data['fecha_recepcion'];
         $muestra->fecha_analisis=$data['fecha_analisis'];
 
-
         if (isset($data['filebutton'])) {
 
            if (Storage::exists($muestra->ruta_img_muestra))
@@ -400,6 +401,34 @@ class MuestraController extends Controller
         return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
 
     }
+
+
+    public function relacionesact(){
+
+        $datos=Input::all();
+
+        $act=Actividad::find($datos['bus']);
+        $represent=DB::table('actividad')->join('representante_actividad',function($join){
+
+            $datos=Input::all();
+
+            $join->where('representante_actividad.id_actividad','=',$datos['bus']);
+
+
+        })->join('representante','representante.id_representante','=','representante_actividad.id_representante')
+        ->select('representante.*')->get();
+        $sector=DB::table('sector_actividad')->where('id_sector_ac','=',$act->id_sector_ac)->get();
+
+
+        return response()->json([
+            'act'=>$act->status_actividad,
+            'cirepre'=>$represent[0]->cedula,
+            'nomrepre'=>$represent[0]->nombre." ".$represent[0]->apellido,
+            'sect'=>$sector[0]->descripcion_sector
+        ]);
+
+    }
+
 
     public function destroy($id)
     {
