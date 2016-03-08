@@ -246,15 +246,31 @@ class MuestraController extends Controller
     }
 
 
+    public function resultadosbdd($valor,$posi){
+
+        $tablas=array('actividad','tecnica_estudio','institucion');
+        $campo2=array('nombre_actividad','descripcion_tecnica_estudio','nombre_institucion');
+
+        $resultados=DB::table($tablas[$posi])->where($campo2[$posi],'ILIKE','%'.$valor.'%')->get();
+
+        return $resultados;
+
+    }
+
+
+
+
+
+
+
     public function buscarbdd(){
 
         $datos=Input::all();
 
-        $tablas=array('actividad','tecnica_estudio','institucion');
         $campo1=array('id_actividad','id_tecnica_estudio','id_institucion');
         $campo2=array('nombre_actividad','descripcion_tecnica_estudio','nombre_institucion');
 
-        $resultados=DB::table($tablas[$datos['bus']-1])->where($campo2[$datos['bus']-1],'like',$datos['valor'].'%')->get();
+        $resultados=$this->resultadosbdd($datos['valor'],$datos['bus']-1);
 
         $datosdb="";
 
@@ -274,12 +290,101 @@ class MuestraController extends Controller
 
 
     public function buscar_filtros(){
+       
         $datos=Input::all();
+        $aux=array();
+        $retorno=array();
+
+
+        if ($datos['actividades_mues_bus']!='') {
+
+            $valor=$datos['actividades_mues_bus'];
+            
+            $resultados=DB::table('actividad')->where('nombre_actividad','ILIKE','%'.$valor.'%')->get();
+            
+            foreach ($resultados as $key) {
+                
+
+                $aux1=DB::table('actividad')->join('muestra_actividad',function($join) use($key){
+
+
+                    $join->where('muestra_actividad.id_actividad','=',$key->id_actividad);
+
+
+                })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+
+                $aux=array_merge($aux,$aux1);
+
+            }
+
+
+        }
+
+        if ($datos['institucion_mues_bus']!='') {
+
+            $valor=$datos['institucion_mues_bus'];
+            
+            $resultados=DB::table('institucion')->where('nombre_institucion','ILIKE','%'.$valor.'%')->get();
+            
+            foreach ($resultados as $key) {
+                
+
+                $aux1=DB::table('institucion')->join('institucion_departamento_representante',function($join) use($key){
+
+
+                    $join->where('institucion_departamento_representante.id_institucion','=',$key->id_institucion);
+
+
+                })->join('representante','representante.id_representante','=','institucion_departamento_representante.id_institucion')
+                ->join('representante_actividad','representante_actividad.id_representante','=','representante.id_representante')
+                ->join('actividad','actividad.id_actividad','=','representante_actividad.id_representante')
+                ->join('muestra_actividad','muestra_actividad.id_actividad','=','actividad.id_actividad')
+                ->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+
+                $aux=array_merge($aux,$aux1);
+
+            }
+
+        }
+        if ($datos['tecnica_mues_bus']!='') {
+
+            
+            $valor=$datos['tecnica_mues_bus'];
+            
+            $resultados=DB::table('tecnica_estudio')->where('descripcion_tecnica_estudio','ILIKE','%'.$valor.'%')->get();
+            
+            foreach ($resultados as $key) {
+                
+
+                $aux1=DB::table('tecnica_estudio')->join('muestra_tecnica_estudio',function($join) use($key){
+
+
+                    $join->where('muestra_tecnica_estudio.id_tecnica_estudio','=',$key->id_tecnica_estudio);
+
+
+                })->join('muestra','muestra.id_muestra','=','muestra_tecnica_estudio.id_muestra')->select('muestra.*')->get();
+
+                $aux=array_merge($aux,$aux1);
+
+            }
 
 
 
+        }
+        if ($datos['inicio_mues_bus']!=''&&$datos['fin_mues_bus']!='') {
+
+            $aux1=DB::table('muestra')->whereBetween('fecha_analisis',[$datos['inicio_mues_bus'],$datos['fin_mues_bus']])->get();
+            $aux=array_merge($aux,$aux1);            
+
+        }
 
     }
+
+
+
+
+
+
 
     public function edit($id)
     {

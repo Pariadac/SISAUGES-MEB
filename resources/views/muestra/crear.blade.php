@@ -127,7 +127,7 @@
                                   <label class="control-label" for="textinput">Tipo de Atividad *</label>  
                                   <div class="col-md-12">
 
-                                    <input type="text" id="lock1" name="tipo_actividad" class="form-control mi-chosen-dos" data-location="1" data-valr="" placeholder="Actividad">
+                                    <input type="text" id="lock1" name="tipo_actividad" class="form-control mi-chosen-dos camporequerido" data-location="1" data-valr="" placeholder="Actividad">
                                     <input name="tipo_actividad_fin" id="finact" type="hidden" value="">
                                     <ul class="oculto1" id="location1">
                                         <?php                                     
@@ -145,10 +145,6 @@
                                   </div>
                                 </div>
 
-                              </div>
-
-                              <div class="col-md-3">
-                                <a href="#" id="agregaactividad" class="glyphicon glyphicon-list btn btn-primary btn-xs">Agregar Actividad</a>
                               </div>
 
 

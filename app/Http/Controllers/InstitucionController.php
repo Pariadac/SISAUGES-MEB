@@ -32,38 +32,57 @@ class InstitucionController extends Controller
     public function create()
     {
     
-        $representantes=Representante::all();
 
-        return view('institucion.formulario',compact('representantes'));
+        return view('institucion.formulario');
 
     }
 
     public function store(Request $request)
     {
        
-        $nombre = $request->input('nomb_inst');
-        $direccion = $request->input('direccion_inst');
-        $correo = $request->input('correo_inst');
-        $telefono = $request->input('telefono_inst');
-        $representante = $request->input('representante_inst');
+        $tb=DB::table('institucion')->max('id_institucion');
 
 
-        $conteo=DB::table('representante')->where('id_representante', '=', $representante)->count();
+        if ($tb) {
 
-        
+            $id=Institucion::find($tb);
 
-        if ($conteo!=0) 
-        {
-            DB::table('institucion')->insert(['nombre_institucion'=>$nombre,'direccion_institucion'=>$direccion,'correo_institucional'=>$correo,'telefono_institucion'=>$telefono,'id_representante'=>$representante]);
-            echo "registro exitoso";
+            if ($request->input('nomb_inst')==$id->nombre_institucion&& $id->direccion_institucion == $request->input('direccion_inst')&& $id->correo_institucional == $request->input('correo_inst')&&$id->telefono_institucion == $request->input('telefono_inst')) {
+                
+
+            }else{
+
+
+                $inst=new Institucion();
+
+                $inst->nombre_institucion = $request->input('nomb_inst');
+                $inst->direccion_institucion = $request->input('direccion_inst');
+                $inst->correo_institucional = $request->input('correo_inst');
+                $inst->telefono_institucion = $request->input('telefono_inst');
+
+                $inst->save();
+
+
+            }
+        }else{
+
+
+            $inst=new Institucion();
+
+            $inst->nombre_institucion = $request->input('nomb_inst');
+            $inst->direccion_institucion = $request->input('direccion_inst');
+            $inst->correo_institucional = $request->input('correo_inst');
+            $inst->telefono_institucion = $request->input('telefono_inst');
+
+            $inst->save();
+
         }
 
-        else
-        {
-              echo "registro fllido no esxite representante";
-        }
 
-        
+        $retorno=0;
+
+
+        return view('institucion.formulario',compact('retorno'));
         
     }
 
@@ -119,22 +138,21 @@ class InstitucionController extends Controller
 
         $var= $data['busqueda'];
 
-        $mostrar= DB::table('institucion')->where('nombre_institucion','like','%'.$var.'%')->get();
+        $mostrar= DB::table('institucion')->where('nombre_institucion','ILIKE','%'.$var.'%')->get();
         
         foreach ($mostrar as $key) {
 
             echo '
 
             <tr class="borrables">
-                <td>'.$key->id_institucion.'</td> 
-                <td>'.$key->nombre_institucion.'</td> 
-                <td>'.$key->direccion_institucion.'</td> 
-                <td>'.$key->correo_institucional.'</td> 
-                <td>'.$key->telefono_institucion.'</td> 
-                <td>'.$key->id_representante.'</td>
-                <td></td>
-                <td><a href="/institucion/editar/'.$key->id_institucion.'">Modificar</a></td>
-                <td><a href="/institucion/eliminar/'.$key->id_institucion.' ">Eliminar</a></td>  
+                <td >'.$key->nombre_institucion.'</td> 
+                <td >'.$key->direccion_institucion.'</td> 
+                <td >'.$key->correo_institucional.'</td> 
+                <td >'.$key->telefono_institucion.'</td> 
+                <td >
+                    <a href="/institucion/editar/'.$key->id_institucion.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Modificar</a>
+                    <a href="/institucion/eliminar/'.$key->id_institucion.' name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
+                </td>  
             </tr>
 
             ';

@@ -2,7 +2,6 @@
 @section('title', 'Crear Actividad')
 @section('content')
 
-    
     <!-- Page Heading -->
     <div class="row">
         <div class="col-lg-12">
@@ -18,7 +17,7 @@
     </div>
     <!-- /.row -->
 
-
+<div class="validadorformularios">
 
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
@@ -54,10 +53,12 @@
 
 
     <div class="col-md-offset-5">
-        {{Form::submit('Enviar',['class'=>'btn btn-primary'])}}
+        {{Form::submit('Enviar',['class'=>'btn btn-success'])}}
     </div>
 
     {!! Form::close() !!}
+
+</div>
 
 @endsection
 @push('scripts')

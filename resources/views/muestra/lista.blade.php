@@ -27,8 +27,8 @@
                 <!-- /.row -->
 
 
-
-                {!!Form::open(['url' => 'muestras/buscar', 'method' => 'POST','class'=>'form-horizontal busquedas', 'enctype'=> "multipart/form-data"])!!}
+                <div class="formulariosajax"> 
+                {!!Form::open(['url' => 'muestras/buscarfiltro', 'method' => 'POST','class'=>'form-horizontal busquedas', 'enctype'=> "multipart/form-data"])!!}
 
 
                         <div class="col-md-2">
@@ -55,7 +55,19 @@
 
                             </div>
                         </div>
+                        <div class="col-md-2">
 
+                             <div class="form-group">
+                                <label>Tecnica de Estudio</label>
+                                <input type="text" id="lock3" name="tecnica_mues_bus" class="form-control mi-chosen" data-location="3" placeholder="Tecnica">
+
+                                <ul class="oculto1" id="location3">
+                                    
+                                </ul>
+
+                            </div>
+
+                        </div>
                         <div class="col-md-4">
 
                             <div class="col-md-12">
@@ -71,28 +83,18 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                             <div class="form-group">
-                                <label>Tecnica de Estudio</label>
-                                <input type="text" id="lock3" name="tecnica_mues_bus" class="form-control mi-chosen" data-location="3" placeholder="Tecnica">
-
-                                <ul class="oculto1" id="location3">
-                                    
-                                </ul>
-
-                            </div>
-                        </div>
+                        
 
                         <div class=" col-md-1 col-md-offset-1">
                                 <label> </label>
-                            <button type="button"  class="btn btn-primary">Buscar</button>
+                            <button type="button" id="boton-inst" class="btn btn-primary buscador-muest">Buscar</button>
                         </div> 
 
 
 
                 {!! Form::close() !!}
 
-
+                </div>
 
                 <div id="imgconttemp">
                     {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform imgcontenedortemporal', 'enctype'=> "multipart/form-data"])!!}
@@ -114,12 +116,11 @@
 
 
 
-                <table class="table">
+                <table class="table table-responsive">
                         <tbody>
                             <tr>
                                     <th>Imagen</th>
                                     <th>Actividad</th>
-                                    <th>Tipo de Actividad</th>
                                     <th>Institucion</th>
                                     <th>Tecnica de estudio</th>
                                     <th>Fecha</th>
@@ -146,7 +147,6 @@
                                                     <img src="'.url("/storage").'/'.$value->ruta_img_muestra.'">
                                                 </div>
                                             </td>
-                                            <td></td>
                                             <td></td>
                                             <td></td>
                                             <td></td>

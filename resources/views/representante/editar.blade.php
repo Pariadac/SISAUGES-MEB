@@ -46,6 +46,16 @@
                 {{Form::label('telefono','Telefono Representante')}}
                 {{Form::text('telefono',$representante->telefono,['class'=>'form-control','type'=>'text'])}}
             </div>
+
+            <div class="col-md-6">
+                {{Form::label('institucion','Institución *')}}
+                {{Form::select('institucion',['Ejemplo'=>'Ejemplo','Ejemplo1'=>'Ejemplo1'],'',['class'=>'form-control selectpicker camporequerido','title'=>'Seleccione una opcion'])}}
+            </div>
+            <div class="col-md-6">
+                {{Form::label('departamento','Departamento *')}}
+                {{Form::select('departamento',['Ejemplo2'=>'ejemplo','Ejemplo3'=>'ejemplo3'],'',['class'=>'form-control selectpicker camporequerido','title'=>'Seleccione una opcion'])}}
+            </div>
+
         </div>
     </div>
 
@@ -58,3 +68,9 @@
 
 
 @endsection
+
+
+@push('scripts')
+    <script src="{{asset ('bower_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
+    <link href="{{asset('bower_components/bootstrap-select/dist/css/bootstrap-select.css')}}" rel="stylesheet" type="text/css">
+@endpush

@@ -7,6 +7,34 @@ body{
 	background-color: #365073!important;
 }
 
+.borrables td{
+
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+
+}
+
+.misbotones button{
+	width: 60%;
+}
+
+.contenedortablas{
+
+	width: 70%;
+	margin: auto;
+
+}
+
+.contenedortablas .tablaboton{
+	width: 30%!important;
+}
+
+.alineadorr{
+	text-align: left!important;
+	padding-left: 5%!important;
+}
 
 .navbar-inverse{
 	background-color: #010326!important; 
@@ -187,6 +215,7 @@ body{
 }
 .table td{
 	text-align: center;
+	vertical-align: middle!important;
 }
 
 .tablaboton{

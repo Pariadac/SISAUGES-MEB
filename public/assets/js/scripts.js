@@ -4,6 +4,13 @@ $(document).ready(function(){
 	var fecha=new Date();
 
 
+	$('.buscador-muest').on('click',function(){
+
+		$('.busquedas').submit();
+
+	});
+
+
 	$('.mi-chosen').on('keyup',function(event){
 
     	event.preventDefault();
@@ -12,6 +19,11 @@ $(document).ready(function(){
 
     		var form=$('.busquedas');
 			var urls=form.attr('action');
+
+			urls=urls.split('/');
+
+    		urls=urls[0]+'/'+urls[1]+'/'+urls[2]+'/muestras/buscar';
+
 
 			var moneda=$('#mimoneda input').val();
 
@@ -461,6 +473,17 @@ $(document).ready(function(){
 		}
 
 	});
+
+
+	$('.formulariosajax form').on('submit',function(event){
+
+		event.preventDefault();
+
+		$('#boton-inst').click();
+
+
+	});
+
 
 
 })

@@ -2,6 +2,24 @@
 @section('title', 'Editar Actividad')
 @section('content')
 
+
+    <!-- Page Heading -->
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="page-header">
+                Actividad <small>pagina Editar</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li class="active">
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Actividad/Editar</label>
+                </li>
+            </ol>
+        </div>
+    </div>
+    <!-- /.row -->
+
+<div class="validadorformularios">
+
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
@@ -42,6 +60,8 @@
     </div>
 
     {!! Form::close() !!}
+
+</div>
 
 @endsection
 @push('scripts')
