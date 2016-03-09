@@ -311,17 +311,15 @@ class MuestraController extends Controller
 
             $valor=$datos['actividades_mues_bus'];
             
-                
-
-            $aux1=DB::table('actividad')->join('muestra_actividad',function($join) use($valor){
-
-
-                $join->where('muestra_actividad.id_actividad','=',$valor);
+            
+            $act=DB::table('muestra_actividad')->where('id_actividad','=',$valor)->get();
 
 
-            })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->get();
+            foreach ($act as $key2) {
+            	$aux1=DB::table('muestra')->where('id_muestra','=',$key2->id_muestra)->get();
+            	$aux=array_merge($aux,$aux1);
+            }
 
-            $aux=array_merge($aux,$aux1);
             $coincidencias++;
 
 

@@ -134,7 +134,7 @@
 
                                           foreach ($actividad as $value):
 
-                                              echo '<li class="referencias" data-ids="1" data-value="'.$value->nombre_actividad.'" data-valortx="'.$value->nombre_actividad.'" > <p class="miminibuscador" >'.$value->nombre_actividad.'</p> </li>';
+                                              echo '<li class="referencias" data-ids2="'.$value->id_actividad.'" data-ids="1" data-value="'.$value->nombre_actividad.'" data-valortx="'.$value->nombre_actividad.'" > <p class="miminibuscador" >'.$value->nombre_actividad.'</p> </li>';
 
                                            endforeach 
 

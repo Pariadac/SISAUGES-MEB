@@ -137,8 +137,8 @@ $(document).ready(function(){
 
 			if (nameact.search('tipo_actividad')>-1) {
 
-				$('#lock'+llave).attr('data-valr',($(this).data('ids')));
-				$('#finact').attr('value',$('#lock1').data('valr'));
+				$('#lock'+llave).attr('data-valr',($(this).data('ids2')));
+				$('#finact').attr('value',$('#lock'+llave).data('valr'));
 
 				busca_relaciones_actividad();
 			};
