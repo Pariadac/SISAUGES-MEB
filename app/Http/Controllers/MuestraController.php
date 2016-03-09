@@ -232,17 +232,21 @@ class MuestraController extends Controller
         foreach ($datos as $key => $value) {
 
 
+
             if (Storage::exists($value->ruta_img_muestra))
             {
 
                 $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
             }
+
+
             
 
         }
 
+        $tecnica=TecnicaEstudio::all();
 
-    	return view('muestra.lista',compact('datos'));
+    	return view('muestra.lista',compact('datos','tecnica'));
     }
 
 
@@ -294,89 +298,114 @@ class MuestraController extends Controller
         $datos=Input::all();
         $aux=array();
         $retorno=array();
+        $coincidencias=0;
+        $validador=1;
+        $relaciones=array();
 
+
+        var_dump($datos);
 
         if ($datos['actividades_mues_bus']!='') {
 
+        	$relaciones['act']=$datos['actividades_mues_bus_f'];
+
             $valor=$datos['actividades_mues_bus'];
             
-            $resultados=DB::table('actividad')->where('nombre_actividad','ILIKE','%'.$valor.'%')->get();
-            
-            foreach ($resultados as $key) {
                 
 
-                $aux1=DB::table('actividad')->join('muestra_actividad',function($join) use($key){
+            $aux1=DB::table('actividad')->join('muestra_actividad',function($join) use($valor){
 
 
-                    $join->where('muestra_actividad.id_actividad','=',$key->id_actividad);
+                $join->where('muestra_actividad.id_actividad','=',$valor);
 
 
-                })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+            })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
 
-                $aux=array_merge($aux,$aux1);
-
-            }
+            $aux=array_merge($aux,$aux1);
+            $coincidencias++;
 
 
         }
 
         if ($datos['institucion_mues_bus']!='') {
 
+        	$relaciones['inst']=$datos['institucion_mues_bus_f'];
+
             $valor=$datos['institucion_mues_bus'];
-            
-            $resultados=DB::table('institucion')->where('nombre_institucion','ILIKE','%'.$valor.'%')->get();
-            
-            foreach ($resultados as $key) {
                 
 
-                $aux1=DB::table('institucion')->join('institucion_departamento_representante',function($join) use($key){
+            $aux1=DB::table('institucion')->join('institucion_departamento_representante',function($join) use($valor){
 
 
-                    $join->where('institucion_departamento_representante.id_institucion','=',$key->id_institucion);
+                $join->where('institucion_departamento_representante.id_institucion','=',$valor);
 
 
-                })->join('representante','representante.id_representante','=','institucion_departamento_representante.id_institucion')
-                ->join('representante_actividad','representante_actividad.id_representante','=','representante.id_representante')
-                ->join('actividad','actividad.id_actividad','=','representante_actividad.id_representante')
-                ->join('muestra_actividad','muestra_actividad.id_actividad','=','actividad.id_actividad')
-                ->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+            })->join('representante_actividad','representante_actividad.id_representante','=','institucion_departamento_representante.id_representante')
+            ->join('actividad','actividad.id_actividad','=','representante_actividad.id_actividad')
+            ->join('muestra_actividad','muestra_actividad.id_actividad','=','actividad.id_actividad')
+            ->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
 
-                $aux=array_merge($aux,$aux1);
+            $aux=array_merge($aux,$aux1);
+            $coincidencias++;
 
-            }
 
         }
         if ($datos['tecnica_mues_bus']!='') {
 
-            
             $valor=$datos['tecnica_mues_bus'];
-            
-            $resultados=DB::table('tecnica_estudio')->where('descripcion_tecnica_estudio','ILIKE','%'.$valor.'%')->get();
-            
-            foreach ($resultados as $key) {
+            $relaciones['tect']=TecnicaEstudio::find($valor);
                 
 
-                $aux1=DB::table('tecnica_estudio')->join('muestra_tecnica_estudio',function($join) use($key){
+            $tect=DB::table('muestra_tecnica_estudio')->where('id_tecnica_estudio','=',$valor)->get();
 
 
-                    $join->where('muestra_tecnica_estudio.id_tecnica_estudio','=',$key->id_tecnica_estudio);
-
-
-                })->join('muestra','muestra.id_muestra','=','muestra_tecnica_estudio.id_muestra')->select('muestra.*')->get();
-
-                $aux=array_merge($aux,$aux1);
-
+            foreach ($tect as $key2) {
+            	$aux1=DB::table('muestra')->where('id_muestra','=',$key2->id_muestra)->get();
+            	$aux=array_merge($aux,$aux1);
             }
 
+            $coincidencias++;
 
 
         }
         if ($datos['inicio_mues_bus']!=''&&$datos['fin_mues_bus']!='') {
 
             $aux1=DB::table('muestra')->whereBetween('fecha_analisis',[$datos['inicio_mues_bus'],$datos['fin_mues_bus']])->get();
-            $aux=array_merge($aux,$aux1);            
+            $aux=array_merge($aux,$aux1); 
+            $coincidencias++;           
 
         }
+
+
+
+        while (count($aux)!=0) {
+
+        	$tama=count($aux);
+        	$compaux=$aux[0];
+        	unset($aux[0]);
+        	$aux=array_values($aux);
+
+        	for ($i=0; $i <$tama-1 ; $i++) { 
+        		
+        		if ($compaux->id_muestra==$aux[$i]->id_muestra) {
+        			
+        			$validador++;
+        			unset($aux[$i]);
+
+        		}
+
+        	}
+        	
+        	if ($validador==$coincidencias) {
+        		$retorno[]=$compaux;
+        	}
+
+
+        }
+
+        var_dump($retorno);
+        var_dump($relaciones);
+        	
 
     }
 

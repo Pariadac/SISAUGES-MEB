@@ -27,14 +27,16 @@
                 <!-- /.row -->
 
 
-                <div class="formulariosajax"> 
+                <div > 
                 {!!Form::open(['url' => 'muestras/buscarfiltro', 'method' => 'POST','class'=>'form-horizontal busquedas', 'enctype'=> "multipart/form-data"])!!}
 
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Actividad</label>
-                                <input type="text" id="lock1" name="actividades_mues_bus" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
+                                <input autocomplete="off" type="text" id="lock1" name="actividades_mues_bus_f" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
+
+                                <input type="hidden" name="actividades_mues_bus" id="t_lock1" value="">
 
                                 <ul class="oculto1" id="location1">
                                     
@@ -47,9 +49,10 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Institucion</label>
-                                <input type="text" id="lock2" name="institucion_mues_bus" class="form-control mi-chosen" data-location="2" placeholder="Institución">
+                                <input autocomplete="off" type="text" id="lock3" name="institucion_mues_bus_f" class="form-control mi-chosen" data-location="3" placeholder="Institución">
+                                <input type="hidden" name="institucion_mues_bus" id="t_lock3" value="">
 
-                                <ul class="oculto1" id="location2">
+                                <ul class="oculto1" id="location3">
                                     
                                 </ul>
 
@@ -59,11 +62,22 @@
 
                              <div class="form-group">
                                 <label>Tecnica de Estudio</label>
-                                <input type="text" id="lock3" name="tecnica_mues_bus" class="form-control mi-chosen" data-location="3" placeholder="Tecnica">
 
-                                <ul class="oculto1" id="location3">
-                                    
-                                </ul>
+                                <select id="tipo_muestra" name="tecnica_mues_bus" class="form-control">
+                                  <option value="">Seleccione...</option>
+                                  <?php
+
+
+                                    foreach ($tecnica as $key) {
+
+                                        echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+
+                                    }
+
+
+                                  ?>
+                                </select>
+
 
                             </div>
 
@@ -87,7 +101,7 @@
 
                         <div class=" col-md-1 col-md-offset-1">
                                 <label> </label>
-                            <button type="button" id="boton-inst" class="btn btn-primary buscador-muest">Buscar</button>
+                            <button type="button" class="btn btn-primary buscador-muest">Buscar</button>
                         </div> 
 
 
