@@ -319,7 +319,7 @@ class MuestraController extends Controller
                 $join->where('muestra_actividad.id_actividad','=',$valor);
 
 
-            })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+            })->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->get();
 
             $aux=array_merge($aux,$aux1);
             $coincidencias++;
@@ -380,6 +380,7 @@ class MuestraController extends Controller
 
         while (count($aux)!=0) {
 
+        	$aux=array_values($aux);
         	$tama=count($aux);
         	$compaux=$aux[0];
         	unset($aux[0]);
