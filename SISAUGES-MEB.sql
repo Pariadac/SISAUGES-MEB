@@ -58,8 +58,6 @@ CREATE TABLE IF NOT EXISTS ACTIVIDAD
 	nombre_actividad varchar(30) not null,
 	status_actividad STATUS not null,
 	permiso_actividad PERMISOS not null,
-	id_tipo_actividad integer,
-	id_clasificacion_actividad integer,
 	id_sector_ac integer,
 	constraint pk_actividad
 		primary key (id_actividad),
