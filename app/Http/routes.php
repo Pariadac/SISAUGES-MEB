@@ -114,6 +114,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('muestras/ajaxrelacionesact','MuestraController@relacionesact');
     Route::post('muestras/buscar','MuestraController@buscarbdd');
     Route::post('muestras/buscarfiltro','MuestraController@buscar_filtros');
+    Route::get('muestras/buscarfiltro','MuestraController@buscar_filtros');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
     Route::get('muestras/detalles/{id}','MuestraController@details');

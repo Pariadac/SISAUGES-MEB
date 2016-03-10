@@ -17,6 +17,7 @@ use SISAUGES\Muestra;
 use SISAUGES\Actividad;
 use SISAUGES\TecnicaEstudio;
 use SISAUGES\Representante;
+use Illuminate\Pagination\LengthAwarePaginator;
 
 
 class MuestraController extends Controller
@@ -26,8 +27,70 @@ class MuestraController extends Controller
         $this->middleware('auth');
     }
 
+    //Funciones para obtener las relaciones de una muestra a partir de esta
+
+    public function obtener_actividad($valor){
+
+    	$act=DB::table('muestra_actividad')->where('id_muestra','=',$valor)->get();
+
+    	$aux=array();
+
+        foreach ($act as $key2) {
+        	$aux1=DB::table('actividad')->where('id_actividad','=',$key2->id_actividad)->get();
+        	$aux=array_merge($aux,$aux1);
+        }
+
+        return $aux;
+
+    }
+
+    public function obtener_institucion($valor){
+
+    	$inst=DB::table('muestra_actividad')->where('id_muestra','=',$valor)->get();
+    	$aux=array();
+
+        foreach ($inst as $llave1) {
+        
+        	$rep=DB::table('representante_actividad')->where('id_actividad','=',$llave1->id_actividad)->get();
+
+        	foreach ($rep as $llave2) {
+
+        		$act=DB::table('institucion_departamento_representante')->where('id_representante',$llave2->id_representante)->get();
+
+        		foreach ($act as $llave3) {
+        			
+        			$aux1=DB::table('institucion')->where('id_institucion','=',$llave3->id_institucion)->get();
+
+        			$aux=array_merge($aux,$aux1);
+
+        		}
+        	}
+
+        }
+
+        return $aux; 
+
+    }
+
+    public function obtener_tecnica($valor){
+
+    	$act=DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$valor)->get();
+
+    	$aux=array();
+
+        foreach ($act as $key2) {
+        	$aux1=DB::table('tecnica_estudio')->where('id_tecnica_estudio','=',$key2->id_tecnica_estudio)->get();
+        	$aux=array_merge($aux,$aux1);
+        }
+
+        return $aux;
+
+    }
 
 
+
+
+    //Funcion para generar una imagen compatible con el navegador
 
     public function generar_imagen_visible($original_paht,$id){
 
@@ -48,6 +111,7 @@ class MuestraController extends Controller
 
     }
 
+    //Retorno a la pagina principal de Muestras
 
     public function index()
     {
@@ -78,13 +142,7 @@ class MuestraController extends Controller
     }
 
 
-
-    public function prueba(){
-        $suma=4+5;
-    }
-
-
-
+    //Funcion que retorna a la pagina de agregar muestra
 
     public function create()
     {
@@ -94,7 +152,7 @@ class MuestraController extends Controller
         return view('muestra.crear',compact('actividad','tecnica'));
     }
 
-
+    //Funcion que retorna una imagen visible a la vista de agregar muestra
 
     public function ajaxvalidar(){
 
@@ -121,6 +179,8 @@ class MuestraController extends Controller
 
 
     }
+
+    //Funcion que elimina las imagenes auxiliares compatibles con el navegador
 
     public function borrar_img(){
 
@@ -153,6 +213,8 @@ class MuestraController extends Controller
         ]);
 
     }
+
+    //Funcion que almacena la informacion en la base de datos, y la imagen en el servidor
 
 
     public function store()
@@ -224,13 +286,21 @@ class MuestraController extends Controller
     }
 
 
+
+    //Funcion que retorna a la Vista listar de Muestras
+
+
     public function listar(){
+
+    	$retorno=array();
+
+    	$valores=array();
+
     	$datos=Muestra::all();
 
         $public_path = public_path();
 
         foreach ($datos as $key => $value) {
-
 
 
             if (Storage::exists($value->ruta_img_muestra))
@@ -239,16 +309,24 @@ class MuestraController extends Controller
                 $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
             }
 
+            $valores['muestra-d']=$datos[$key];
+            $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
+            $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
+            $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
 
+            $retorno[]=$valores;
             
 
         }
 
         $tecnica=TecnicaEstudio::all();
 
-    	return view('muestra.lista',compact('datos','tecnica'));
+
+    	return view('muestra.lista',compact('datos','tecnica','retorno'));
     }
 
+
+    //Funcion que busca las relaciones de muestra usando el nombre principal de dichas relaciones como parametro
 
     public function resultadosbdd($valor,$posi){
 
@@ -262,10 +340,7 @@ class MuestraController extends Controller
     }
 
 
-
-
-
-
+    //Funcion ajax utilizada para retornar una lista de las relaciones de muestra
 
     public function buscarbdd(){
 
@@ -293,27 +368,37 @@ class MuestraController extends Controller
     }
 
 
-    public function buscar_filtros(){
+    function retornar_busqueda_filtro($valores){
+
+    	$retorno=array();
+
+
+    }
+
+
+
+    //Funcion que retorna la busqueda de muestras segun el filtro utilizado por el usuario
+
+    public function buscar_filtros(Request $request){
        
-        $datos=Input::all();
         $aux=array();
         $retorno=array();
         $coincidencias=0;
-        $validador=1;
-        $relaciones=array();
+
+        $query=['actividades_mues_bus'=>$request->actividades_mues_bus,
+        		'institucion_mues_bus'=>$request->institucion_mues_bus,
+        		'tecnica_mues_bus'=>$request->tecnica_mues_bus,
+        		'inicio_mues_bus'=>$request->inicio_mues_bus,
+        		'fin_mues_bus'=>$request->fin_mues_bus
+
+        		];
 
 
-        var_dump($datos);
+        if ($request->actividades_mues_bus!='') {
 
-        if ($datos['actividades_mues_bus']!='') {
-
-        	$relaciones['act']=$datos['actividades_mues_bus_f'];
-
-            $valor=$datos['actividades_mues_bus'];
-            
+            $valor=$request->actividades_mues_bus;         
             
             $act=DB::table('muestra_actividad')->where('id_actividad','=',$valor)->get();
-
 
             foreach ($act as $key2) {
             	$aux1=DB::table('muestra')->where('id_muestra','=',$key2->id_muestra)->get();
@@ -325,33 +410,38 @@ class MuestraController extends Controller
 
         }
 
-        if ($datos['institucion_mues_bus']!='') {
+        if ($request->institucion_mues_bus!='') {
 
-        	$relaciones['inst']=$datos['institucion_mues_bus_f'];
+            $valor=$request->institucion_mues_bus;
 
-            $valor=$datos['institucion_mues_bus'];
-                
+            $inst=DB::table('institucion_departamento_representante')->where('id_institucion','=',$valor)->get();
 
-            $aux1=DB::table('institucion')->join('institucion_departamento_representante',function($join) use($valor){
+            foreach ($inst as $llave1) {
+            
+            	$rep=DB::table('representante_actividad')->where('id_representante','=',$llave1->id_representante)->get();
 
+            	foreach ($rep as $llave2) {
 
-                $join->where('institucion_departamento_representante.id_institucion','=',$valor);
+            		$act=DB::table('muestra_actividad')->where('id_actividad','=',$llave2->id_actividad)->get();
 
+            		foreach ($act as $llave3) {
+            			
+            			$aux1=DB::table('muestra')->where('id_muestra','=',$llave3->id_muestra)->get();
 
-            })->join('representante_actividad','representante_actividad.id_representante','=','institucion_departamento_representante.id_representante')
-            ->join('actividad','actividad.id_actividad','=','representante_actividad.id_actividad')
-            ->join('muestra_actividad','muestra_actividad.id_actividad','=','actividad.id_actividad')
-            ->join('muestra','muestra.id_muestra','=','muestra_actividad.id_muestra')->select('muestra.*')->get();
+            			$aux=array_merge($aux,$aux1);
 
-            $aux=array_merge($aux,$aux1);
+            		}
+            	}
+
+            }    
+            
             $coincidencias++;
 
 
         }
-        if ($datos['tecnica_mues_bus']!='') {
+        if ($request->tecnica_mues_bus!='') {
 
-            $valor=$datos['tecnica_mues_bus'];
-            $relaciones['tect']=TecnicaEstudio::find($valor);
+            $valor=$request->tecnica_mues_bus;
                 
 
             $tect=DB::table('muestra_tecnica_estudio')->where('id_tecnica_estudio','=',$valor)->get();
@@ -366,15 +456,13 @@ class MuestraController extends Controller
 
 
         }
-        if ($datos['inicio_mues_bus']!=''&&$datos['fin_mues_bus']!='') {
+        if ($request->inicio_mues_bus!=''&&$request->fin_mues_bus!='') {
 
-            $aux1=DB::table('muestra')->whereBetween('fecha_analisis',[$datos['inicio_mues_bus'],$datos['fin_mues_bus']])->get();
+            $aux1=DB::table('muestra')->whereBetween('fecha_analisis',[$request->inicio_mues_bus,$request->fin_mues_bus])->get();
             $aux=array_merge($aux,$aux1); 
             $coincidencias++;           
 
         }
-
-
 
         while (count($aux)!=0) {
 
@@ -383,6 +471,7 @@ class MuestraController extends Controller
         	$compaux=$aux[0];
         	unset($aux[0]);
         	$aux=array_values($aux);
+        	$validador=1;
 
         	for ($i=0; $i <$tama-1 ; $i++) { 
         		
@@ -399,20 +488,60 @@ class MuestraController extends Controller
         		$retorno[]=$compaux;
         	}
 
+        }
+
+        $page = Input::get('page', 1); 
+
+        $perPage = 2;
+
+        $offSet = ($page * $perPage) - $perPage;
+
+        $itemsForCurrentPage = array_slice($retorno, $offSet, $perPage, true);
+
+
+        $valores=array();
+
+        $retorno=array();
+
+    	$datos=$itemsForCurrentPage;
+
+        $public_path = public_path();
+
+        foreach ($datos as $key => $value) {
+
+
+            if (Storage::exists($value->ruta_img_muestra))
+            {
+
+                $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
+            }
+
+            $valores['muestra-d']=$datos[$key];
+            $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
+            $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
+            $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
+            
+            $retorno[]=$valores;
 
         }
 
-        var_dump($retorno);
-        var_dump($relaciones);
-        	
+        $itemsForCurrentPage=$retorno;
+
+
+        $tecnica=TecnicaEstudio::all();
+
+
+        $paginador=new LengthAwarePaginator($itemsForCurrentPage, count($retorno), $perPage, $page, ['path' => 'buscarfiltro','query' =>$query]);
+
+        return view('muestra.prueba',compact('paginador','tecnica','itemsForCurrentPage')); 
+
 
     }
 
 
 
 
-
-
+    //Funcion que retorna la vista para editar una muestra
 
     public function edit($id)
     {
@@ -447,6 +576,9 @@ class MuestraController extends Controller
         return view('muestra.crear',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
 
     }
+
+
+    //Funcion que actualiza los datos de una muestra
 
     public function update($id)
     {
@@ -501,6 +633,8 @@ class MuestraController extends Controller
         
     }
 
+    //Funcion que muestra los detalles de una muestra incluyendo las muestras relacionadas
+
     public function details($id){
 
 
@@ -536,6 +670,8 @@ class MuestraController extends Controller
     }
 
 
+    //Funcion que busca las relaciones de una actividad para una muestra
+
     public function relacionesact(){
 
         $datos=Input::all();
@@ -562,6 +698,8 @@ class MuestraController extends Controller
 
     }
 
+
+    //Funcion de Eliminar muestra
 
     public function destroy($id)
     {

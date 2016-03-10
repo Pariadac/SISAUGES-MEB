@@ -2,7 +2,9 @@
 
 @section('content')
 
-                <?php $murl='muestras/guardar'; 
+<?php 
+
+				 $murl='muestras/guardar'; 
 
 
                 ?>
@@ -19,7 +21,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Muestras/Lista</label>
+                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Muestras/Lista/Busqueda</label>
                             </li>
                         </ol>
                     </div>
@@ -116,9 +118,9 @@
 
                         <?php
 
-                            foreach ($datos as $keys) {
+                            foreach ($itemsForCurrentPage as $keys) {
                                 
-                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys->ruta_img_muestra.'">';
+                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys['muestra-d']->ruta_img_muestra.'">';
 
                             }
 
@@ -143,7 +145,7 @@
 
                             <?php
 
-                                foreach ($retorno as $key=> $value) {
+                                foreach ($itemsForCurrentPage as $key=> $value) {
 
 
                                     if ($key % 2!= 0) {
@@ -180,8 +182,6 @@
                                     ';
                                 }
 
-                                /*<a href="'.url("/muestras/eliminar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>*/
-
                             ?>
 
 
@@ -189,5 +189,6 @@
 
 
 
-@endsection
+{!! $paginador->render(); !!}
 
+@endsection
