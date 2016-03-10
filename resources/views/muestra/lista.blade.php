@@ -116,9 +116,9 @@
 
                         <?php
 
-                            foreach ($datos as $keys) {
+                            foreach ($itemsForCurrentPage as $keys) {
                                 
-                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys->ruta_img_muestra.'">';
+                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys['muestra-d']->ruta_img_muestra.'">';
 
                             }
 
@@ -143,7 +143,7 @@
 
                             <?php
 
-                                foreach ($retorno as $key=> $value) {
+                                foreach ($itemsForCurrentPage as $key=> $value) {
 
 
                                     if ($key % 2!= 0) {
@@ -187,7 +187,11 @@
 
                     </table>
 
+                    <div class="estilospaginador">
+                        
+                        {!! $paginador->render(); !!}
 
+                    </div>
 
 @endsection
 

@@ -29,17 +29,17 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('nombreActividad','Nombre de la Actividad')}}
-                {{Form::text('nombreActividad',$actividad->nombre_actividad,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('nombreActividad','Nombre de la Actividad*')}}
+                {{Form::text('nombreActividad',$actividad->nombre_actividad,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('sectorActividad','Sector Involucrado')}}
+                {{Form::label('sectorActividad','Sector Involucrado*')}}
                 {{Form::select('sectorActividad',$sectorActividad,$actividad->id_sector_ac,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('statusActividad','Status Actividad')}}
+                {{Form::label('statusActividad','Status Actividad*')}}
                 {{Form::select('statusActividad',['No iniciado' => 'No Iniciado',
                                                   'Iniciado'    => 'Iniciado',
                                                   'En progreso' => 'En Progreso',
@@ -47,9 +47,13 @@
             </div>
 
             <div class="col-md-6">
-                {{Form::label('permisoActividad','Permisologia')}}
+                {{Form::label('permisoActividad','Permisologia*')}}
                 {{Form::select('permisoActividad',['Publico'    => 'Publico',
                                                    'Privado'    => 'Privado'],$actividad->permiso_actividad,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+            </div>
+
+            <div class="col-md-12 msnrequeridos">
+                <p>Todos los campos con (*) son obligatorios</p>
             </div>
         </div>
     </div>

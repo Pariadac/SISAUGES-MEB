@@ -49,22 +49,22 @@
             <div class="panel-body">
                 
                  <div class="col-md-6">
-                    {{Form::label('Nombre de la institucion')}}
+                    {{Form::label('Nombre de la institucion*')}}
                     {{Form::text('nomb_inst',null,['class'=>'form-control camporequerido','type'=>'text'])}}
                 </div>
 
                 <div class="col-md-6">
-                    {{Form::label('Correo de la institucion')}}
+                    {{Form::label('Correo de la institucion*')}}
                     {{Form::text('correo_inst',null,['class'=>'form-control camporequerido solomails','type'=>'text'])}}
                 </div>
                
                 <div class="col-md-6">
-                    {{Form::label('Telefono de la institucion')}}
+                    {{Form::label('Telefono de la institucion*')}}
                     {{Form::text('telefono_inst',null,['class'=>'form-control camporequerido solo-numero','type'=>'text'])}}
                 </div>
 
                 <div class="col-md-6">
-                    {{Form::label('Direccion de la Institucion')}}
+                    {{Form::label('Direccion de la Institucion*')}}
                     {{Form::text('direccion_inst',null,['class'=>'form-control camporequerido','type'=>'text'])}}
                 </div>         
                 
@@ -72,6 +72,9 @@
             </div>
         </div>
 
+        <div class="col-md-12 msnrequeridos">
+            <p>Todos los campos con (*) son obligatorios</p>
+        </div>
 
         <div class="col-md-offset-5">
             {{Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])}}

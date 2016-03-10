@@ -77,7 +77,7 @@
                 </div>-->
 
 
-                <div class="validadorformularios">
+                <div class="validadorformularios ">
                       
                   {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform', 'enctype'=> "multipart/form-data"])!!}
 

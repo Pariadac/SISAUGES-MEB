@@ -17,6 +17,16 @@
     </div>
     <!-- /.row -->
 
+    <div class="col-md-12">
+        <div class="contenedoralertas">
+          <div id="alerta" style="display:none" class="" data-estado="0" data-clase="0">
+          
+            <p><strong></strong>  <span></span></p>
+
+          </div>
+        </div>
+    </div>
+
 
     <div class="validadorformularios">
 
@@ -30,22 +40,23 @@
             <div class="panel-body">
                 
                  <div class="col-md-6">
-                    {{Form::label('Departamento')}}
+                    {{Form::label('Departamento*')}}
                     {{Form::text('nomb',$departamento->descripcion_departamento,['class'=>'form-control camporequerido','type'=>'text'])}}
                 </div>   
                
+                <div class="col-md-12 msnrequeridos">
+                    <p>Todos los campos con (*) son obligatorios</p>
+                </div>
+  
             </div>
-        </div>
 
+        </div>
 
         <div class="col-md-offset-5">
             {{Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])}}
         </div>
 
-
-    <div class="col-md-offset-5">
-        {{Form::submit('Enviar',['class'=>'btn btn-primary'])}}
-    </div>
+        
 
     {!! Form::close() !!}
 

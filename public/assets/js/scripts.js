@@ -4,6 +4,16 @@ $(document).ready(function(){
 	var fecha=new Date();
 
 
+	function estylepag(){
+
+		var ancho=$('.estilospaginador ul').width();
+
+		$('.estilospaginador').attr('style','position: relative; width: '+ancho+'px; margin: auto;')
+
+	}
+
+	estylepag();
+
 	$('.buscador-muest').on('click',function(){
 
 		$('.busquedas').submit();

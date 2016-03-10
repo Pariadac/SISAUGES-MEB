@@ -1,4 +1,28 @@
-<?php namespace SISAUGES\Http\Controllers;
+<?php 
+/**
+ * Copyright (c) 2016 Ely Colmenarez
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+
+
+namespace SISAUGES\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Collective\Html\HtmlServiceProvider;
@@ -20,6 +44,20 @@ use SISAUGES\Representante;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 
+
+/**
+ * Class MuestraController
+ *
+ * Esta clase se diseño para manejar las transancciones de las Muestras en la base de
+ * datos, estas pueden ser agregar,
+ * modificar, eliminar o listar.
+ *
+ * @author Edward Perez zero_zerouno@hotmail.com
+ * @copyright 2016 Edward Perez
+ * @package SISAUGES\Http\Controllers
+ */
+
+
 class MuestraController extends Controller
 {
     public function __construct()
@@ -27,7 +65,16 @@ class MuestraController extends Controller
         $this->middleware('auth');
     }
 
-    //Funciones para obtener las relaciones de una muestra a partir de esta
+
+    /**
+     * Metodo para obtener las relaciones de una muestra a partir de esta
+     *
+     *
+     * @param id_muestra
+     *
+     * @return $aux retorna la actividades relacionadas a una muestra
+     */
+
 
     public function obtener_actividad($valor){
 
@@ -43,6 +90,16 @@ class MuestraController extends Controller
         return $aux;
 
     }
+
+
+    /**
+     * Metodo para obtener las relaciones de una muestra a partir de esta
+     *
+     *
+     * @param id_muestra
+     *
+     * @return $aux retorna la institución relacionada a una muestra
+     */
 
     public function obtener_institucion($valor){
 
@@ -72,6 +129,15 @@ class MuestraController extends Controller
 
     }
 
+    /**
+     * Metodo para obtener las relaciones de una muestra a partir de esta
+     *
+     *
+     * @param id_muestra
+     *
+     * @return $aux retorna la tecnica relacionada a una muestra
+     */
+
     public function obtener_tecnica($valor){
 
     	$act=DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$valor)->get();
@@ -90,7 +156,15 @@ class MuestraController extends Controller
 
 
 
-    //Funcion para generar una imagen compatible con el navegador
+    /**
+     * Metodo para generar una imagen compatible con el navegador
+     *
+     *
+     * @param string,integer
+     *
+     * @return retorna la ruta de una imagen auxiliar creada en el servidor
+     */
+
 
     public function generar_imagen_visible($original_paht,$id){
 
@@ -111,7 +185,16 @@ class MuestraController extends Controller
 
     }
 
-    //Retorno a la pagina principal de Muestras
+
+    /**
+     * Metodo para retornar a la pagina principal de Muestras
+     *
+     *
+     * @param void
+     *
+     * @return redirige a la vista principal del Modulo Muestras
+     */
+
 
     public function index()
     {
@@ -142,7 +225,16 @@ class MuestraController extends Controller
     }
 
 
-    //Funcion que retorna a la pagina de agregar muestra
+
+    /**
+     * Metodo que retorna a la pagina de agregar muestra
+     *
+     *
+     * @param void
+     *
+     * @return redirige a la vista agregar del Modulo Muestras
+     */
+
 
     public function create()
     {
@@ -152,7 +244,15 @@ class MuestraController extends Controller
         return view('muestra.crear',compact('actividad','tecnica'));
     }
 
-    //Funcion que retorna una imagen visible a la vista de agregar muestra
+
+    /**
+     * Metodo que retorna una imagen visible a la vista de agregar muestra
+     *
+     *
+     * @param void
+     *
+     * @return retorna una imagen visible a la vista de agregar muestra en formato json
+     */
 
     public function ajaxvalidar(){
 
@@ -180,7 +280,16 @@ class MuestraController extends Controller
 
     }
 
-    //Funcion que elimina las imagenes auxiliares compatibles con el navegador
+
+    /**
+     * Metodo que elimina las imagenes auxiliares compatibles con el navegador
+     *
+     *
+     * @param void
+     *
+     * @return elimina las imagenes auxiliares del servidor
+     */
+
 
     public function borrar_img(){
 
@@ -215,6 +324,17 @@ class MuestraController extends Controller
     }
 
     //Funcion que almacena la informacion en la base de datos, y la imagen en el servidor
+
+
+    /**
+     * Metodo que almacena la informacion en la base de datos, y la imagen en el servidor
+     *
+     *
+     * @param void
+     *
+     * @return almacena la informacion del formulario del modulo muestras en la base de datos.
+     */
+
 
 
     public function store()
@@ -286,17 +406,37 @@ class MuestraController extends Controller
     }
 
 
+     /**
+     * Metodo que retorna a la Vista listar de Muestras
+     *
+     *
+     * @param void
+     *
+     * @return retorna a la Vista listar de Muestras
+     */
 
-    //Funcion que retorna a la Vista listar de Muestras
+
 
 
     public function listar(){
 
-    	$retorno=array();
 
-    	$valores=array();
+    	$totaldatos=DB::table('muestra')->get();
 
-    	$datos=Muestra::all();
+    	$page = Input::get('page', 1); 
+
+        $perPage = 2;
+
+        $offSet = ($page * $perPage) - $perPage;
+
+        $itemsForCurrentPage = array_slice($totaldatos, $offSet, $perPage, true);
+
+
+        $valores=array();
+
+        $retorno=array();
+
+    	$datos=$itemsForCurrentPage;
 
         $public_path = public_path();
 
@@ -313,20 +453,33 @@ class MuestraController extends Controller
             $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
             $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
             $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
-
-            $retorno[]=$valores;
             
+            $retorno[]=$valores;
 
         }
+
+        $itemsForCurrentPage=$retorno;
+
 
         $tecnica=TecnicaEstudio::all();
 
 
-    	return view('muestra.lista',compact('datos','tecnica','retorno'));
+        $paginador=new LengthAwarePaginator($itemsForCurrentPage, count($totaldatos), $perPage, $page, ['path' => 'lista']);
+
+
+
+    	return view('muestra.lista',compact('paginador','tecnica','itemsForCurrentPage'));
     }
 
 
-    //Funcion que busca las relaciones de muestra usando el nombre principal de dichas relaciones como parametro
+    /**
+     * Metodo que busca las relaciones de muestra usando el nombre principal de dichas relaciones como parametro
+     *
+     *
+     * @param $valor string,$posi integer;
+     *
+     * @return $resultados retorna un objeto del tipo de dato solicitado.
+     */
 
     public function resultadosbdd($valor,$posi){
 
@@ -340,7 +493,15 @@ class MuestraController extends Controller
     }
 
 
-    //Funcion ajax utilizada para retornar una lista de las relaciones de muestra
+    /**
+     * Metodo ajax utilizada para retornar una lista de las relaciones de muestra
+     *
+     *
+     * @param void;
+     *
+     * @return $var retorna una cadena de valores conpatibles con listas html en formato json
+     */
+
 
     public function buscarbdd(){
 
@@ -368,16 +529,17 @@ class MuestraController extends Controller
     }
 
 
-    function retornar_busqueda_filtro($valores){
-
-    	$retorno=array();
 
 
-    }
+	/**
+     * Metodo que retorna la busqueda de muestras segun el filtro utilizado por el usuario
+     *
+     *
+     * @param $reques objetos de tipo reques de laravel;
+     *
+     * @return $paginador lista de paginas generadas por laravel, $tecnicas arreglo con el conjunto de tecnicas existentes, $itemsForCurrentPage arreglo de objetos con los datos de la muestra
+     */
 
-
-
-    //Funcion que retorna la busqueda de muestras segun el filtro utilizado por el usuario
 
     public function buscar_filtros(Request $request){
        
@@ -490,6 +652,8 @@ class MuestraController extends Controller
 
         }
 
+        $total_pages=count($retorno);
+
         $page = Input::get('page', 1); 
 
         $perPage = 2;
@@ -531,7 +695,8 @@ class MuestraController extends Controller
         $tecnica=TecnicaEstudio::all();
 
 
-        $paginador=new LengthAwarePaginator($itemsForCurrentPage, count($retorno), $perPage, $page, ['path' => 'buscarfiltro','query' =>$query]);
+        $paginador=new LengthAwarePaginator($itemsForCurrentPage, $total_pages, $perPage, $page, ['path' => 'buscarfiltro','query' =>$query]);
+
 
         return view('muestra.prueba',compact('paginador','tecnica','itemsForCurrentPage')); 
 
@@ -540,8 +705,17 @@ class MuestraController extends Controller
 
 
 
+    /**
+     * Metodo que retorna la vista para editar una muestra
+     *
+     *
+     * @param $id integer;
+     *
+     * @return $muestra datos obtenidos de la muestra seleccionada, $actividad objeto con la informacion de la actividad relacionada a la muestra, $tecnica arreglo de objetos de las muestras existentes, $muestracontenido arreglo de datos relacionados a la iamgen de la muestra, $tecnica_estudio_mues objeto con la informacion de la tecnica de estudio relacionada a la muestra
+     */
 
-    //Funcion que retorna la vista para editar una muestra
+
+
 
     public function edit($id)
     {
@@ -578,7 +752,17 @@ class MuestraController extends Controller
     }
 
 
-    //Funcion que actualiza los datos de una muestra
+
+    /**
+     * Metodo que actualiza los datos de una muestra
+     *
+     *
+     * @param $id integer;
+     *
+     * @return $retorno estado de la solicitud de la muestra 1 para fallido, 0 para exitoso. $actividad arreglo de actividades existentes, $tecnica arreglo de actividades existentes;
+     */
+
+
 
     public function update($id)
     {
@@ -635,6 +819,17 @@ class MuestraController extends Controller
 
     //Funcion que muestra los detalles de una muestra incluyendo las muestras relacionadas
 
+
+    /**
+     * Metodo que muestra los detalles de una muestra incluyendo las muestras relacionadas
+     *
+     *
+     * @param $id integer;
+     *
+     * @return $muestra datos obtenidos de la muestra seleccionada, $actividad objeto con la informacion de la actividad relacionada a la muestra, $tecnica arreglo de objetos de las muestras existentes, $muestracontenido arreglo de datos relacionados a la iamgen de la muestra, $tecnica_estudio_mues objeto con la informacion de la tecnica de estudio relacionada a la muestra
+     */
+
+
     public function details($id){
 
 
@@ -672,6 +867,17 @@ class MuestraController extends Controller
 
     //Funcion que busca las relaciones de una actividad para una muestra
 
+
+    /**
+     * Metodo que busca las relaciones de una actividad para una muestra
+     *
+     *
+     * @param void;
+     *
+     * @return retorna una respuesta en formato json de la relacion de las actividades
+     */
+
+
     public function relacionesact(){
 
         $datos=Input::all();
@@ -697,9 +903,6 @@ class MuestraController extends Controller
         ]);
 
     }
-
-
-    //Funcion de Eliminar muestra
 
     public function destroy($id)
     {

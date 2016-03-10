@@ -21,22 +21,32 @@
 
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
+    @else
+
+            <div class="contenedoralertas">
+              <div id="alerta" style="display:none" class="" data-estado="0" data-clase="0">
+              
+                <p><strong></strong>  <span></span></p>
+
+              </div>
+            </div>
+
     @endif
     {!!Form::open(['action' => 'ActividadController@store'])!!}
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('nombreActividad','Nombre de la Actividad')}}
-                {{Form::text('nombreActividad',null,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('nombreActividad','Nombre de la Actividad*')}}
+                {{Form::text('nombreActividad',null,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('sectorActividad','Sector Involucrado')}}
+                {{Form::label('sectorActividad','Sector Involucrado*')}}
                 {{Form::select('sectorActividad',$sectorActividad,'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('statusActividad','Status Actividad')}}
+                {{Form::label('statusActividad','Status Actividad*')}}
                 {{Form::select('statusActividad',['No iniciado' => 'No Iniciado',
                                                   'Iniciado'    => 'Iniciado',
                                                   'En progreso' => 'En Progreso',
@@ -44,16 +54,22 @@
             </div>
 
             <div class="col-md-6">
-                {{Form::label('permisoActividad','Permisologia')}}
+                {{Form::label('permisoActividad','Permisologia*')}}
                 {{Form::select('permisoActividad',['Publico'    => 'Publico',
                                                    'Privado'    => 'Privado'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
             </div>
+
+
+            <div class="col-md-12 msnrequeridos">
+                <p>Todos los campos con (*) son obligatorios</p>
+            </div>
+            
         </div>
     </div>
 
 
     <div class="col-md-offset-5">
-        {{Form::submit('Enviar',['class'=>'btn btn-success'])}}
+        {{Form::submit('Enviar',['class'=>'btn btn-success', 'id'=> "singlebutton"])}}
     </div>
 
     {!! Form::close() !!}

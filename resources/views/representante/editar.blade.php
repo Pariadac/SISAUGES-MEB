@@ -27,24 +27,24 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('cedula','Cedula Representante')}}
-                {{Form::text('cedula',$representante->cedula,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('cedula','Cedula Representante*')}}
+                {{Form::text('cedula',$representante->cedula,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombre','Nombre Representante')}}
-                {{Form::text('nombre',$representante->nombre,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('nombre','Nombre Representante*')}}
+                {{Form::text('nombre',$representante->nombre,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('apellido','Apellido Representante')}}
-                {{Form::text('apellido',$representante->apellido,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('apellido','Apellido Representante*')}}
+                {{Form::text('apellido',$representante->apellido,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('email','Correo Electronico Representante')}}
-                {{Form::text('email',$representante->email,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('email','Correo Electronico Representante*')}}
+                {{Form::text('email',$representante->email,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('telefono','Telefono Representante')}}
-                {{Form::text('telefono',$representante->telefono,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('telefono','Telefono Representante*')}}
+                {{Form::text('telefono',$representante->telefono,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
 
             <div class="col-md-6">

@@ -49,12 +49,19 @@
             <div class="panel-body">
                 
                  <div class="col-md-6">
-                    {{Form::label('Departamento')}}
+                    {{Form::label('Departamento*')}}
                     {{Form::text('nomb',null,['class'=>'form-control camporequerido','type'=>'text'])}}
                 </div>   
-               
+
+
+                <div class="col-md-12 msnrequeridos">
+                    <p>Todos los campos con (*) son obligatorios</p>
+                </div>
+  
             </div>
+
         </div>
+
 
 
         <div class="col-md-offset-5">

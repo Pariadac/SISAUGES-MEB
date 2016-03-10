@@ -18,6 +18,19 @@
     <!-- /.row -->
 
 
+    <div class="col-md-12">
+        <div class="contenedoralertas">
+          <div id="alerta" style="display:none" class="" data-estado="0" data-clase="0">
+          
+            <p><strong></strong>  <span></span></p>
+
+          </div>
+        </div>
+    </div>
+
+
+    <div class="validadorformularios">
+
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
@@ -26,33 +39,39 @@
         <div class="panel-body">
             
              <div class="col-md-6">
-                {{Form::label('Nombre de la institucion')}}
-                {{Form::text('nomb_inst',$institucion->nombre_institucion,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('Nombre de la institucion*')}}
+                {{Form::text('nomb_inst',$institucion->nombre_institucion,['class'=>'form-control  camporequerido','type'=>'text'])}}
             </div>
            
             <div class="col-md-6">
-                {{Form::label('Direccion de la Institucion')}}
-                {{Form::text('direccion_inst',$institucion->direccion_institucion,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('Direccion de la Institucion*')}}
+                {{Form::text('direccion_inst',$institucion->direccion_institucion,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
             
             <div class="col-md-6">
-                {{Form::label('Correo de la institucion')}}
-                {{Form::text('correo_inst',$institucion->correo_institucional,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('Correo de la institucion*')}}
+                {{Form::text('correo_inst',$institucion->correo_institucional,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
            
             <div class="col-md-6">
-                {{Form::label('Telefono de la institucion')}}
-                {{Form::text('telefono_inst',$institucion->telefono_institucion,['class'=>'form-control','type'=>'text'])}}
+                {{Form::label('Telefono de la institucion*')}}
+                {{Form::text('telefono_inst',$institucion->telefono_institucion,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
            
         </div>
     </div>
 
 
+    <div class="col-md-12 msnrequeridos">
+        <p>Todos los campos con (*) son obligatorios</p>
+    </div>
+
     <div class="col-md-offset-5">
-        {{Form::submit('Enviar',['class'=>'btn btn-primary'])}}
+        {{Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])}}
     </div>
 
     {!! Form::close() !!}
+
+    </div>
 
 @endsection
