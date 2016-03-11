@@ -113,8 +113,8 @@ if (PHP_VERSION_ID < 70000) {
                 require_once $RandomCompatDIR.'/random_bytes_dev_urandom.php';
             }
             // Unset variables after use
-            $RandomCompat_basedir = null;
             $RandomCompatUrandom = null;
+            $RandomCompat_basedir = null;
         }
 
         /**
@@ -127,15 +127,8 @@ if (PHP_VERSION_ID < 70000) {
             &&
             extension_loaded('mcrypt')
         ) {
-            // Prevent this code from hanging indefinitely on non-Windows;
-            // see https://bugs.php.net/bug.php?id=69833
-            if (
-                DIRECTORY_SEPARATOR !== '/' || 
-                (PHP_VERSION_ID <= 50609 || PHP_VERSION_ID >= 50613)
-            ) {
-                // See random_bytes_mcrypt.php
-                require_once $RandomCompatDIR.'/random_bytes_mcrypt.php';
-            }
+            // See random_bytes_mcrypt.php
+            require_once $RandomCompatDIR.'/random_bytes_mcrypt.php';
         }
 
         if (

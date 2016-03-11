@@ -33,17 +33,17 @@
     <link href="<?php echo e(url('assets/css/principal-style.css')); ?>" rel="stylesheet">
 
     <link href="<?php echo e(url('assets/css/jquery.datetimepicker.css')); ?>" rel="stylesheet">
-    <script type="text/javascript">
-        window.history.forward();
-        function noBack()
-        {
-            window.history.forward();
-        }
+    <script type = "text/javascript" >
+        function nobackbutton(){
+           window.location.hash="no-back-button";
+           window.location.hash="Again-No-back-button" //chrome
+           window.onhashchange=function(){window.location.hash="no-back-button";}
+          }
     </script>
 
 </head>
 
-<body  onLoad="noBack();" onpageshow="if (event.persisted) noBack();" onUnload="">
+<body  onLoad="nobackbutton();" onpageshow="if (event.persisted) nobackbutton();" onUnload="">
 
     <?php if(Auth::guest()): ?><div id="wrapper" ><?php else: ?> <div id="wrapper"> <?php endif; ?>
 

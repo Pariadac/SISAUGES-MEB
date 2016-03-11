@@ -1,5 +1,5 @@
 @extends('layouts.app')
-<?php $title = "Editar Usuario"?>
+@section('title', 'Editar Usuario')
 @section('content')
 
     <!-- Page Heading -->
@@ -27,7 +27,7 @@
         <div class="panel-body">
             <div class="col-md-6">
                 {{Form::label('nivel_usuario','Nivel Usuario')}}
-                {{Form::select('nivel_usuario[]',$nivel,$usuario->NivelUsuario->id_nivel_de_usuario,['class'=>'form-control selectpicker','multiple'])}}
+                {{Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
             </div>
             <div class="col-md-6">
                 {{Form::label('cedula','Cedula Usuario')}}

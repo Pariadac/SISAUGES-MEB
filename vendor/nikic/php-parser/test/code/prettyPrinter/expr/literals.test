@@ -81,12 +81,6 @@ b';
     'a
     b';
 }
-
-// shell exec (similar to double quoted string)
-`foo`;
-`foo$a`;
-`foo{$a}bar`;
-`\`\'\"`;
 -----
 // magic constants
 __LINE__;
@@ -159,8 +153,3 @@ b';
     'a
     b';
 }
-// shell exec (similar to double quoted string)
-`foo`;
-`foo{$a}`;
-`foo{$a}bar`;
-`\`\\'\\"`;

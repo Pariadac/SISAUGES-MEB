@@ -221,10 +221,8 @@ class FilesystemManager implements FactoryContract
             'username' => $config['username'], 'apiKey' => $config['key'],
         ]);
 
-        $root = isset($config['root']) ? $config['root'] : null;
-
         return $this->adapt($this->createFlysystem(
-            new RackspaceAdapter($this->getRackspaceContainer($client, $config), $root), $config
+            new RackspaceAdapter($this->getRackspaceContainer($client, $config)), $config
         ));
     }
 

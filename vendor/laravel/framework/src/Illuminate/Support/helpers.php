@@ -412,7 +412,7 @@ if (! function_exists('data_get')) {
 
         while (($segment = array_shift($key)) !== null) {
             if ($segment === '*') {
-                if (! Arr::accessible($target)) {
+                if (! is_array($target) && ! $target instanceof ArrayAccess) {
                     return value($default);
                 }
 
@@ -421,8 +421,14 @@ if (! function_exists('data_get')) {
                 return in_array('*', $key) ? Arr::collapse($result) : $result;
             }
 
-            if (Arr::accessible($target)) {
-                if (! Arr::exists($target, $segment)) {
+            if (is_array($target)) {
+                if (! array_key_exists($segment, $target)) {
+                    return value($default);
+                }
+
+                $target = $target[$segment];
+            } elseif ($target instanceof ArrayAccess) {
+                if (! isset($target[$segment])) {
                     return value($default);
                 }
 
@@ -862,18 +868,6 @@ if (! function_exists('value')) {
     function value($value)
     {
         return $value instanceof Closure ? $value() : $value;
-    }
-}
-
-if (! function_exists('windows_os')) {
-    /**
-     * Determine whether the current envrionment is Windows based.
-     *
-     * @return bool
-     */
-    function windows_os()
-    {
-        return strtolower(substr(PHP_OS, 0, 3)) === 'win';
     }
 }
 

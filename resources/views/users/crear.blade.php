@@ -26,8 +26,8 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
-                    {{Form::label('nivel_usuario','Nivel Usuario')}}
-                    {{Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
+                    {{Form::label('nivelUsuario','Nivel Usuario')}}
+                    {{Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
                 </div>
                 <div class="col-md-6">
                     {{Form::label('cedula','Cedula')}}

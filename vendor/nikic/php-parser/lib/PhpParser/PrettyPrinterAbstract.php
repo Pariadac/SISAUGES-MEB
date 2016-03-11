@@ -125,17 +125,13 @@ abstract class PrettyPrinterAbstract
      * @return string Pretty printed statements
      */
     public function prettyPrintFile(array $stmts) {
-        if (!$stmts) {
-            return "<?php\n\n";
-        }
+        $p = rtrim($this->prettyPrint($stmts));
 
-        $p = "<?php\n\n" . $this->prettyPrint($stmts);
+        $p = preg_replace('/^\?>\n?/', '', $p, -1, $count);
+        $p = preg_replace('/<\?php$/', '', $p);
 
-        if ($stmts[0] instanceof Stmt\InlineHTML) {
-            $p = preg_replace('/^<\?php\s+\?>\n?/', '', $p);
-        }
-        if ($stmts[count($stmts) - 1] instanceof Stmt\InlineHTML) {
-            $p = preg_replace('/<\?php$/', '', rtrim($p));
+        if (!$count) {
+            $p = "<?php\n\n" . $p;
         }
 
         return $p;
@@ -268,19 +264,12 @@ abstract class PrettyPrinterAbstract
      *
      * @param string $string Not to be indented string
      *
-     * @return string String marked with $this->noIndentToken's.
+     * @return mixed String marked with $this->noIndentToken's.
      */
     protected function pNoIndent($string) {
         return str_replace("\n", "\n" . $this->noIndentToken, $string);
     }
 
-    /**
-     * Prints reformatted text of the passed comments.
-     *
-     * @param Comment[] $comments List of comments
-     *
-     * @return string Reformatted text of comments
-     */
     protected function pComments(array $comments) {
         $result = '';
 

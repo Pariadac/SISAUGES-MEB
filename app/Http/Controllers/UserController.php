@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Crypt;
 
 class UserController extends Controller
 {
+
+    protected $nivel;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->nivel = NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
     }
 
     public function index()
@@ -26,8 +29,7 @@ class UserController extends Controller
 
     public function create()
     {
-        $nivel=NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
-        return view('users.crear')->with('nivel',$nivel);
+        return view('users.crear')->with('nivel',$this->nivel);
     }
 
     public function store()
@@ -42,7 +44,7 @@ class UserController extends Controller
         $usuario->password=\Hash::make(\Request::Input('password'));
         $usuario->save();
 
-        $nivel=$usuario->id_nivel_usuario=\Request::Input('nivel_usuario');
+        $nivel=\Request::Input('nivelUsuario');
 
         foreach($nivel as $niveles)
         {
@@ -57,9 +59,9 @@ class UserController extends Controller
     {
         $usuario = User::find($id);
         $usuario->nivelUsuarios($id)->get();
-        dd($usuario->nivelUsuarios()->get());
+        //dd($usuario->nivelUsuarios()->get());
         $nivel=NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
-        return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$nivel]);
+        return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$this->nivel]);
     }
 
     public function update($id)
@@ -72,6 +74,15 @@ class UserController extends Controller
         $usuario->telefono=\Request::Input('telefono');
         $usuario->password = \Hash::make(\Request::Input('password'));
         $usuario->save();
+
+
+        $nivel=\Request::Input('nivelUsuario');
+
+        foreach($nivel as $niveles)
+        {
+            $usuario->nivelUsuarios()->update([$niveles]);
+        }
+
         return redirect('usuario')->with('message','El usuario N°'.$id.' ha sido editado');
     }
 

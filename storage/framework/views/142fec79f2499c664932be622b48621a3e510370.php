@@ -28,7 +28,7 @@
             <div class="col-md-6">
                 <?php echo e(Form::label('nivel_usuario','Nivel Usuario')); ?>
 
-                <?php echo e(Form::select('nivel_usuario[]',$nivel,$usuario->NivelUsuario->id_nivel_de_usuario,['class'=>'form-control selectpicker','multiple'])); ?>
+                <?php echo e(Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
 
             </div>
             <div class="col-md-6">

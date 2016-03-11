@@ -73,7 +73,7 @@ trait InteractsWithPages
 
         $this->currentUri = $this->app->make('request')->fullUrl();
 
-        $this->crawler = new Crawler($this->response->getContent(), $this->currentUri);
+        $this->crawler = new Crawler($this->response->getContent(), $uri);
 
         $this->subCrawlers = [];
 
@@ -208,47 +208,7 @@ trait InteractsWithPages
     }
 
     /**
-     * Get the HTML from the current context or the full response.
-     *
-     * @return string
-     */
-    protected function html()
-    {
-        return $this->crawler()
-            ? $this->crawler()->html()
-            : $this->response->getContent();
-    }
-
-    /**
-     * Get the plain text from the current context or the full response.
-     *
-     * @return string
-     */
-    protected function text()
-    {
-        return $this->crawler()
-            ? $this->crawler()->text()
-            : strip_tags($this->response->getContent());
-    }
-
-    /**
-     * Get the escaped text pattern.
-     *
-     * @param  string  $text
-     * @return string
-     */
-    protected function getEscapedPattern($text)
-    {
-        $rawPattern = preg_quote($text, '/');
-
-        $escapedPattern = preg_quote(e($text), '/');
-
-        return $rawPattern == $escapedPattern
-            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
-    }
-
-    /**
-     * Assert that a given string is seen on the current HTML.
+     * Assert that a given string is seen on the page.
      *
      * @param  string  $text
      * @param  bool  $negate
@@ -258,15 +218,24 @@ trait InteractsWithPages
     {
         $method = $negate ? 'assertNotRegExp' : 'assertRegExp';
 
-        $pattern = $this->getEscapedPattern($text);
+        $rawPattern = preg_quote($text, '/');
 
-        $this->$method("/$pattern/i", $this->html());
+        $escapedPattern = preg_quote(e($text), '/');
+
+        $pattern = $rawPattern == $escapedPattern
+                ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
+
+        $html = $this->crawler()
+                    ? $this->crawler()->html()
+                    : $this->response->getContent();
+
+        $this->$method("/$pattern/i", $html);
 
         return $this;
     }
 
     /**
-     * Assert that a given string is not seen on the current HTML.
+     * Assert that a given string is not seen on the page.
      *
      * @param  string  $text
      * @return $this
@@ -274,35 +243,6 @@ trait InteractsWithPages
     protected function dontSee($text)
     {
         return $this->see($text, true);
-    }
-
-    /**
-     * Assert that a given string is seen on the current text.
-     *
-     * @param  string  $text
-     * @param  bool  $negate
-     * @return $this
-     */
-    protected function seeText($text, $negate = false)
-    {
-        $method = $negate ? 'assertNotRegExp' : 'assertRegExp';
-
-        $pattern = $this->getEscapedPattern($text);
-
-        $this->$method("/$pattern/i", $this->text());
-
-        return $this;
-    }
-
-    /**
-     * Assert that a given string is not seen on the current text.
-     *
-     * @param  string  $text
-     * @return $this
-     */
-    protected function dontSeeText($text)
-    {
-        return $this->seeText($text, true);
     }
 
     /**
@@ -355,7 +295,12 @@ trait InteractsWithPages
     {
         $elements = $this->crawler()->filter($element);
 
-        $pattern = $this->getEscapedPattern($text);
+        $rawPattern = preg_quote($text, '/');
+
+        $escapedPattern = preg_quote(e($text), '/');
+
+        $pattern = $rawPattern == $escapedPattern
+            ? $rawPattern : "({$rawPattern}|{$escapedPattern})";
 
         foreach ($elements as $element) {
             $element = new Crawler($element);
@@ -635,6 +580,8 @@ trait InteractsWithPages
                 return $option->getAttribute('value');
             }
         }
+
+        return;
     }
 
     /**
@@ -656,6 +603,8 @@ trait InteractsWithPages
                 return $radio->getAttribute('value');
             }
         }
+
+        return;
     }
 
     /**
