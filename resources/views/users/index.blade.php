@@ -32,7 +32,7 @@
             <th>Apellido</th>
             <th>Correo</th>
             <th>Nombre de Usuario</th>
-            <th colspan="2">Acción</th>
+            <th class="tablaboton">Acción</th>
         </tr>
         @foreach($usuario as $user)
             <tr>
@@ -42,10 +42,9 @@
                 <td>{{$user->apellido}}</td>
                 <td>{{$user->email}}</td>
                 <td>{{$user->username}}</td>
-                <td width="120" align="center">
+                <td class="misbotones">
                     {!! Html::link('usuario/editar/'.$user->id_usuario, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-                </td>
-                <td width="60" align="center">
+                    
                     {!! Form::open(array('url' =>'usuario/eliminar/'.$user->id_usuario, 'method' => 'DELETE')) !!}
                     <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     {!! Form::close() !!}

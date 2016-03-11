@@ -4,14 +4,44 @@ $(document).ready(function(){
 	var fecha=new Date();
 
 
+	function estylepag(){
+
+		var ancho=$('.estilospaginador ul').width();
+
+		$('.estilospaginador').attr('style','position: relative; width: '+ancho+'px; margin: auto;')
+
+	}
+
+	estylepag();
+
+	$('.buscador-muest').on('click',function(){
+
+		$('.busquedas').submit();
+
+	});
+
+	$('.mi-chosen').on('focus',function(){
+
+		event.preventDefault();
+		var llave=$(this).data('location');
+		$('#location'+llave).attr('class','buscadores');
+
+	});
+
 	$('.mi-chosen').on('keyup',function(event){
 
     	event.preventDefault();
     	var llave=$(this).data('location');
-    	if ($(this).val().length>=2) {
+    	var aux=$('#location'+llave).html();
+    	if ($(this).val().length>=1) {
 
     		var form=$('.busquedas');
 			var urls=form.attr('action');
+
+			urls=urls.split('/');
+
+    		urls=urls[0]+'/'+urls[1]+'/'+urls[2]+'/muestras/buscar';
+
 
 			var moneda=$('#mimoneda input').val();
 
@@ -33,7 +63,10 @@ $(document).ready(function(){
 	        });
 
     	}else{
+
     		$('#location'+llave).attr('class','oculto1');
+    		$('#location'+llave).empty();
+    		$('#location'+llave).html(aux);
     	}
 
 
@@ -108,13 +141,14 @@ $(document).ready(function(){
 		var nameact=$('#lock'+llave).attr('name');
 
 			$('#lock'+llave).val($(this).data('valortx'));
+			$('#t_lock'+llave).val($(this).data('value'));
 			$('#lock'+llave).attr('data-valores',$(this).data('value'));
 			$('#location'+llave).attr('class','oculto1');
 
 			if (nameact.search('tipo_actividad')>-1) {
 
-				$('#lock'+llave).attr('data-valr',($(this).data('ids')));
-				$('#finact').attr('value',$('#lock1').data('valr'));
+				$('#lock'+llave).attr('data-valr',($(this).data('ids2')));
+				$('#finact').attr('value',$('#lock'+llave).data('valr'));
 
 				busca_relaciones_actividad();
 			};
@@ -461,6 +495,17 @@ $(document).ready(function(){
 		}
 
 	});
+
+
+	$('.formulariosajax form').on('submit',function(event){
+
+		event.preventDefault();
+
+		$('.formulariosajax form button').click();
+
+
+	});
+
 
 
 })

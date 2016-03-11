@@ -195,7 +195,20 @@
                     </li>
 
                     <li>
-                        <a href="{{url('/actividad')}}"><i class="fa fa-fw fa-folder-open"></i> Actividad</a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+
+                        <ul id="field-2" class="collapse">
+                            
+                            <li>
+                                <a href="{{url('/crearActividad')}}">AGREGAR</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/actividad')}}">LISTAR</a>
+                            </li>
+
+
+                        </ul>
+
                     </li>
 
                     <!--<li>
@@ -262,6 +275,25 @@
                         </ul>
 
                     </li>
+
+
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-dep"><i class="fa fa-fw fa-folder-open"></i> Departamentos<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+
+                        <ul id="field-dep" class="collapse">
+                            
+                            <li>
+                                <a href="{{url('/departamento/crear')}}">AGREGAR</a>
+                            </li>
+                            <li>
+                                <a href="{{url('/departamento')}}">LISTAR</a>
+                            </li>
+
+                            
+                        </ul>
+
+                    </li>
+
                         
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#field-4"><i class="fa fa-fw fa-users"></i>Tesistas<span><i class="fa fa-fw fa-caret-down"></i></span></a>

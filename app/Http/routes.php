@@ -90,6 +90,18 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('institucion/buscar','InstitucionController@buscar');
 
 
+//rutas para Departamento
+
+
+    Route::get('departamento','DepartamentoController@index');
+    Route::get('departamento/crear','DepartamentoController@create');
+    Route::post('departamento/guardar','DepartamentoController@store');
+    Route::get('departamento/editar/{id}','DepartamentoController@edit');
+    Route::post('departamento/edita/{id}','DepartamentoController@update');
+    Route::get('departamento/eliminar/{id}','DepartamentoController@destroy');
+    Route::post('departamento/buscar','DepartamentoController@buscar');
+
+
 //rutas para muestras
 
 
@@ -101,6 +113,8 @@ Route::group(['middleware' => 'web'], function () {
     Route::post('muestras/ajaxborrarimg','MuestraController@borrar_img');
     Route::post('muestras/ajaxrelacionesact','MuestraController@relacionesact');
     Route::post('muestras/buscar','MuestraController@buscarbdd');
+    Route::post('muestras/buscarfiltro','MuestraController@buscar_filtros');
+    Route::get('muestras/buscarfiltro','MuestraController@buscar_filtros');
     Route::get('muestras/lista','MuestraController@listar');
     Route::get('muestras/editar/{id}','MuestraController@edit');
     Route::get('muestras/detalles/{id}','MuestraController@details');

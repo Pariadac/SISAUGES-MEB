@@ -18,6 +18,19 @@
     </div>
     <!-- /.row -->
 
+
+    <div class="col-md-12">
+        <div class="contenedoralertas">
+          <div id="alerta" style="display:none" class="" data-estado="0" data-clase="0">
+          
+            <p><strong></strong>  <span></span></p>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="validadorformularios">
+
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
@@ -26,45 +39,61 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
+<<<<<<< HEAD
                     {{Form::label('nivelUsuario','Nivel Usuario')}}
                     {{Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
+=======
+                    {{Form::label('nivel_usuario','Nivel Usuario*')}}
+                    {{Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
+>>>>>>> a53246c441c6099da6f0ce7ccf56c1085fde4849
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('cedula','Cedula')}}
-                    {{Form::text('cedula',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('cedula','Cedula*')}}
+                    {{Form::text('cedula',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('nombre','Nombre')}}
-                    {{Form::text('nombre',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('nombre','Nombre*')}}
+                    {{Form::text('nombre',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('apellido','Apellido')}}
-                    {{Form::text('apellido',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('apellido','Apellido*')}}
+                    {{Form::text('apellido',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('email','Correo Electronico')}}
-                    {{Form::text('email',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('email','Correo Electronico*')}}
+                    {{Form::text('email',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('telefono','Telefono')}}
-                    {{Form::text('telefono',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('telefono','Telefono*')}}
+                    {{Form::text('telefono',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('nombreUsuario','Nombre Usuario')}}
-                    {{Form::text('nombreUsuario',null,['class'=>'form-control','type'=>'text'])}}
+                    {{Form::label('nombreUsuario','Nombre Usuario*')}}
+                    {{Form::text('nombreUsuario',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('contraseña','Contraseña')}}
-                    {{Form::password('contraseña',['class'=>'form-control'])}}
+                    {{Form::label('contraseña','Contraseña*')}}
+                    {{Form::password('contraseña',['class'=>'form-control  camporequerido'])}}
                 </div>
+
+                <div class="col-md-12 msnrequeridos">
+                    <p>Todos los campos con (*) son obligatorios</p>
+                </div>
+
             </div>
         </div>
 
 
         <div class="col-md-offset-5">
-            {{Form::submit('Enviar',['class'=>'btn btn-primary'])}}
+            {{Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])}}
         </div>
-    {!!Form::close()!!}
+
+    {!! Form::close() !!}
+
+    </div>
+
+
+
 @endsection
 
 @push('scripts')

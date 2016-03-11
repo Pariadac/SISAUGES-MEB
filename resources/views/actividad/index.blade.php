@@ -23,14 +23,14 @@
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
-    <table class="table table-bordered table-responsive">
+    <table class="table table-responsive">
         <tr>
             <th>Actividad N°</th>
             <th>Nombre Actividad</th>
             <th>Status Actividad</th>
             <th>Permisos</th>
             <th>Involucrados</th>
-            <th colspan="2">Accion</th>
+            <th class="tablaboton">Accion</th>
         </tr>
         @foreach($actividad as $act)
             <tr>
@@ -41,15 +41,19 @@
                 <td>{{$act->sector->descripcion_sector}}</td>
 
                 <td width="120" align="center">
+
                     {!! Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-                </td>
-                <td width="60" align="center">
+
                     {!! Form::open(array('url' =>'actividad/eliminar/'.$act->id_actividad, 'method' => 'DELETE')) !!}
+                    
                     <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     {!! Form::close() !!}
                 </td>
             </tr>
         @endforeach
     </table>
-    {!! $actividad->render() !!}
+
+    <div class="estilospaginador">
+        {!! $actividad->render() !!}
+    </div>
 @endsection

@@ -2,11 +2,44 @@ body{
 	background-color: #010326!important;
 }
 
+p{
+
+	word-wrap:break-word;
+
+}
 
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
 	background-color: #365073!important;
 }
 
+.borrables td{
+
+	padding: 8px;
+	line-height: 1.42857143;
+	vertical-align: top;
+	border-top: 1px solid #ddd;
+
+}
+
+.misbotones button{
+	width: 60%;
+}
+
+.contenedortablas{
+
+	width: 70%;
+	margin: auto;
+
+}
+
+.contenedortablas .tablaboton{
+	width: 30%!important;
+}
+
+.alineadorr{
+	text-align: left!important;
+	padding-left: 5%!important;
+}
 
 .navbar-inverse{
 	background-color: #010326!important; 
@@ -16,6 +49,10 @@ body{
 #principal-suit img{
 	width: 100%!important;
 
+}
+
+.busquedas{
+	text-align: center;
 }
 
 .busquedas .form-group{
@@ -36,7 +73,8 @@ body{
 
 .msnrequeridos{
 	text-align: right;
-	color: #B22222
+	color: #B22222;
+	margin-top: 20px;
 }
 
 .abajo{
@@ -101,6 +139,8 @@ body{
 .contenedor-imagen{
 	max-width: 100px;
 	margin: auto;
+	max-height: 60px;
+    overflow: hidden;
 }
 .contenedor-imagen img{
 	width: 100%;
@@ -187,6 +227,7 @@ body{
 }
 .table td{
 	text-align: center;
+	vertical-align: middle!important;
 }
 
 .tablaboton{
@@ -201,10 +242,15 @@ body{
 	margin-top: 15px;
 }
 
+td button{
+
+	width: 60%;
+}
+
 td a{
 	width: 60%;
     margin: auto!important;
-    margin-bottom: 5px!important;
+    margin-bottom: 3px!important;
 }
 
 .oculto1{
