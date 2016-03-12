@@ -31,7 +31,7 @@
             <th>Apellido</th>
             <th>Correo</th>
             <th>Nombre de Usuario</th>
-            <th colspan="2">Acción</th>
+            <th class="tablaboton">Acción</th>
         </tr>
         <?php foreach($usuario as $user): ?>
             <tr>
@@ -41,11 +41,10 @@
                 <td><?php echo e($user->apellido); ?></td>
                 <td><?php echo e($user->email); ?></td>
                 <td><?php echo e($user->username); ?></td>
-                <td width="120" align="center">
+                <td class="misbotones">
                     <?php echo Html::link('usuario/editar/'.$user->id_usuario, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
-                </td>
-                <td width="60" align="center">
+                    
                     <?php echo Form::open(array('url' =>'usuario/eliminar/'.$user->id_usuario, 'method' => 'DELETE')); ?>
 
                     <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>

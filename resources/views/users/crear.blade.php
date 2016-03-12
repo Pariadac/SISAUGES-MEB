@@ -39,13 +39,10 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
-<<<<<<< HEAD
                     {{Form::label('nivelUsuario','Nivel Usuario')}}
                     {{Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
-=======
                     {{Form::label('nivel_usuario','Nivel Usuario*')}}
                     {{Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])}}
->>>>>>> a53246c441c6099da6f0ce7ccf56c1085fde4849
                 </div>
                 <div class="col-md-6">
                     {{Form::label('cedula','Cedula*')}}

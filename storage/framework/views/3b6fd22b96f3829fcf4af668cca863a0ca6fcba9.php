@@ -17,6 +17,19 @@
     </div>
     <!-- /.row -->
 
+
+    <div class="col-md-12">
+        <div class="contenedoralertas">
+          <div id="alerta" style="display:none" class="" data-estado="0" data-clase="0">
+          
+            <p><strong></strong>  <span></span></p>
+
+          </div>
+        </div>
+    </div>
+
+    <div class="validadorformularios">
+
     <?php if(Session::has('message')): ?>
         <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
     <?php endif; ?>
@@ -30,58 +43,73 @@
 
                     <?php echo e(Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
 
-                </div>
-                <div class="col-md-6">
-                    <?php echo e(Form::label('cedula','Cedula')); ?>
+                    <?php echo e(Form::label('nivel_usuario','Nivel Usuario*')); ?>
 
-                    <?php echo e(Form::text('cedula',null,['class'=>'form-control','type'=>'text'])); ?>
+                    <?php echo e(Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('nombre','Nombre')); ?>
+                    <?php echo e(Form::label('cedula','Cedula*')); ?>
 
-                    <?php echo e(Form::text('nombre',null,['class'=>'form-control','type'=>'text'])); ?>
-
-                </div>
-                <div class="col-md-6">
-                    <?php echo e(Form::label('apellido','Apellido')); ?>
-
-                    <?php echo e(Form::text('apellido',null,['class'=>'form-control','type'=>'text'])); ?>
+                    <?php echo e(Form::text('cedula',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('email','Correo Electronico')); ?>
+                    <?php echo e(Form::label('nombre','Nombre*')); ?>
 
-                    <?php echo e(Form::text('email',null,['class'=>'form-control','type'=>'text'])); ?>
-
-                </div>
-                <div class="col-md-6">
-                    <?php echo e(Form::label('telefono','Telefono')); ?>
-
-                    <?php echo e(Form::text('telefono',null,['class'=>'form-control','type'=>'text'])); ?>
+                    <?php echo e(Form::text('nombre',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('nombreUsuario','Nombre Usuario')); ?>
+                    <?php echo e(Form::label('apellido','Apellido*')); ?>
 
-                    <?php echo e(Form::text('nombreUsuario',null,['class'=>'form-control','type'=>'text'])); ?>
+                    <?php echo e(Form::text('apellido',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
 
                 </div>
                 <div class="col-md-6">
-                    <?php echo e(Form::label('contraseña','Contraseña')); ?>
+                    <?php echo e(Form::label('email','Correo Electronico*')); ?>
 
-                    <?php echo e(Form::password('contraseña',['class'=>'form-control'])); ?>
+                    <?php echo e(Form::text('email',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
 
                 </div>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('telefono','Telefono*')); ?>
+
+                    <?php echo e(Form::text('telefono',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
+
+                </div>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('nombreUsuario','Nombre Usuario*')); ?>
+
+                    <?php echo e(Form::text('nombreUsuario',null,['class'=>'form-control  camporequerido','type'=>'text'])); ?>
+
+                </div>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('contraseña','Contraseña*')); ?>
+
+                    <?php echo e(Form::password('contraseña',['class'=>'form-control  camporequerido'])); ?>
+
+                </div>
+
+                <div class="col-md-12 msnrequeridos">
+                    <p>Todos los campos con (*) son obligatorios</p>
+                </div>
+
             </div>
         </div>
 
 
         <div class="col-md-offset-5">
-            <?php echo e(Form::submit('Enviar',['class'=>'btn btn-primary'])); ?>
+            <?php echo e(Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])); ?>
 
         </div>
+
     <?php echo Form::close(); ?>
+
+
+    </div>
+
+
 
 <?php $__env->stopSection(); ?>
 
