@@ -195,7 +195,7 @@
                     </li>
 
                     <li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Actividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
 
                         <ul id="field-2" class="collapse">
                             
@@ -210,58 +210,6 @@
                         </ul>
 
                     </li>
-
-                    <!--<li>
-                        <a href="javascript:;" data-toggle="collapse" data-target="#field-2"><i class="fa fa-fw fa-folder-open"></i> Atividad<span><i class="fa fa-fw fa-caret-down"></i></span></a>
-                        <ul id="field-2" class="collapse">
-
-
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-1"><i class="fa fa-fw fa-folder-open"></i>Clasificacion<span><i class="fa fa-fw fa-caret-down"></i></span></a>
-                                <ul id="field-2-1" class="collapse">
-                                    <li>
-                                        <a href="{{url('/crearClasificacionActividad')}}">AGREGAR</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{url('/clasificacionActividad')}}">LISTAR</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-2"><i class="fa fa-fw fa-folder-open"></i>Tipo<span><i class="fa fa-fw fa-caret-down"></i></span></a>
-                                <ul id="field-2-2" class="collapse">
-                                    <li>
-                                        <a href="{{url('/crearTipoActividad')}}">AGREGAR</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{url('/tipoActividad')}}">LISTAR</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-                            <li>
-                                <a href="javascript:;" data-toggle="collapse" data-target="#field-2-3"><i class="fa fa-fw fa-folder-open"></i>Sector<span><i class="fa fa-fw fa-caret-down"></i></span></a>
-                                <ul id="field-2-3" class="collapse">
-                                    <li>
-                                        <a href="{{url('/crearSectorActividad')}}">AGREGAR</a>
-                                    </li>
-                                    <li>
-                                        <a href="{{url('/sectorActividad')}}">LISTAR</a>
-                                    </li>
-                                </ul>
-                            </li>
-
-
-
-                            <li>
-                                <a href="{{url('/crearActividad')}}">AGREGAR</a>
-                            </li>
-                            <li>
-                                <a href="{{url('/actividad')}}">LISTAR</a>
-                            </li>
-                        </ul>
-                    </li>-->
                     <li>
                         <a href="javascript:;" data-toggle="collapse" data-target="#field-3"><i class="fa fa-fw fa-suitcase"></i> Instituciones<span><i class="fa fa-fw fa-caret-down"></i></span></a>
                         

@@ -21,22 +21,22 @@
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
-    <table class="table table-responsive">
+    <table class="table table-bordered table-responsive">
         <tr>
-            <th>Tesista N°</th>
             <th>Cedula</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
+            <th>Actividad Relacionada</th>
             <th class="tablaboton">Acción</th>
         </tr>
         @foreach($tesista as $tes)
             <tr>
-                <td>{{$tes->id_tesista}}</td>
                 <td>{{$tes->cedula}}</td>
                 <td>{{$tes->nombre}}</td>
                 <td>{{$tes->apellido}}</td>
-                <td>{{$tes->correo_electronico}}</td>
+                <td>{{$tes->email}}</td>
+                <td>{{$tes->actividad->nombre_actividad}}</td>
                 <td class="misbotones">
                     {!! Html::link('tesista/editar/'.$tes->id_tesista, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
 

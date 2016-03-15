@@ -9,28 +9,33 @@ use Illuminate\Support\Facades\Input;
 use SISAUGES\Actividad;
 use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
+use SISAUGES\Representante;
 use SISAUGES\SectorActividad;
 
 class ActividadController extends Controller
 {
     protected $sector;
+    protected $representante;
+
     public function __construct()
     {
         $this->middleware('auth');
-        $this->sector=$sector=SectorActividad::all()->pluck('descripcion_sector','id_sector_ac');
+        $this->sector = SectorActividad::all()->pluck('descripcion_sector','id_sector_ac');
+        $this->representante = Representante::all()->pluck('nombre','apellido','telefono','email');
     }
 
-    public function index(Request $request)
+    public function index(/*Request $request*/)
     {
-        $nombreActividad=$request->input('nombreActividad');
-        $actividad = Actividad::with('sector')->orderBy('id_actividad','asc')->paginate(2);
+        //$nombreActividad=$request->input('nombreActividad');
+        $actividad = Actividad::with('sector')->orderBy('id_actividad','asc')->paginate(5);
         $actividad->setPath('actividad');
         return view('actividad.index')->with('actividad',$actividad);
     }
 
     public function create()
     {
-        return view('actividad.crear')->with(['sectorActividad'=>$this->sector]);
+        return view('actividad.crear')->with(['sectorActividad' =>  $this->sector,
+                                              'representante'   =>  $this->representante]);
     }
 
     public function store()

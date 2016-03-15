@@ -22,14 +22,14 @@
     <?php if(Session::has('message')): ?>
         <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
     <?php endif; ?>
-    <table class="table table-bordered table-responsive">
+    <table class="table table-responsive">
         <tr>
             <th>Actividad N°</th>
             <th>Nombre Actividad</th>
             <th>Status Actividad</th>
             <th>Permisos</th>
             <th>Involucrados</th>
-            <th>Accion</th>
+            <th class="tablaboton">Accion</th>
         </tr>
         <?php foreach($actividad as $act): ?>
             <tr>
@@ -40,12 +40,13 @@
                 <td><?php echo e($act->sector->descripcion_sector); ?></td>
 
                 <td width="120" align="center">
+
                     <?php echo Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
-                </td>
-                <td width="60" align="center">
+
                     <?php echo Form::open(array('url' =>'actividad/eliminar/'.$act->id_actividad, 'method' => 'DELETE')); ?>
 
+                    
                     <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     <?php echo Form::close(); ?>
 
@@ -53,7 +54,10 @@
             </tr>
         <?php endforeach; ?>
     </table>
-    <?php echo $actividad->render(); ?>
 
+    <div class="estilospaginador">
+        <?php echo $actividad->render(); ?>
+
+    </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('layouts.app', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

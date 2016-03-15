@@ -26,15 +26,17 @@
                 <!-- /.row -->
 
 
-
-                <?php echo Form::open(['url' => 'muestras/buscar', 'method' => 'POST','class'=>'form-horizontal busquedas', 'enctype'=> "multipart/form-data"]); ?>
+                <div > 
+                <?php echo Form::open(['url' => 'muestras/buscarfiltro', 'method' => 'POST','class'=>'form-horizontal busquedas', 'enctype'=> "multipart/form-data"]); ?>
 
 
 
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Actividad</label>
-                                <input type="text" id="lock1" name="actividades_mues_bus" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
+                                <input autocomplete="off" type="text" id="lock1" name="actividades_mues_bus_f" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
+
+                                <input type="hidden" name="actividades_mues_bus" id="t_lock1" value="">
 
                                 <ul class="oculto1" id="location1">
                                     
@@ -47,15 +49,39 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Institucion</label>
-                                <input type="text" id="lock2" name="institucion_mues_bus" class="form-control mi-chosen" data-location="2" placeholder="Institución">
+                                <input autocomplete="off" type="text" id="lock3" name="institucion_mues_bus_f" class="form-control mi-chosen" data-location="3" placeholder="Institución">
+                                <input type="hidden" name="institucion_mues_bus" id="t_lock3" value="">
 
-                                <ul class="oculto1" id="location2">
+                                <ul class="oculto1" id="location3">
                                     
                                 </ul>
 
                             </div>
                         </div>
+                        <div class="col-md-2">
 
+                             <div class="form-group">
+                                <label>Tecnica de Estudio</label>
+
+                                <select id="tipo_muestra" name="tecnica_mues_bus" class="form-control">
+                                  <option value="">Seleccione...</option>
+                                  <?php
+
+
+                                    foreach ($tecnica as $key) {
+
+                                        echo '<option value="'.$key->id_tecnica_estudio.'">'.$key->descripcion_tecnica_estudio.'</option>';
+
+                                    }
+
+
+                                  ?>
+                                </select>
+
+
+                            </div>
+
+                        </div>
                         <div class="col-md-4">
 
                             <div class="col-md-12">
@@ -71,21 +97,11 @@
                             </div>
                         </div>
 
-                        <div class="col-md-2">
-                             <div class="form-group">
-                                <label>Tecnica de Estudio</label>
-                                <input type="text" id="lock3" name="tecnica_mues_bus" class="form-control mi-chosen" data-location="3" placeholder="Tecnica">
-
-                                <ul class="oculto1" id="location3">
-                                    
-                                </ul>
-
-                            </div>
-                        </div>
+                        
 
                         <div class=" col-md-1 col-md-offset-1">
                                 <label> </label>
-                            <button type="button"  class="btn btn-primary">Buscar</button>
+                            <button type="button" class="btn btn-primary buscador-muest">Buscar</button>
                         </div> 
 
 
@@ -93,7 +109,7 @@
                 <?php echo Form::close(); ?>
 
 
-
+                </div>
 
                 <div id="imgconttemp">
                     <?php echo Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform imgcontenedortemporal', 'enctype'=> "multipart/form-data"]); ?>
@@ -102,9 +118,9 @@
 
                         <?php
 
-                            foreach ($datos as $keys) {
+                            foreach ($itemsForCurrentPage as $keys) {
                                 
-                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys->ruta_img_muestra.'">';
+                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$keys['muestra-d']->ruta_img_muestra.'">';
 
                             }
 
@@ -117,12 +133,11 @@
 
 
 
-                <table class="table">
+                <table class="table table-responsive">
                         <tbody>
                             <tr>
                                     <th>Imagen</th>
                                     <th>Actividad</th>
-                                    <th>Tipo de Actividad</th>
                                     <th>Institucion</th>
                                     <th>Tecnica de estudio</th>
                                     <th>Fecha</th>
@@ -131,7 +146,7 @@
 
                             <?php
 
-                                foreach ($datos as $key=> $value) {
+                                foreach ($itemsForCurrentPage as $key=> $value) {
 
 
                                     if ($key % 2!= 0) {
@@ -146,20 +161,19 @@
                                         <tr class="'.$col.'">
                                             <td >
                                                 <div class="contenedor-imagen">
-                                                    <img src="'.url("/storage").'/'.$value->ruta_img_muestra.'">
+                                                    <img src="'.url("/storage").'/'.$value['muestra-d']->ruta_img_muestra.'">
                                                 </div>
                                             </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>'.$value['actividad-d'][0]->nombre_actividad.'</td>
+                                            <td>'.$value['institucion-d'][0]->nombre_institucion.'</td>
+                                            <td>'.$value['tecnica-d'][0]->descripcion_tecnica_estudio.'</td>
                                             <td>
-                                                '.$value->fecha_analisis.'
+                                                '.$value['muestra-d']->fecha_analisis.'
                                             </td>
                                             <td >
-                                                <a href="'.url("/muestras/detalles")."/".$value->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
+                                                <a href="'.url("/muestras/detalles")."/".$value['muestra-d']->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
 
-                                                <a href="'.url("/muestras/editar")."/".$value->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
+                                                <a href="'.url("/muestras/editar")."/".$value['muestra-d']->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
 
                                                 
                                             </td>
@@ -176,7 +190,12 @@
 
                     </table>
 
+                    <div class="estilospaginador">
+                        
+                        <?php echo $paginador->render();; ?>
 
+
+                    </div>
 
 <?php $__env->stopSection(); ?>
 

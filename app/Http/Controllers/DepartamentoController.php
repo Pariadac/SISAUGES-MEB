@@ -41,11 +41,13 @@ class DepartamentoController extends Controller
         $tb=DB::table('departamento')->max('id_departamento');
 
 
-        if ($tb) {
+        if ($tb)
+        {
 
             $id=Departamento::find($tb);
 
-            if ($request->input('nomb')==$id->descripcion_departamento) {
+            if ($request->input('nomb')==$id->descripcion_departamento)
+            {
                 
 
             }else{
@@ -59,7 +61,8 @@ class DepartamentoController extends Controller
 
 
             }
-        }else{
+        }else
+        {
 
 
             $inst=new Departamento();
@@ -85,7 +88,7 @@ class DepartamentoController extends Controller
 
     }
 
-    public function update()
+    public function update($id)
     {
 
         $departamento=Departamento::find($id);

@@ -38,17 +38,10 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-<<<<<<< HEAD
-                <?php echo e(Form::label('nivel_usuario','Nivel Usuario')); ?>
+                <?php echo e(Form::label('nivelUsuario','Nivel Usuario*')); ?>
 
-                <?php echo e(Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
+                <?php echo e(Form::select('nivelUsuario[]',$nivel,$usuario_seleccionado,['class'=>'form-control selectpicker','multiple'])); ?>
 
-=======
-                <?php echo e(Form::label('nivel_usuario','Nivel Usuario*')); ?>
-
-                <?php echo e(Form::select('nivel_usuario[]',$nivel,$usuario->NivelUsuario->id_nivel_de_usuario,['class'=>'form-control selectpicker','multiple'])); ?>
-
->>>>>>> a53246c441c6099da6f0ce7ccf56c1085fde4849
             </div>
             <div class="col-md-6">
                 <?php echo e(Form::label('cedula','Cedula Usuario*')); ?>

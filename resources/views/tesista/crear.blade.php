@@ -64,7 +64,10 @@
                 {{Form::label('semestre','Semestre/Año Tesista*')}}
                 {{Form::text('semestre',null,['class'=>'form-control camporequerido','type'=>'text'])}}
             </div>
-
+            <div class="col-md-6">
+                {{Form::label('actividad','Actividad relacionada*')}}
+                {{Form::select('actividad',$actividad,null,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+            </div>
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>
             </div>
@@ -82,3 +85,8 @@
     </div>
 
 @endsection
+
+@push('scripts')
+<script src="{{asset ('bower_components/bootstrap-select/dist/js/bootstrap-select.js')}}"></script>
+<link href="{{asset('bower_components/bootstrap-select/dist/css/bootstrap-select.css')}}" rel="stylesheet" type="text/css">
+@endpush

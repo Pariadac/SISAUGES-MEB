@@ -23,6 +23,7 @@ namespace SISAUGES\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Mockery\Exception;
 use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
 use SISAUGES\Representante;
@@ -80,14 +81,21 @@ class RepresentanteController extends Controller
 
     public function store()
     {
-        $representante = new Representante();
-        $representante->cedula=\Request::Input('cedula');
-        $representante->nombre=\Request::Input('nombre');
-        $representante->apellido=\Request::Input('apellido');
-        $representante->email=\Request::Input('email');
-        $representante->telefono=\Request::Input('telefono');
-        $representante->save();
-        return redirect('representante')->with('message','Se ha agregado el representante con exito');
+        try
+        {
+            $representante = new Representante();
+            $representante->cedula = \Request::Input('cedula');
+            $representante->nombre = \Request::Input('nombre');
+            $representante->apellido = \Request::Input('apellido');
+            $representante->email = \Request::Input('email');
+            $representante->telefono = \Request::Input('telefono');
+            $representante->save();
+            return redirect('representante')->with('message', 'Se ha agregado el representante con exito');
+        }
+        catch(Exception $e)
+        {
+            return $e->getMessage();
+        }
     }
 
     public function edit($id)

@@ -58,13 +58,14 @@ class UserController extends Controller
     public function edit($id)
     {
         $usuario = User::find($id);
-        $usuario->nivelUsuarios($id)->get();
-        //dd($usuario->nivelUsuarios()->get());
-        $nivel=NivelUsuario::all()->pluck('descripcion_nivel_usuario','id_nivel_de_usuario');
-        return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$this->nivel]);
+        $usuario_seleccionado=User::find($id)->nivelUsuarios()->pluck('usuarios_niveles.id_nivel_de_usuario')->toArray();
+        //dd($usuario_seleccionado);
+
+        return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$this->nivel,
+                                        'usuario_seleccionado'=>$usuario_seleccionado]);
     }
 
-    public function update($id)
+    public function update($id, Request $request)
     {
         $usuario = User::find($id);
         $usuario->cedula=Crypt::encrypt(\Request::Input('cedula'));
@@ -74,14 +75,9 @@ class UserController extends Controller
         $usuario->telefono=\Request::Input('telefono');
         $usuario->password = \Hash::make(\Request::Input('password'));
         $usuario->save();
+        $nivel = $request->input('nivelUsuario');
 
-
-        $nivel=\Request::Input('nivelUsuario');
-
-        foreach($nivel as $niveles)
-        {
-            $usuario->nivelUsuarios()->update([$niveles]);
-        }
+        $usuario->nivelUsuarios()->sync($nivel);
 
         return redirect('usuario')->with('message','El usuario N°'.$id.' ha sido editado');
     }
@@ -89,7 +85,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         $usuario = User::find($id);
+        $usuario->nivelUsuarios()->detach();
         $usuario->delete();
+
         return redirect('usuario')->with('message','El usuario'.$id.' ha sido eliminado con exito');
     }
 }

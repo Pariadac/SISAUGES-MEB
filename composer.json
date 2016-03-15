@@ -8,7 +8,8 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "laravelcollective/html": "~5.0",
-        "itbz/fpdf":"~1.7.2"
+        "itbz/fpdf":"~1.7.2",
+        "enyo/dropzone":"~4.3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

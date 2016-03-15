@@ -13,7 +13,7 @@
 CREATE TABLE IF NOT EXISTS PERSONA
 (
 	id_persona serial not null,
-	cedula integer not null,
+	cedula varchar not null,
 	nombre varchar(30),
 	apellido varchar(30),
 	email varchar(30) not null,

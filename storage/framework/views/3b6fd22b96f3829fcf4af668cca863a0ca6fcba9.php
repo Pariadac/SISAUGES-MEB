@@ -39,13 +39,9 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
-                    <?php echo e(Form::label('nivelUsuario','Nivel Usuario')); ?>
+                    <?php echo e(Form::label('nivelUsuario','Nivel Usuario*')); ?>
 
                     <?php echo e(Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
-
-                    <?php echo e(Form::label('nivel_usuario','Nivel Usuario*')); ?>
-
-                    <?php echo e(Form::select('nivel_usuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple'])); ?>
 
                 </div>
                 <div class="col-md-6">

@@ -19,7 +19,7 @@ class Actividad extends Model
 
     public function tesistas()
     {
-       return $this->hasMany(Tesista::class,'id_tesista','id_atividad');
+       return $this->hasMany(Tesista::class,'id_actividad');
     }
 
     public function muestras()

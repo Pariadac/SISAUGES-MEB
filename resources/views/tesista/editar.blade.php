@@ -63,7 +63,11 @@
             </div>
             <div class="col-md-6">
                 {{Form::label('semestre','Semestre/Año Tesista*')}}
-                {{Form::text('semestre',$tesista->semestre_año_carrera,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::text('semestre',$tesista->semestre_tesista,['class'=>'form-control camporequerido','type'=>'text'])}}
+            </div>
+            <div class="col-md-6">
+                {{Form::label('actividad','Actividad relacionada*')}}
+                {{Form::select('actividad',$actividad,$tesista->id_actividad,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
             </div>
 
             <div class="col-md-12 msnrequeridos">
