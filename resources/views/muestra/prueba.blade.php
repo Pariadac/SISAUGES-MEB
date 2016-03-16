@@ -189,6 +189,10 @@
 
 
 
-{!! $paginador->render(); !!}
+                    <div class="estilospaginador">
+                        
+                        {!! $paginador->render(); !!}
+
+                    </div>
 
 @endsection

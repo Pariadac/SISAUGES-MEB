@@ -8,6 +8,48 @@ p{
 
 }
 
+#contenedorcarga, #contenedordatos{
+	display: none;
+	width: 80%;
+    margin: auto;
+}
+
+#contenedorcarga img{
+	width: 100%;
+}
+
+#miniaturas-padre{
+	max-height: 150px;
+	overflow: scroll;
+	overflow-x:hidden;
+}
+
+div#miniaturas .col-md-6 {
+    margin-bottom: 5px;
+}
+
+#miniaturas img{
+
+	width: 100%;
+	max-height: 65px;
+	overflow: hidden;
+	border: solid 4px #365073;
+
+}
+
+.select-si{
+	border: solid 4px #449d44!important;
+}
+
+.select-no{
+	border: solid 4px #365073!important;
+}
+
+
+#miniaturas img:hover{
+	border: solid 4px #449d44!important;
+}
+
 .navbar-inverse .navbar-nav>.active>a, .navbar-inverse .navbar-nav>.active>a:focus, .navbar-inverse .navbar-nav>.active>a:hover{
 	background-color: #365073!important;
 }

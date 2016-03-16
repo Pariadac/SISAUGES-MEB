@@ -225,6 +225,48 @@ class MuestraController extends Controller
     }
 
 
+    public function eliminarimg_bdd(){
+
+        $rutas=DB::table('auximg')->get();
+
+        foreach ($rutas as $key) {
+
+          if (strlen($key->description_img)>0) {
+            
+                $valores=explode('/', $key->description_img);
+                $valores2=explode('/', $key->orgpage_img);
+
+                $busqueda=DB::table('muestra')->where('ruta_img_muestra','=',$valores2[count($valores2)-1])->get();
+
+                if (count($busqueda)==0) {
+                    
+                    if (Storage::exists($valores2[count($valores2)-1]))
+                    {
+
+                        $retorno=Storage::delete($valores2[count($valores2)-1]);
+
+                        DB::table('auximg')->where('auxid', '=', $key->auxid)->delete();
+
+                    }
+
+                }
+
+                if (Storage::exists($valores[count($valores)-1]))
+                {
+
+                    $retorno=Storage::delete($valores[count($valores)-1]);
+
+                    DB::table('auximg')->where('auxid', '=', $key->auxid)->delete();
+
+                }
+
+            }  
+
+        }
+
+
+    }
+
 
     /**
      * Metodo que retorna a la pagina de agregar muestra
@@ -238,10 +280,17 @@ class MuestraController extends Controller
 
     public function create()
     {
+        $this->eliminarimg_bdd();
+
+        $valor=DB::table('muestra')->max('id_muestra');
+        if (!$valor) {$valor=1;}else{$valor++;}
+
+        $valor.=date("d_m_Y_H_i_s");
+
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.crear',compact('actividad','tecnica'));
+        return view('muestra.crear',compact('actividad','tecnica','valor'));
     }
 
 
@@ -261,24 +310,27 @@ class MuestraController extends Controller
 
         $file=$data['filebutton'];
 
+        $fecha=date("d_m_Y_H_i_s");
 
-        $ruta_n=$this->generar_imagen_visible($data['filebutton']->getRealPath(),1);
+        $nombre='imagen-'.($data['posi']+1)."-".$fecha.".".$file->getClientOriginalExtension();
 
-    	$error=0;
+        $ruta_n=$this->generar_imagen_visible($data['filebutton']->getRealPath(),$data['posi']);
+             
+        \Storage::disk('local')->put($nombre,  \File::get($file));
 
-		$msg="archivo guardado";
+        DB::table('auximg')->insert(['description_img'=>$ruta_n,'orgpage_img'=>$nombre]);
 
  
        return response()->json([
-       		'msn'=>$msg,
-       		'errorm'=>$error,
             'ruta'=>'/storage/'.$ruta_n,
-            'orgnl'=>$file->getClientOriginalName(),
-            'tama'=>$file->getSize()
+            'rutaori'=>$nombre,
+            'rutatrue'=>$file->getClientOriginalName(),
+            'pos'=>$data['posi']
        	]);
 
 
     }
+
 
 
     /**
@@ -297,9 +349,11 @@ class MuestraController extends Controller
 
         $retorno=0;
 
-        var_dump($data['rutamuestra']);
+        $rutas=explode(';',$data['rutamuestra']);
 
-        foreach ($data['rutamuestra'] as $key) {
+        var_dump($rutas);
+
+        foreach ($rutas as $key) {
 
           if (strlen($key)>0) {
             
@@ -317,9 +371,6 @@ class MuestraController extends Controller
         }
 
 
-        return response()->json([
-            'msn'=>$retorno
-        ]);
 
     }
 
@@ -339,69 +390,62 @@ class MuestraController extends Controller
 
     public function store()
     {
-     
+        $data=Input::all();
+
+        if (DB::table('muestra')->where('codigo_muestra','=',$data['truecodmues'])->count()==0):
+
+
+            $valor_def=explode(';', $data['truerutas']);
+            $valor_ori=explode(';', $data['trueorigis']);
+
+
+            foreach ($valor_def as $key => $value) {
+                
+
+                if (strlen($value)>1):
+
+
+                    if (Storage::exists($value)){
+
+
+                        $muestra=new Muestra();
+
+                        $muestra->codigo_muestra=$data['truecodmues'];
+                        $muestra->nombre_original_muestra=$valor_ori[$key];
+                        $muestra->ruta_img_muestra=$value;
+                        $muestra->descripcion_muestra=$data['truedescri'];
+                        $muestra->fecha_recepcion=$data['truefecharep'];
+                        $muestra->fecha_analisis=$data['truefechaana'];
+
+                        if ($muestra->save()) {
+
+                            DB::table('muestra_actividad')->insert(['id_actividad'=>$data['trueactividad'],'id_muestra'=>$muestra->id_muestra]);
+
+                            DB::table('muestra_tecnica_estudio')->insert(['id_tecnica_estudio'=>$data['truetecnic'],'id_muestra'=>$muestra->id_muestra]);
+
+                        }
+
+                    }
+
+
+                endif;
+
+            }
+
+
+        endif;
+
+        $this->eliminarimg_bdd();
+
+
     	$retorno=0;
-
-    	$data=Input::all();
-
-    	$file = $data['filebutton'];
-
-    	$muestra=new Muestra();
-
-
-    	$fecha=date("d_m_Y_H_i_s");
-
-
-    	$valor=DB::table('muestra')->max('id_muestra');
-
-
-
-    	$compro=DB::table('muestra')->where('codigo_muestra','=',$data['textinput'])->count();
-
-    	if ($compro==0) {
-
-    		if ($valor) {
-    		$nombre=$muestra->ruta_img_muestra='imagen-'.$valor."-".$fecha.".".$file->getClientOriginalExtension();
-	    	}else{
-	    		$nombre=$muestra->ruta_img_muestra='imagen-0-'.$fecha.".".$file->getClientOriginalExtension();
-                $valor=0;
-	    	}
-
-
-	    	$muestra->codigo_muestra=$data['textinput'];
-	    	$muestra->nombre_original_muestra=$file->getClientOriginalName();
-	    	$muestra->descripcion_muestra=$data['textarea'];
-	    	$muestra->fecha_recepcion=$data['fecha_recepcion'];
-	    	$muestra->fecha_analisis=$data['fecha_analisis'];
-
-
-	    	if ($muestra->save()) {
-
-                DB::table('muestra_actividad')->insert(['id_actividad'=>$data['tipo_actividad_fin'],'id_muestra'=>$muestra->id_muestra]);
-
-                $asociacion=DB::table('muestra')->max('id_muestra');
-
-                DB::table('muestra_tecnica_estudio')->insert(['id_tecnica_estudio'=>$data['tipo_muestra'],'id_muestra'=>$asociacion]);
-
-
-		    	//obtenemos el campo file definido en el formulario
-		    	$file = $data['filebutton'];
-		 
-		    	//indicamos que queremos guardar un nuevo archivo en el disco local
-		    	\Storage::disk('local')->put($nombre,  \File::get($file));
-
-	    	}
-
-    	}else{
-    		$retorno=1;
-    	}
-
-
+        $valor=DB::table('muestra')->max('id_muestra');
+        if (!$valor) {$valor=1;}else{$valor++;}
+        $valor.=date("d_m_Y_H_i_s");
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-    	return view('muestra.crear',compact('retorno','actividad','tecnica'));
-
+        return view('muestra.crear',compact('retorno','actividad','tecnica','valor'));
 
     }
 
@@ -420,12 +464,13 @@ class MuestraController extends Controller
 
     public function listar(){
 
+        $this->eliminarimg_bdd();
 
     	$totaldatos=DB::table('muestra')->get();
 
     	$page = Input::get('page', 1); 
 
-        $perPage = 2;
+        $perPage = 20;
 
         $offSet = ($page * $perPage) - $perPage;
 
@@ -447,6 +492,8 @@ class MuestraController extends Controller
             {
 
                 $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
+
+                DB::table('auximg')->insert(['description_img'=>$datos[$key]->ruta_img_muestra,'orgpage_img'=>$value->ruta_img_muestra]);
             }
 
             $valores['muestra-d']=$datos[$key];
@@ -543,6 +590,8 @@ class MuestraController extends Controller
 
     public function buscar_filtros(Request $request){
        
+        $this->eliminarimg_bdd();
+
         $aux=array();
         $retorno=array();
         $coincidencias=0;
@@ -656,7 +705,7 @@ class MuestraController extends Controller
 
         $page = Input::get('page', 1); 
 
-        $perPage = 2;
+        $perPage = 20;
 
         $offSet = ($page * $perPage) - $perPage;
 
@@ -678,6 +727,8 @@ class MuestraController extends Controller
             {
 
                 $datos[$key]->ruta_img_muestra=$this->generar_imagen_visible($public_path.'/storage/'.$value->ruta_img_muestra,$key);
+
+                DB::table('auximg')->insert(['description_img'=>$datos[$key]->ruta_img_muestra,'orgpage_img'=>$value->ruta_img_muestra]);
             }
 
             $valores['muestra-d']=$datos[$key];
@@ -719,35 +770,30 @@ class MuestraController extends Controller
 
     public function edit($id)
     {
-     
+        $this->eliminarimg_bdd();
+        
         $muestra=Muestra::find($id);
 
         $tecnica_estudio_mues=DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$muestra->id_muestra)->get();
 
-        $muestracontenido=null;
+        $actividad_muestr=DB::table('muestra_actividad')->where('id_muestra','=',$muestra->id_muestra)->get();
+
+        $ruta_aux="";
 
         if (Storage::exists($muestra->ruta_img_muestra))
         {
-            $muestracontenido=Storage::size($muestra->ruta_img_muestra);
-            $muestra->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
 
+            $ruta_aux=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
 
-            if ($muestracontenido<1000000) {
-                $muestracontenido=$muestracontenido / 1000;
-                $ext='KB';
-            }else{
-                $muestracontenido=$muestracontenido / 1000000;
-                $ext='MB';
-            }
+            DB::table('auximg')->insert(['description_img'=>$ruta_aux,'orgpage_img'=>$muestra->ruta_img_muestra]);
 
-            $muestracontenido=number_format($muestracontenido, 2,'.','').$ext;
         }
 
-
+        $valor=$muestra->codigo_muestra;
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.crear',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
+        return view('muestra.crear',compact('muestra','actividad','tecnica','tecnica_estudio_mues','actividad_muestr','valor','ruta_aux'));
 
     }
 
@@ -769,50 +815,48 @@ class MuestraController extends Controller
 
         $data=Input::all(); 
 
-        $muestra=Muestra::find($id);
 
-        $fecha=date("d_m_Y_H_i_s");
+        $valor_def=explode(';', $data['truerutas']);
+        $valor_ori=explode(';', $data['trueorigis']);
 
 
-        $muestra->codigo_muestra=$data['textinput'];
-        $muestra->descripcion_muestra=$data['textarea'];
-        $muestra->fecha_recepcion=$data['fecha_recepcion'];
-        $muestra->fecha_analisis=$data['fecha_analisis'];
-
-        if (isset($data['filebutton'])) {
-
-           if (Storage::exists($muestra->ruta_img_muestra))
-            {
-
-                Storage::delete($muestra->ruta_img_muestra);
-
-            }
-
-            $muestra->nombre_original_muestra=$data['filebutton']->getClientOriginalName();
-
+        foreach ($valor_def as $key => $value) {
             
 
-            $file = $data['filebutton'];
-
-            $muestra->ruta_img_muestra='imagen-'.$muestra->id_muestra."-".$fecha.".".$file->getClientOriginalExtension();
-
-            \Storage::disk('local')->put($muestra->ruta_img_muestra,  \File::get($file));
+            if (strlen($value)>1):
 
 
+                if (Storage::exists($value)){
+
+
+                    $muestra=Muestra::find($id);
+
+                    $muestra->nombre_original_muestra=$valor_ori[$key];
+                    $muestra->ruta_img_muestra=$value;
+                    $muestra->descripcion_muestra=$data['truedescri'];
+                    $muestra->fecha_recepcion=$data['truefecharep'];
+                    $muestra->fecha_analisis=$data['truefechaana'];
+
+                    $muestra->save();
+
+                }
+
+
+            endif;
 
         }
 
+        $retorno=0;
 
-        if ($muestra->save()) {
-            $retorno=0;
-        }else{
-            $retorno=1;
-        }
+        $valor=DB::table('muestra')->max('id_muestra');
+        if (!$valor) {$valor=1;}else{$valor++;}
+
+        $valor.=date("d_m_Y_H_i_s");
 
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.crear',compact('retorno','actividad','tecnica'));
+        return view('muestra.crear',compact('retorno','actividad','tecnica','valor'));
 
         
     }
@@ -832,6 +876,7 @@ class MuestraController extends Controller
 
     public function details($id){
 
+        $this->eliminarimg_bdd();
 
         $muestra=Muestra::find($id);
 
@@ -839,10 +884,37 @@ class MuestraController extends Controller
 
         $muestracontenido=null;
 
+        $valores=array();
+
+        $releated=array();
+
         if (Storage::exists($muestra->ruta_img_muestra))
         {
             $muestracontenido=Storage::size($muestra->ruta_img_muestra);
-            $muestra->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
+            $muestra_aux=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
+
+            DB::table('auximg')->insert(['description_img'=>$muestra_aux,'orgpage_img'=>$muestra->ruta_img_muestra]);
+
+
+            $muestras_related=DB::table('muestra')->where('codigo_muestra','=',$muestra->codigo_muestra)->get();
+
+            foreach ($muestras_related as $key => $value) {
+                
+                $muestras_related[$key]->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$value->ruta_img_muestra,$value->id_muestra);
+
+                DB::table('auximg')->insert(['description_img'=>$muestras_related[$key]->ruta_img_muestra,'orgpage_img'=>$value->ruta_img_muestra]);
+
+                $valores['muestra-d']=$muestras_related[$key];
+                $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
+                $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
+                $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
+                
+                $releated[]=$valores;
+
+
+            }
+
+            $muestra->ruta_img_muestra=$muestra_aux;
 
 
             if ($muestracontenido<1000000) {
@@ -860,7 +932,7 @@ class MuestraController extends Controller
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues'));
+        return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues','releated'));
 
     }
 

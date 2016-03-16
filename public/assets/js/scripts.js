@@ -12,6 +12,7 @@ $(document).ready(function(){
 
 	}
 
+
 	estylepag();
 
 	$('.buscador-muest').on('click',function(){
@@ -107,7 +108,7 @@ $(document).ready(function(){
 
     	var form=$('.muestraform');
 		var urls=form.attr('action');
-		var buscador=$('#lock1').data('valr');
+		var buscador=$('.res2').val();
 
 		urls=urls.split('/');
 
@@ -150,11 +151,24 @@ $(document).ready(function(){
 				$('#lock'+llave).attr('data-valr',($(this).data('ids2')));
 				$('#finact').attr('value',$('#lock'+llave).data('valr'));
 
-				busca_relaciones_actividad();
+				
 			};
 
 
 	})
+
+
+	$('.res2').on('change',function(){
+		busca_relaciones_actividad();
+	});
+
+
+	if ($('.res2').length>0) {
+
+		busca_relaciones_actividad();
+	};
+
+	busca_relaciones_actividad();
 
 
 
@@ -314,17 +328,22 @@ $(document).ready(function(){
 		var form=$('.muestraform');
     	var url=form.attr('action');
 
+    	var info= new FormData();
+
+    	var moneda=$('#mimoneda input').val();
+
+		info.append('_token',moneda);
+		info.append('rutamuestra',$('#rutamuestra').attr('value'));
+
     	url=url.split('/');
 
     	url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxborrarimg';
 
 
-    	var data=new FormData(form[0]);
-
     	$.ajax({
 		    url: url, 
 		    type: "POST",             
-		    data: data,
+		    data: info,
 		    contentType: false,
 		    dataType: "json",       
 		    cache: false,             
@@ -357,68 +376,124 @@ $(document).ready(function(){
 		var data=new FormData(form[0]);
 		var errores=0;
 
+		$('#miniaturas img').each(function(){
+			$(this).attr('class','select-no');
+		});
+
+		if ($('#filebutton')[0].files.length>0 && $('#filebutton')[0].files.length!=$('#contenedordatos').attr('data-compro')) {
+			$('#contenedordatos').attr('data-insp', $('#filebutton')[0].files.length-1);
+			$('#contenedordatos').attr('data-compro', $('#filebutton')[0].files.length-1);
+
+			$('#contenedordatos').fadeOut(function(){
+				$('#contenedorcarga').fadeIn();
+			});
+
+		};
+
+
 		var extpermitidas=new Array('jpeg','tiff','png','gif','bmp');
 
 		for (var i = 0; i < extpermitidas.length; i++) {
-			if ($('#filebutton')[0].files[0].type!='image/'+extpermitidas[i]) {
-				errores++;
+			for (var j = 0; j < $('#filebutton')[0].files.length; j++) {
+
+				if ($('#filebutton')[0].files[j].type!='image/'+extpermitidas[i]) {
+					errores++;
+				};
+
 			};
 		};
 
-		if (errores<extpermitidas.length) {
+		var totalerr=extpermitidas.length*$('#filebutton')[0].files.length;
+
+		if (errores<totalerr) {
 			errores=0;
 		};
 
-		if ($('#filebutton')[0].files[0].size >5000000) {
-			errores++;
-		}
+		for (var i = 0; i < $('#filebutton')[0].files.length; i++) {
+			
+			if ($('#filebutton')[0].files[i].size >5000000) {
+				errores++;
+			}
+
+		};
 
 
 		if (errores==0)
 		{
 
+			var moneda=$('#mimoneda input').val();
+
+			console.log(moneda);
+
 			var url=form.attr('action');
+			var borradores=[];
 
 			url=url.split('/');
 
     		url=url[0]+'/'+url[1]+'/'+url[2]+'/muestras/ajaxvalidar';
 
-			$.ajax({
-			    url: url, 
-			    type: "POST",             
-			    data: data,
-			    contentType: false,
-			    dataType: "json",       
-			    cache: false,             
-			    processData:false, 
-			    success: function(data) {
+			for (var i = 0; i < $('#filebutton')[0].files.length; i++) {
+				
+				setTimeout(ajaxdatos(i,moneda,url),200);
 
-			    	$('#thumbnil').attr('src',data.ruta);
-			    	$('.imgcargada').fadeIn();
-			    	$('#rutamuestra').val($('#thumbnil').attr('src'));
-
-			    	
-			    	if (data.tama<1000000) {
-			    		var mytama=data.tama / 1000;
-			    		var ext='KB';
-			    	}else{
-			    		var mytama=data.tama / 1000000;
-			    		var ext='MB';
-			    	}
- 
-			    	$('#imgnom').empty();
-			    	$('#imgnom').append(data.orgnl);
-
-			    	$('#imgtama').empty();
-			    	$('#imgtama').append(mytama.toFixed(2)+ext);
-
-			    	setTimeout(borrar_img(),2000);
-
-
-			    }
-			});
+			};
 		}
+		
+	});
 
+	
+	function ajaxdatos(i,moneda,url){
+
+
+					var info= new FormData();
+
+					info.append('_token',moneda);
+					info.append('filebutton',$('#filebutton')[0].files[i]);
+					info.append('posi',i);
+					info.append('igobli',$('#idobligatorio').data('id'));
+
+					$.ajax({
+					    url: url, 
+					    type: "POST",             
+					    data: info,
+					    contentType: false,
+					    dataType: "json",       
+					    cache: false,             
+					    processData:false, 
+					    success: function(data) {
+
+					    	$('#thumbnil').attr('src',data.ruta);
+					    	$('.imgcargada').fadeIn();
+					    	$('#rutamuestra').val($('#rutamuestra').val()+';'+data.rutaori);
+					    	$('#rutamuestra2').val($('#rutamuestra2').val()+';'+data.rutatrue);
+
+					    	if ($('#contenedordatos').attr('data-insp')==data.pos) {
+
+					    		$('#miniaturas').append('<div class="col-md-6"><img data-oriurl="'+data.rutaori+'" src="'+data.ruta+'" class="select-si"></div>');
+
+					    		$('#contenedorcarga').fadeOut(function(){
+									$('#contenedordatos').fadeIn();
+								});
+
+					    	}else{
+					    		$('#miniaturas').append('<div class="col-md-6"><img src="'+data.ruta+'" class="select-no"></div>');
+					    	}
+
+
+					    }
+					});
+
+	}
+
+	$('#miniaturas').on('click','img',function(){
+
+		$('#miniaturas img').each(function(){
+			$(this).attr('class','select-no');
+		});
+
+		$(this).attr('class','select-si');
+
+		$('#thumbnil').attr('src',$(this).attr('src'));
 	});
 
 
@@ -446,6 +521,15 @@ $(document).ready(function(){
 
 	})
 
+
+	function trueform(){
+
+		for (var i = 0; i < 7; i++) {
+			$('#env'+i).val($('.res'+i).val());
+		};
+
+		$('.trueformsend').submit();
+	}
 
 
 	$('#singlebutton').on('click',function(event){
@@ -491,7 +575,15 @@ $(document).ready(function(){
 			});
 
 		}else{
-			$('.validadorformularios form').submit();
+			
+			if ($('.validadorformularios form').attr('data-valid')=='encontrado') {
+
+				trueform();
+
+			}else{
+				$('.validadorformularios form').submit();
+			}
+
 		}
 
 	});
@@ -505,6 +597,25 @@ $(document).ready(function(){
 
 
 	});
+
+
+
+
+
+
+	$(".my_select_box").chosen({
+	    no_results_text: "Oops, nothing found!",
+	    width: "100%"
+	  });
+
+
+
+
+
+
+
+
+
 
 
 
