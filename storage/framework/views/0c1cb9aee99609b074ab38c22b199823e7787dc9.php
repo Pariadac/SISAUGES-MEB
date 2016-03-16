@@ -18,7 +18,10 @@
     <link href="<?php echo e(url('assets/css/sb-admin.css')); ?>" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
+    <link href="<?php echo e(url('assets/css/dropzone.min.css')); ?>" rel="stylesheet">
+
     <link href="<?php echo e(url('assets/css/plugins/morris.css')); ?>" rel="stylesheet">
+    <link href="<?php echo e(url('assets/css/chosen.min.css')); ?>" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="<?php echo e(url('assets/font-awesome/css/font-awesome.min.css')); ?>" rel="stylesheet" type="text/css">
@@ -332,8 +335,8 @@
 
         <!-- jQuery -->
         <script src="<?php echo e(url('assets/js/jquery.js')); ?>"></script>
-        <script src="<?php echo e(url('assets/js/scripts.js')); ?>"></script>
-
+        
+		<script src="<?php echo e(url('assets/js/scripts.js')); ?>"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="<?php echo e(url('assets/js/bootstrap.min.js')); ?>"></script>
 
@@ -341,8 +344,10 @@
         <script src="<?php echo e(url('assets/js/plugins/morris/raphael.min.js')); ?>"></script>
         <script src="<?php echo e(url('assets/js/plugins/morris/morris.min.js')); ?>"></script>
         <script src="<?php echo e(url('assets/js/plugins/morris/morris-data.js')); ?>"></script>
-        <script src="<?php echo e(url('assets/js/draganddropquery.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/chosen.jquery.min.js')); ?>"></script>
+        <script src="<?php echo e(url('assets/js/dropzone.min.js')); ?>"></script>
         <script src="<?php echo e(url('assets/js/jquery.datetimepicker.full.js')); ?>"></script>
+        
         <?php echo $__env->yieldContent('scripts'); ?>
     </div>
 </body>
