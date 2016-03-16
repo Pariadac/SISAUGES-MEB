@@ -47,7 +47,8 @@ class InstitucionController extends Controller
 
             $id=Institucion::find($tb);
 
-            if ($request->input('nomb_inst')==$id->nombre_institucion&& $id->direccion_institucion == $request->input('direccion_inst')&& $id->correo_institucional == $request->input('correo_inst')&&$id->telefono_institucion == $request->input('telefono_inst')) {
+            if ($request->input('nomb_inst')==$id->nombre_institucion&& $id->direccion_institucion == $request->input('direccion_inst')&& $id->correo_institucional == $request->input('correo_inst')&&$id->telefono_institucion == $request->input('telefono_inst'))
+            {
                 
 
             }else{

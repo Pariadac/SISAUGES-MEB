@@ -59,7 +59,6 @@ class UserController extends Controller
     {
         $usuario = User::find($id);
         $usuario_seleccionado=User::find($id)->nivelUsuarios()->pluck('usuarios_niveles.id_nivel_de_usuario')->toArray();
-        //dd($usuario_seleccionado);
 
         return view('users.editar')->with(['usuario'=>$usuario,'nivel'=>$this->nivel,
                                         'usuario_seleccionado'=>$usuario_seleccionado]);

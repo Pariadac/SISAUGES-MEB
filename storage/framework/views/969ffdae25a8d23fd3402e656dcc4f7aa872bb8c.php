@@ -77,13 +77,13 @@
             <div class="col-md-6">
                 <?php echo e(Form::label('institucion','Institución *')); ?>
 
-                <?php echo e(Form::select('institucion',['Ejemplo'=>'Ejemplo','Ejemplo1'=>'Ejemplo1'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])); ?>
+                <?php echo e(Form::select('institucion[]',$institucion,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])); ?>
 
             </div>
             <div class="col-md-6">
                 <?php echo e(Form::label('departamento','Departamento *')); ?>
 
-                <?php echo e(Form::select('departamento',['Ejemplo2'=>'ejemplo','Ejemplo3'=>'ejemplo3'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])); ?>
+                <?php echo e(Form::select('departamento[]',$departamento,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])); ?>
 
             </div>
 

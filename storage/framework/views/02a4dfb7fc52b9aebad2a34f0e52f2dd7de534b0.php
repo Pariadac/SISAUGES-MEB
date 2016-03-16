@@ -27,13 +27,15 @@
     ?>
 
 
-    <div class="col-md-4">
+    <div class="col-md-12 formulariosajax">
         <?php echo Form::open(['url' => '/institucion/buscar', 'class' => 'busqueda-inst']); ?>
 
 
-            <input class="form-control" type="text" name="busqueda" placeholder="BUSCAR">
+            <div class="col-md-4">
+                <input class="form-control" type="text" name="busqueda" placeholder="BUSCAR">
+            </div>
 
-            <button type="button" class="btn btn-primary">Buscar</button>
+            <button type="button" id="boton-inst" class="btn btn-primary">Buscar</button>
 
 
         <?php echo Form::close(); ?>
@@ -41,16 +43,15 @@
     </div>
 
 
-    <table class="table">
+    <table class="table table-responsive" style="margin-top:60px!important">
         <tbody>
 
             <tr>
-                <th>Id Institucion</th>
                 <th>Nombre Institucion</th>
                 <th>Direccion institucion</th>
                 <th>Correo istitucion</th>
                 <th>Telefono Institucion</th>
-                <th>Id Representante</th>
+                <th class="tablaboton">Acción</th>
             </tr>
 
               
@@ -59,29 +60,33 @@
 
 
             
-
-                $extremo=count($mostrar);
-              for ($i=0; $i <$extremo ; $i++) 
-              { 
-
-
-                echo '
-
-            <tr class="borrables">
-                <td>'.$mostrar[$i]->id_institucion.'</td> 
-                <td>'.$mostrar[$i]->nombre_institucion.'</td> 
-                <td>'.$mostrar[$i]->direccion_institucion.'</td> 
-                <td>'.$mostrar[$i]->correo_institucional.'</td> 
-                <td>'.$mostrar[$i]->telefono_institucion.'</td> 
-                <td>'.$mostrar[$i]->id_representante.'</td>
-                <td></td>
-                <td><a href="/institucion/editar/'.$mostrar[$i]->id_institucion.'">Modificar</a></td>
-                <td><a href="/institucion/eliminar/'.$mostrar[$i]->id_institucion.' ">Eliminar</a></td>  
-            </tr>
-
-            ';
+            if ($mostrar) {
                 
-              }
+            
+                $extremo=count($mostrar);
+                for ($i=0; $i <$extremo ; $i++) 
+                  { 
+
+
+                    echo '
+
+                    <tr class="borrables">
+                        <td>'.$mostrar[$i]->nombre_institucion.'</td> 
+                        <td>'.$mostrar[$i]->direccion_institucion.'</td> 
+                        <td>'.$mostrar[$i]->correo_institucional.'</td> 
+                        <td>'.$mostrar[$i]->telefono_institucion.'</td> 
+                        <td>
+                            <a href="/institucion/editar/'.$mostrar[$i]->id_institucion.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Modificar</a>
+                            <a href="/institucion/eliminar/'.$mostrar[$i]->id_institucion.' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
+                        </td>  
+                    </tr>
+
+                    ';
+                    
+                  }
+
+            }
+
             
             ?>
 

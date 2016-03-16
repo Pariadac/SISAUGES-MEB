@@ -21,14 +21,14 @@
     <?php if(Session::has('message')): ?>
         <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
     <?php endif; ?>
-    <table class="table table-hover">
+    <table class="table table-responsive">
         <tr>
             <th>Representante N°</th>
             <th>Cedula</th>
             <th>Nombre</th>
             <th>Apellido</th>
             <th>Correo</th>
-            <th colspan="2">Acción</th>
+            <th class="tablaboton">Acción</th>
         </tr>
         <?php foreach($representante as $rep): ?>
             <tr>
@@ -37,15 +37,15 @@
                 <td><?php echo e($rep->nombre); ?></td>
                 <td><?php echo e($rep->apellido); ?></td>
                 <td><?php echo e($rep->email); ?></td>
-                <td width="60" align="center">
+                <td class="misbotones">
                     <?php echo Html::link('representante/editar/'.$rep->id_representante, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
-                </td>
-                <td width="60" align="center">
+
                     <?php echo Form::open(array('url' =>'representante/eliminar/'.$rep->id_representante, 'method' => 'DELETE')); ?>
 
                     <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     <?php echo Form::close(); ?>
+
 
                 </td>
             </tr>

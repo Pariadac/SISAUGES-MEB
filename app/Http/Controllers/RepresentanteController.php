@@ -24,8 +24,10 @@ namespace SISAUGES\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Mockery\Exception;
+use SISAUGES\Departamento;
 use SISAUGES\Http\Requests;
 use SISAUGES\Http\Controllers\Controller;
+use SISAUGES\Institucion;
 use SISAUGES\Representante;
 
 /**
@@ -41,9 +43,15 @@ use SISAUGES\Representante;
  */
 class RepresentanteController extends Controller
 {
+    protected $institucion;
+    protected $departamento;
+    protected $representante;
     public function __construct()
     {
         $this->middleware('auth');
+        $this->institucion = Institucion::all()->pluck('nombre_institucion','id_institucion');
+        $this->departamento = Departamento::all()->pluck('descripcion_departamento','id_departamento');
+        $this->representante = Representante::all();
     }
 
     /**
@@ -59,8 +67,7 @@ class RepresentanteController extends Controller
      */
     public function index()
     {
-        $representante = Representante::all();
-        return view('representante.index')->with('representante',$representante);
+        return view('representante.index')->with(['representante'   =>  $this->representante]);
     }
 
     /**
@@ -76,7 +83,8 @@ class RepresentanteController extends Controller
      */
     public function create()
     {
-        return view('representante.crear');
+        return view('representante.crear')->with(['departamento'=>$this->departamento,
+                                                  'institucion'=>$this->institucion]);
     }
 
     public function store()
@@ -90,6 +98,17 @@ class RepresentanteController extends Controller
             $representante->email = \Request::Input('email');
             $representante->telefono = \Request::Input('telefono');
             $representante->save();
+            $rep = $representante->id_representante;
+            $institucion = \Request::Input('institucion');
+            $departamento = \Request::Input('departamento');
+            //dd($representante->id_representante);
+            foreach($institucion as $ins)
+            {
+                foreach($departamento as $dep)
+                {
+                    $representante->institucion()->attach($ins,["id_departamento" => $dep],$rep);
+                }
+            }
             return redirect('representante')->with('message', 'Se ha agregado el representante con exito');
         }
         catch(Exception $e)
@@ -101,7 +120,9 @@ class RepresentanteController extends Controller
     public function edit($id)
     {
         $representante = Representante::find($id);
-        return view('representante.editar')->with('representante', $representante);
+        return view('representante.editar')->with(['representante'  =>  $representante,
+                                                   'institucion'    =>  $this->institucion,
+                                                    'departamento'  =>  $this->departamento]);
     }
 
     public function update($id)

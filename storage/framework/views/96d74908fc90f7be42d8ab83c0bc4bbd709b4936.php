@@ -41,69 +41,47 @@
 
 
     <div class="validadorformularios">
-        <?php if(Session::has('message')): ?>
-            <div class="alert alert-success"><?php echo e(Session::get('message')); ?></div>
-        <?php endif; ?>
+    
         <?php echo Form::open(['action' => 'InstitucionController@store']); ?>
 
         <div class="panel panel-default">
             <div class="panel-body">
                 
-                 <div class="col-md-4">
-                    <?php echo e(Form::label('Nombre de la institucion')); ?>
+                 <div class="col-md-6">
+                    <?php echo e(Form::label('Nombre de la institucion*')); ?>
 
                     <?php echo e(Form::text('nomb_inst',null,['class'=>'form-control camporequerido','type'=>'text'])); ?>
 
                 </div>
 
-                <div class="col-md-4">
-                    <?php echo e(Form::label('Correo de la institucion')); ?>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('Correo de la institucion*')); ?>
 
                     <?php echo e(Form::text('correo_inst',null,['class'=>'form-control camporequerido solomails','type'=>'text'])); ?>
 
                 </div>
                
-                <div class="col-md-4">
-                    <?php echo e(Form::label('Telefono de la institucion')); ?>
+                <div class="col-md-6">
+                    <?php echo e(Form::label('Telefono de la institucion*')); ?>
 
                     <?php echo e(Form::text('telefono_inst',null,['class'=>'form-control camporequerido solo-numero','type'=>'text'])); ?>
 
                 </div>
 
                 <div class="col-md-6">
-                    <?php echo e(Form::label('Direccion de la Institucion')); ?>
+                    <?php echo e(Form::label('Direccion de la Institucion*')); ?>
 
                     <?php echo e(Form::text('direccion_inst',null,['class'=>'form-control camporequerido','type'=>'text'])); ?>
 
-                </div>
+                </div>         
                 
-                
-               
-                <div class="col-md-6">
-
-                  <div class="form-group ">
-                    <label class="control-label" for="textinput">Representante de la institucion *</label>  
-                    <select name="representante_inst" data-value="" class="form-control camporequerido">
-                      <option value="">Seleccione Tecnica...</option>
-                      <?php
-
-
-                        foreach ($representantes as $key) {
-                            echo '<option value="'.$key->id_representante.'">'.$key->nombre.'</option>';
-                        }
-
-
-                      ?>
-                    </select> 
-                    </div>
-                  </div>
-
-
-                </div>
                
             </div>
         </div>
 
+        <div class="col-md-12 msnrequeridos">
+            <p>Todos los campos con (*) son obligatorios</p>
+        </div>
 
         <div class="col-md-offset-5">
             <?php echo e(Form::submit('Enviar',['class'=>'btn btn-success', 'id'=>'singlebutton'])); ?>

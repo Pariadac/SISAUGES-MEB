@@ -110,10 +110,10 @@ CREATE TABLE IF NOT EXISTS REPRESENTANTE_ACTIVIDAD
 CREATE TABLE IF NOT EXISTS INSTITUCION
 (
 	id_institucion serial,
-	nombre_institucion varchar(50) not null,
-	direccion_institucion varchar(50),
+	nombre_institucion varchar(100) not null,
+	direccion_institucion varchar(100),
 	correo_institucional varchar(30) not null,
-	telefono_institucion varchar(11),
+	telefono_institucion varchar(12),
 	constraint pk_institicion
 		primary key (id_institucion)
 );
