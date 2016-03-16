@@ -23,7 +23,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución/Agregar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="{{url('/institucion')}}">Institución</a>/Agregar</label>
                 </li>
             </ol>
         </div>

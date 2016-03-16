@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Usuarios/Editar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="{{url('/usuario')}}">Usuarios</a>/Editar</label>
                 </li>
             </ol>
         </div>
@@ -39,7 +39,7 @@
         <div class="panel-body">
             <div class="col-md-6">
                 {{Form::label('nivelUsuario','Nivel Usuario*')}}
-                {{Form::select('nivelUsuario[]',$nivel,$usuarioSeleccionado,['class'=>'form-control selectpicker','multiple'])}}
+                {{Form::select('nivelUsuario[]',$nivel,$usuario_seleccionado,['class'=>'form-control selectpicker','multiple'])}}
             </div>
             <div class="col-md-6">
                 {{Form::label('cedula','Cedula Usuario*')}}

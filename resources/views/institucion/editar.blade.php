@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución/Editar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="{{url('/institucion')}}">Institución</a>/Editar</label>
                 </li>
             </ol>
         </div>

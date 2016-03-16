@@ -14,7 +14,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Muestras/Detalles</label>
+                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="/muestras/lista">Muestras</a>/Detalles</label>
                             </li>
                         </ol>
                     </div>

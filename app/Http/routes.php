@@ -120,6 +120,7 @@ Route::group(['middleware' => 'web'], function () {
     Route::get('muestras/detalles/{id}','MuestraController@details');
     Route::post('muestras/edita/{id}','MuestraController@update');
     Route::delete('muestras/eliminar{id}','MuestraController@destroy');
+    Route::get('muestras/pru','MuestraController@generate_singlepdf');
 
 
 

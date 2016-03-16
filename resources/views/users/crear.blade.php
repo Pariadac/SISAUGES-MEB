@@ -11,7 +11,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Usuarios/Agregar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="{{url('/usuario')}}">Usuarios</a>/Agregar</label>
                 </li>
             </ol>
         </div>

@@ -225,7 +225,7 @@ $(document).ready(function(){
 			if(clase==1){
 				str='alert alert-danger';
 				$('#alerta strong').text('Error');
-				$('#alerta span').text('La operacion a fallado, intente nuevamente');
+				$('#alerta span').text('La operacion a fallado');
 			};
 
 			$('#alerta').attr('class',str);
@@ -270,12 +270,17 @@ $(document).ready(function(){
 	  format:'d-m-Y',
 	  timepicker:false,
 	  maxDate:fecha,
+	  scrollInput:false,
+	  onChangeDateTime:function(dp,input){
+	    $('#fin_mues_bus').datetimepicker('setOptions',{minDate: $('#inicio_mues_bus').datetimepicker('getValue')});
+	  }
 	});
 
 	$('#fin_mues_bus').datetimepicker({
 	  format:'d-m-Y',
 	  timepicker:false,
 	  maxDate:fecha,
+	  scrollInput:false,
 	});
 
 
@@ -283,6 +288,8 @@ $(document).ready(function(){
 	  format:'d-m-Y',
 	  timepicker:false,
 	  maxDate:fecha,
+	  scrollInput:false,
+
 	});
 
 
@@ -290,6 +297,11 @@ $(document).ready(function(){
 	  format:'d-m-Y',
 	  timepicker:false,
 	  maxDate:fecha,
+	  scrollInput:false,
+	  onChangeDateTime:function(dp,input){
+	  	
+	    $('#fecha_analisis').datetimepicker('setOptions',{minDate: $('#fecha_recepcion').datetimepicker('getValue')});
+	  }
 	});
 
 	$('#imagenescarga').on('click',function(event){
