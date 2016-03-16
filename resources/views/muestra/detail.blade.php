@@ -83,9 +83,66 @@
 
                 <div class="row">
                 	<div class="col-md-10 col-md-offset-1 enfatizador">
-                		<h3>Muestras Relacionadas por Actividad</h3>
+                		<h3>Muestras Relacionadas</h3>
                 		<div id="seccion_relacionadas">
-                			
+                			<div class="col-md-12">
+                                <table class="table table-responsive">
+                                    <tbody>
+                                        <tr>
+                                                <th>Imagen</th>
+                                                <th>Actividad</th>
+                                                <th>Institucion</th>
+                                                <th>Tecnica de estudio</th>
+                                                <th>Fecha</th>
+                                                <th class="tablaboton">Acción</th>
+                                        </tr>
+
+                                        <?php
+
+                                            foreach ($releated as $key=> $value) {
+
+
+                                                if ($key % 2!= 0) {
+                                                    $col="info";
+                                                }else{
+                                                    $col="";
+                                                }
+
+                                                echo '
+
+
+                                                    <tr class="'.$col.'">
+                                                        <td >
+                                                            <div class="contenedor-imagen">
+                                                                <img src="'.url("/storage").'/'.$value['muestra-d']->ruta_img_muestra.'">
+                                                            </div>
+                                                        </td>
+                                                        <td>'.$value['actividad-d'][0]->nombre_actividad.'</td>
+                                                        <td>'.$value['institucion-d'][0]->nombre_institucion.'</td>
+                                                        <td>'.$value['tecnica-d'][0]->descripcion_tecnica_estudio.'</td>
+                                                        <td>
+                                                            '.$value['muestra-d']->fecha_analisis.'
+                                                        </td>
+                                                        <td >
+                                                            <a href="'.url("/muestras/detalles")."/".$value['muestra-d']->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Detalles</a>
+
+                                                            <a href="'.url("/muestras/editar")."/".$value['muestra-d']->id_muestra.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
+
+                                                            
+                                                        </td>
+                                                    </tr>    
+
+
+                                                ';
+                                            }
+
+                                            /*<a href="'.url("/muestras/eliminar")."/".$value->id_muestra.'" id="singlebutton" name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>*/
+
+                                        ?>
+
+
+                                </table>
+                            </div>
                 		</div>
                 	</div>
                 </div>

@@ -18,7 +18,10 @@
     <link href="{{url('assets/css/sb-admin.css') }}" rel="stylesheet">
 
     <!-- Morris Charts CSS -->
+    <link href="{{url('assets/css/dropzone.min.css') }}" rel="stylesheet">
+
     <link href="{{url('assets/css/plugins/morris.css') }}" rel="stylesheet">
+    <link href="{{url('assets/css/chosen.min.css') }}" rel="stylesheet">
 
     <!-- Custom Fonts -->
     <link href="{{url('assets/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
@@ -332,8 +335,8 @@
 
         <!-- jQuery -->
         <script src="{{url('assets/js/jquery.js') }}"></script>
-        <script src="{{url('assets/js/scripts.js') }}"></script>
-
+        
+		<script src="{{url('assets/js/scripts.js') }}"></script>
         <!-- Bootstrap Core JavaScript -->
         <script src="{{url('assets/js/bootstrap.min.js') }}"></script>
 
@@ -341,8 +344,10 @@
         <script src="{{url('assets/js/plugins/morris/raphael.min.js') }}"></script>
         <script src="{{url('assets/js/plugins/morris/morris.min.js') }}"></script>
         <script src="{{url('assets/js/plugins/morris/morris-data.js') }}"></script>
-        <script src="{{url('assets/js/draganddropquery.js') }}"></script>
+        <script src="{{url('assets/js/chosen.jquery.min.js') }}"></script>
+        <script src="{{url('assets/js/dropzone.min.js') }}"></script>
         <script src="{{url('assets/js/jquery.datetimepicker.full.js') }}"></script>
+        
         @stack('scripts')
     </div>
 </body>

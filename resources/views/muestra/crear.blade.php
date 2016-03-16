@@ -29,7 +29,7 @@
 
 
                 <div id="mimoneda">
-                    {!! Form::token() !!}
+                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 </div>
 
                 <!-- Page Heading -->
@@ -57,6 +57,21 @@
                   </div>
                 </div>
 
+                <div id="trueform">
+                	{!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'trueformsend', 'enctype'=> "multipart/form-data"])!!}
+
+                		<input type="hidden" value="" name="trueorigis" id="env0">
+                		<input type="hidden" value="" name="truerutas" id="env1">
+                		<input type="hidden" value="" name="trueactividad" id="env2">
+                		<input type="hidden" value="" name="truefecharep" id="env3">
+                		<input type="hidden" value="" name="truefechaana" id="env4">
+                		<input type="hidden" value="" name="truetecnic" id="env5">
+                		<input type="hidden" value="" name="truedescri" id="env6">
+                		<input type="hidden" value="<?php echo $valor; ?>" name="truecodmues" id="env7">
+
+                	{!! Form::close() !!}
+                </div>
+
                 <!--<div class="pasos-registro">
                     <div class="col-md-2">
                         <h4>Paso:/</h4>
@@ -79,43 +94,52 @@
 
                 <div class="validadorformularios ">
                       
-                  {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform', 'enctype'=> "multipart/form-data"])!!}
+                  {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform', 'data-valid'=>'encontrado', 'enctype'=> "multipart/form-data"])!!}
 
 
                       <fieldset>
 
-                          <div class="col-md-4">
+                          <div class="col-md-5">
 
-                                  <div class="botn col-md-12">
-
-
-                                      <div class="col-md-12 botones-principal">
-                                        <button type="button" class="btn btn-primary" id="imagenescarga">Muestra *</button>
-                                      </div>
-
-                                      <input id="filebutton" name="filebutton" class="input-file  <?php if (!$datos) {echo 'camporequerido';} ?> " type="file">
-
-                                      <input name="rutamuestra[]" id="rutamuestra" value="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" type="hidden">
-
-                                      <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
-                                          <div class="alineador">
-                                              <img src="<?php if ($datos) {echo url('/storage').'/'.$datos->ruta_img_muestra;} ?>" id="thumbnil">
-                                          </div>
-                                      </div>                    
-
+                                  <div class="col-md-12 botones-principal">
+                                    <button type="button" class="btn btn-primary" id="imagenescarga">Muestra *</button>
                                   </div>
-                                  <div class="col-md-12 datosimg">
-                                      <div class="enfatizador">
-                                        <div class="row">
-                                          <div class="col-md-12"><p><label>Nombre:</label> <span id="imgnom"><?php if (isset($muestracontenido)) {echo $muestra->nombre_original_muestra;} ?></span></p></div>
-                                          <div class="col-md-12"><p><label>Tamaño:</label> <span id="imgtama"><?php if (isset($muestracontenido)) {echo $muestracontenido;} ?></span></p></div>
-                                      </div>
-                                      </div>
-                                  </div>
+
+								  <div <?php if($datos){echo 'style="display:block"';} ?> id="contenedordatos" data-insp="visible" data-compro="0">
+
+								  	<div class="botn col-md-12">
+	                                      <input id="filebutton" name="filebutton[]" <?php if(!$datos){echo "multiple";} ?> class="input-file  <?php if (!$datos) {echo 'camporequerido';} ?> " type="file">
+
+	                                      <input class="res1" name="rutamuestra" id="rutamuestra" value="<?php if ($datos) {echo ';'. $ruta_aux;} ?>" type="hidden">
+	                                      <input class="res0" name="rutamuestra2" id="rutamuestra2" value="<?php if ($datos) {echo ';'.$datos->ruta_img_muestra;} ?>" type="hidden">
+
+	                                      <div class="col-md-12 imgcargada" <?php if ($datos) {echo 'style="display:block!important;"';} ?>>
+	                                          <div class="alineador">
+	                                              <img src="<?php if ($datos) {echo url('/storage').'/'.$ruta_aux;} ?>" id="thumbnil">
+	                                          </div>
+	                                      </div>                    
+
+	                                  </div>
+
+	                                  <div class="col-md-12" id="miniaturas-padre">
+	                                  		
+		                                  <div class="col-md-12" id="miniaturas">
+		                                  	
+		                                  </div>
+
+	                                  </div>
+
+								  </div>
+
+								  <div id="contenedorcarga" <?php if($datos){echo 'style="display:hidden"';} ?>>
+								  		<div class="col-md-12">
+								  			<img src="{{url('assets/complementos/carga.gif') }}">
+								  		</div>
+								  </div>
 
                           </div> 
 
-                          <div class="col-md-8">
+                          <div class="col-md-7">
                             
 
                             <div class="row">
@@ -127,7 +151,31 @@
                                   <label class="control-label" for="textinput">Tipo de Atividad *</label>  
                                   <div class="col-md-12">
 
-                                    <input autocomplete="off" type="text" id="lock1" name="tipo_actividad" class="form-control mi-chosen-dos camporequerido" data-location="1" data-valr="" placeholder="Actividad">
+                                  <select class="my_select_box chosen-select res2" name="tipo_actividad_fin">
+                                  		
+                                  		<option value="">Seleccione una Actividad</option>
+
+                                  		<?php                                     
+
+
+                                           foreach ($actividad as $key) {
+	                                          if ($datos) {
+	                                              if ($actividad_muestr[0]->id_actividad==$key->id_actividad) {
+	                                                echo '<option selected value="'.$key->id_actividad.'">'.$key->nombre_actividad.'</option>';
+	                                              }else{
+	                                                echo '<option value="'.$key->id_actividad.'">'.$key->nombre_actividad.'</option>';
+	                                              }
+	                                          }else{
+	                                            echo '<option value="'.$key->id_actividad.'">'.$key->nombre_actividad.'</option>';
+	                                          }
+	                                        }
+
+                                       ?>
+
+                                  </select>
+
+
+                                    <!--<input autocomplete="off" type="text" id="lock1" name="tipo_actividad" class="form-control mi-chosen-dos camporequerido" data-location="1" data-valr="" placeholder="Actividad">
                                     <input name="tipo_actividad_fin" id="finact" type="hidden" value="">
                                     <ul class="oculto1" id="location1">
                                         <?php                                     
@@ -139,7 +187,7 @@
                                            endforeach 
 
                                        ?>
-                                    </ul>
+                                    </ul>-->
 
 
                                   </div>
@@ -177,19 +225,11 @@
                                   <div class="form-group ">
                                     <label class="control-label" for="textinput">Fecha de Recepcion *</label>  
                                     <div class="col-md-12">
-                                    <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_recepcion;} ?>" class="form-control camporequerido"> 
+                                    <input id="fecha_recepcion" name="fecha_recepcion" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_recepcion;} ?>" class="form-control camporequerido res3"> 
                                     </div>
                                   </div>
 
 
-
-                                  <!-- Text input-->
-                                  <div class="form-group ">
-                                    <label class="control-label" for="textinput">Codigo de La muestra *</label>  
-                                    <div class="col-md-12">
-                                    <input id="textinput" name="textinput" type="text" placeholder="Codigo" value="<?php if ($datos) {echo $datos->codigo_muestra;} ?>" class="form-control camporequerido"> 
-                                    </div>
-                                  </div>
 
 
                                   
@@ -201,7 +241,7 @@
                                   <div class="form-group ">
                                     <label class="control-label" for="textinput">Fecha de Analisis *</label>  
                                     <div class="col-md-12">
-                                    <input id="fecha_analisis" name="fecha_analisis" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_analisis;} ?>" class="form-control camporequerido"> 
+                                    <input id="fecha_analisis" name="fecha_analisis" type="text" placeholder="placeholder" value="<?php if ($datos) {echo $datos->fecha_analisis;} ?>" class="form-control camporequerido res4"> 
                                     </div>
                                   </div>
 
@@ -209,7 +249,7 @@
                                   <div class="form-group ">
                                     <label class="control-label" for="textinput">Tecnica de Estudio *</label>  
                                     <div class="col-md-12">
-                                    <select id="tipo_muestra" name="tipo_muestra" data-value="<?php if ($datos) {echo $datos->tipo_muestra;} ?>" class="form-control camporequerido">
+                                    <select class="my_select_box chosen-select res5" data-placeholder="Select Your Options" id="tipo_muestra" name="tipo_muestra" data-value="<?php if ($datos) {echo $datos->tipo_muestra;} ?>">
                                       <option value="">Seleccione Tecnica...</option>
                                       <?php
 
@@ -243,7 +283,7 @@
                                 <div class="form-group">
                                   <label class="control-label" for="textarea">Descripccion de la muestra *</label>
                                   <div class="col-md-12">                     
-                                    <textarea class="form-control camporequerido" id="textarea" name="textarea"><?php if ($datos) {echo $datos->descripcion_muestra;} ?></textarea>
+                                    <textarea class="form-control camporequerido res6" id="textarea" name="textarea"><?php if ($datos) {echo $datos->descripcion_muestra;} ?></textarea>
                                   </div>
                                 </div>
 

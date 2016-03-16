@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DataSourceManagerImpl" format="xml" hash="1268727949">
+  <component name="DataSourceManagerImpl" format="xml" hash="2396387769">
     <data-source source="LOCAL" name="PostgreSQL - SISAUGES-MEB@localhost" uuid="f2132241-9f8e-4919-8b76-fd6335a5e17e">
       <driver-ref>postgresql</driver-ref>
       <synchronize>true</synchronize>
