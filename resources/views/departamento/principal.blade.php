@@ -41,7 +41,7 @@
                         <tr class="borrables">
                             <td class="alineadorr">'.$key->descripcion_departamento.'</td> 
                             <td>
-                                <a href="/departamento/editar/'.$key->id_departamento.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Modificar</a>
+                                <a href="/departamento/editar/'.$key->id_departamento.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
                                 <a href="/departamento/eliminar/'.$key->id_departamento.' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
                             </td>  
                         </tr>

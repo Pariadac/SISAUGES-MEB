@@ -75,7 +75,7 @@
                         <td>'.$mostrar[$i]->correo_institucional.'</td> 
                         <td>'.$mostrar[$i]->telefono_institucion.'</td> 
                         <td>
-                            <a href="/institucion/editar/'.$mostrar[$i]->id_institucion.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Modificar</a>
+                            <a href="/institucion/editar/'.$mostrar[$i]->id_institucion.'" name="singlebutton" class="glyphicon glyphicon-pencil btn btn-warning btn-xs">Modificar</a>
                             <a href="/institucion/eliminar/'.$mostrar[$i]->id_institucion.' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
                         </td>  
                     </tr>

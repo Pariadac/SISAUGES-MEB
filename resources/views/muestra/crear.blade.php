@@ -40,7 +40,7 @@
                         </h1>
                         <ol class="breadcrumb">
                             <li class="active">
-                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Muestras/<?php echo $titulo; ?></label>
+                                <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="/muestras/lista">Muestras</a>/<?php echo $titulo; ?></label>
                             </li>
                         </ol>
                     </div>

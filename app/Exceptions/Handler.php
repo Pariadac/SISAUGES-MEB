@@ -45,6 +45,12 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $e)
     {
+
+        if ($e) {
+            $error="Ocurrio un error al procesar la petición";
+            return response()->view('errors.503',compact('error'));
+        }
+
         return parent::render($request, $e);
     }
 }

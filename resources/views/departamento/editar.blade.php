@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Departamento /Editar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="{{url('/departamento')}}">Departamento</a> /Editar</label>
                 </li>
             </ol>
         </div>
@@ -33,7 +33,7 @@
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
-    {!!Form::open(['url' => 'departamento/edita/'.$institucion->id_institucion])!!}
+    {!!Form::open(['url' => 'departamento/edita/'.$departamento->id_departamento])!!}
 
 
         <div class="panel panel-default">
