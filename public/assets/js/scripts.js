@@ -168,8 +168,6 @@ $(document).ready(function(){
 		busca_relaciones_actividad();
 	};
 
-	busca_relaciones_actividad();
-
 
 
 	function validarEmail( email ) {
