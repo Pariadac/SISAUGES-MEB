@@ -60,6 +60,13 @@
 
             </div>
 
+            <div class="col-md-6">
+                <?php echo e(Form::label('representante','Representante Actividad*')); ?>
+
+                <?php echo e(Form::select('representante[]',$representante,$representanteSeleccionado,['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])); ?>
+
+            </div>
+
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>
             </div>

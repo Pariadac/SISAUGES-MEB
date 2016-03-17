@@ -25,15 +25,15 @@ class Muestra extends Model
 
     public function actividad()
     {
-        return $this->belongsToMany(Actividad::class,'muestra_actividad','id_actividad','id_muestra');
+        return $this->belongsToMany(Actividad::class,'muestra_actividad','id_muestra','id_actividad');
     }
 
     public function tecnicaEstudio()
     {
         return $this->belongsToMany(TecnicaEstudio::class,
                                     'muestra_tecnica_estudio',
-                                    'id_tecnica_estudio',
-                                    'id_muestra');
+                                    'id_muestra',
+                                    'id_tecnica_estudio');
     }
 
 

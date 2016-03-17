@@ -52,6 +52,11 @@
                                                    'Privado'    => 'Privado'],$actividad->permiso_actividad,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
             </div>
 
+            <div class="col-md-6">
+                {{Form::label('representante','Representante Actividad*')}}
+                {{Form::select('representante[]',$representante,$representanteSeleccionado,['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
+            </div>
+
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>
             </div>

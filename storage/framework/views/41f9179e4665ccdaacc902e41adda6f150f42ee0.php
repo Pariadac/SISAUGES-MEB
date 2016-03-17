@@ -69,7 +69,7 @@
             <div class="col-md-6">
                 <?php echo e(Form::label('representante','Representante Actividad*')); ?>
 
-                <?php echo e(Form::select('representante',$representante,'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])); ?>
+                <?php echo e(Form::select('representante[]',$representante,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])); ?>
 
             </div>
 

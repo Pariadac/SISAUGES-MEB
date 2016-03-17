@@ -14,7 +14,7 @@ class Actividad extends Model
 
     public function representantes()
     {
-        return $this->belongsToMany(Representante::class,'representante_actividad','id_representante','id_actividad');
+        return $this->belongsToMany(Representante::class,'representante_actividad','id_actividad','id_representante');
     }
 
     public function tesistas()
@@ -24,7 +24,7 @@ class Actividad extends Model
 
     public function muestras()
     {
-        return $this->belongsToMany(Muestra::class,'muestra_actividad','id_muestra','id_actividad');
+        return $this->belongsToMany(Muestra::class,'muestra_actividad','id_actividad','id_muestra');
     }
 
     public function sector()

@@ -26,11 +26,11 @@ Route::get('/', function () {
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['prefix'=>'superuser', 'middleware' => ['web','su']], function () {
     //
 });
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['web','admin']], function () {
     Route::auth();
 
     Route::get('tesista','TesistaController@index');

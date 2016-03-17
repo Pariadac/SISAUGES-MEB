@@ -60,7 +60,7 @@
             </div>
             <div class="col-md-6">
                 {{Form::label('representante','Representante Actividad*')}}
-                {{Form::select('representante',$representante,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
+                {{Form::select('representante[]',$representante,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
             </div>
 
 

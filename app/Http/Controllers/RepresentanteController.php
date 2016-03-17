@@ -97,7 +97,7 @@ class RepresentanteController extends Controller
         $representante->email = \Request::Input('email');
         $representante->telefono = \Request::Input('telefono');
         $representante->save();
-        $rep = $representante->id_representante;
+
         $institucion = \Request::Input('institucion');
         $departamento = \Request::Input('departamento');
         foreach($institucion as $ins)

@@ -48,9 +48,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \SISAUGES\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-        'superuser' => \SISAUGES\Http\Middleware\SuperuserMiddleware::class,
-        'administrador' => \SISAUGES\Http\Middleware\AdministradorMiddleware::class,
+        'su' => \SISAUGES\Http\Middleware\SuperuserMiddleware::class,
+        'admin' => \SISAUGES\Http\Middleware\AdministradorMiddleware::class,
         'operador' => \SISAUGES\Http\Middleware\OperadorMiddleware::class,
-        'usuario' => \SISAUGES\Http\Middleware\UsuarioMiddleware::class
+        'user' => \SISAUGES\Http\Middleware\UsuarioMiddleware::class
     ];
 }
