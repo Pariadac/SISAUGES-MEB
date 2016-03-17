@@ -25,6 +25,8 @@ class Representante extends Model
     {
         return $this->belongsToMany(Departamento::class,
                                     'institucion_departamento_representante',
-                                    'id_representante','id_departamento')->withPivot('id_institucion');
+                                    'id_representante',
+                                    'id_departamento')
+                                    ->withPivot('id_institucion');
     }
 }

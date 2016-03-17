@@ -46,8 +46,7 @@
 
                     <?php echo Form::open(array('url' =>'actividad/eliminar/'.$act->id_actividad, 'method' => 'DELETE')); ?>
 
-                    
-                    <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
+                        <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     <?php echo Form::close(); ?>
 
                 </td>

@@ -104,7 +104,7 @@ class RepresentanteController extends Controller
         {
             foreach($departamento as $dep)
             {
-                $representante->institucion()->attach($ins, ['id_departamento'=>$dep], $rep);
+                $representante->institucion()->attach($ins, ['id_departamento'=>$dep]);
             }
         }
 
@@ -127,10 +127,6 @@ class RepresentanteController extends Controller
 
     public function update($id)
     {
-        $representanteInstitucion = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_institucion')
-            ->toArray();
-        $representanteDepartamento = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_departamento')
-            ->toArray();
         $representante = Representante::find($id);
         $representante->cedula=\Request::Input('cedula');
         $representante->nombre=\Request::Input('nombre');
@@ -138,17 +134,24 @@ class RepresentanteController extends Controller
         $representante->email=\Request::Input('email');
         $representante->telefono=\Request::Input('telefono');
         $representante->save();
-
-        $rep = $representante->id_representante;
+        $representante->institucion()->detach();
         $institucion = \Request::Input('institucion');
         $departamento = \Request::Input('departamento');
-        $representante->institucion()->sync($institucion, ['id_departamento'=>$departamento], $rep);
+        foreach($institucion as $ins)
+        {
+            foreach($departamento as $dep)
+            {
+
+                $representante->institucion()->attach($ins, ['id_departamento'=>$dep]);
+            }
+        }
         return redirect('representante')->with('message','El representante N°'.$id.' ha sido editado');
     }
 
     public function destroy($id)
     {
         $representante = Representante::find($id);
+        $representante->institucion()->detach();
         $representante->delete();
         return redirect('representante')->with('message','El representante '.$id.' ha sido eliminado');
     }

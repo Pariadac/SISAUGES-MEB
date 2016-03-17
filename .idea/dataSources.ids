@@ -10,8 +10,8 @@
       <schema id="2" parent="1" name="public">
         <object-id>2200</object-id>
         <comment>standard public schema</comment>
-        <introspection-state-number>5354</introspection-state-number>
-        <introspection-timestamp>2016-03-16.19:06:04.775</introspection-timestamp>
+        <introspection-state-number>5395</introspection-state-number>
+        <introspection-timestamp>2016-03-16.22:45:28.880</introspection-timestamp>
       </schema>
       <schema id="3" parent="1" name="pg_catalog">
         <object-id>11</object-id>
@@ -95,15 +95,15 @@
       </table>
       <table id="21" parent="2" name="departamento">
         <object-id>20766</object-id>
-        <state-number>4661</state-number>
+        <state-number>5395</state-number>
       </table>
       <table id="22" parent="2" name="institucion">
         <object-id>20028</object-id>
-        <state-number>4661</state-number>
+        <state-number>5395</state-number>
       </table>
       <table id="23" parent="2" name="institucion_departamento_representante">
-        <object-id>20772</object-id>
-        <state-number>4661</state-number>
+        <object-id>29042</object-id>
+        <state-number>5395</state-number>
       </table>
       <table id="24" parent="2" name="laboratorio">
         <object-id>20442</object-id>
@@ -135,7 +135,7 @@
       </table>
       <table id="31" parent="2" name="representante">
         <object-id>20001</object-id>
-        <state-number>4745</state-number>
+        <state-number>5395</state-number>
       </table>
       <table id="32" parent="2" name="representante_actividad">
         <object-id>20534</object-id>
@@ -20210,22 +20210,22 @@
         <primary>1</primary>
       </key>
       <column id="3598" parent="23" name="id_institucion">
-        <state-number>4661</state-number>
+        <state-number>5395</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
       <column id="3599" parent="23" name="id_departamento">
-        <state-number>4661</state-number>
+        <state-number>5395</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
       <column id="3600" parent="23" name="id_representante">
-        <state-number>4661</state-number>
+        <state-number>5395</state-number>
         <mandatory>1</mandatory>
         <data-type>integer</data-type>
       </column>
       <index id="3601" parent="23" name="pk_idr">
-        <object-id>20775</object-id>
+        <object-id>29045</object-id>
         <columns>id_departamento
 id_institucion
 id_representante</columns>
@@ -20253,6 +20253,7 @@ id_representante</columns>
       </foreign-key>
       <foreign-key id="3605" parent="23" name="fk_representante">
         <columns>id_representante</columns>
+        <ref-key>~.representante.pk_representante</ref-key>
         <cascade-update-rule>restrict</cascade-update-rule>
         <cascade-delete-rule>restrict</cascade-delete-rule>
       </foreign-key>
