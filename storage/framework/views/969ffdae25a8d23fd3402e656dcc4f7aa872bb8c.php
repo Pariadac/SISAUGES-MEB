@@ -9,7 +9,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución/Agregar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="<?php echo e(url('/representante')); ?>">Representante</a>/Agregar</label>
                 </li>
             </ol>
         </div>

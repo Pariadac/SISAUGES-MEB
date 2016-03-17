@@ -45,8 +45,7 @@
                     {!! Html::link('actividad/editar/'.$act->id_actividad, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
 
                     {!! Form::open(array('url' =>'actividad/eliminar/'.$act->id_actividad, 'method' => 'DELETE')) !!}
-                    
-                    <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
+                        <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
                     {!! Form::close() !!}
                 </td>
             </tr>

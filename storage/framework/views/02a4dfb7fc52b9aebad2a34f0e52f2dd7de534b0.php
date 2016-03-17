@@ -53,44 +53,23 @@
                 <th>Telefono Institucion</th>
                 <th class="tablaboton">Acción</th>
             </tr>
+            <?php foreach($mostrar as $m): ?>
+                <tr class="borrables">
+                    <td><?php echo e($m->nombre_institucion); ?></td>
+                    <td><?php echo e($m->direccion_institucion); ?></td>
+                    <td><?php echo e($m->correo_institucional); ?></td>
+                    <td><?php echo e($m->telefono_institucion); ?></td>
+                    <td>
+                        <?php echo Html::link('institucion/editar/'.$m->id_institucion,'Modificar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')); ?>
 
-              
-            
-            <?php
+                        <?php echo Form::open(array('url'=> 'institucion/eliminar/'.$m->id_institucion, 'method'=> 'DELETE')); ?>
 
+                            <a href=".' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
+                        <?php echo Form::close(); ?>
 
-            
-            if ($mostrar) {
-                
-            
-                $extremo=count($mostrar);
-                for ($i=0; $i <$extremo ; $i++) 
-                  { 
-
-
-                    echo '
-
-                    <tr class="borrables">
-                        <td>'.$mostrar[$i]->nombre_institucion.'</td> 
-                        <td>'.$mostrar[$i]->direccion_institucion.'</td> 
-                        <td>'.$mostrar[$i]->correo_institucional.'</td> 
-                        <td>'.$mostrar[$i]->telefono_institucion.'</td> 
-                        <td>
-                            <a href="/institucion/editar/'.$mostrar[$i]->id_institucion.'" name="singlebutton" class="glyphicon glyphicon-list btn btn-primary btn-xs">Modificar</a>
-                            <a href="/institucion/eliminar/'.$mostrar[$i]->id_institucion.' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
-                        </td>  
-                    </tr>
-
-                    ';
-                    
-                  }
-
-            }
-
-            
-            ?>
-
-
+                    </td>
+                </tr>
+            <?php endforeach; ?>
         </tbody>
 
 

@@ -90,39 +90,34 @@ class RepresentanteController extends Controller
 
     public function store()
     {
-        try
+        $representante = new Representante();
+        $representante->cedula = \Request::Input('cedula');
+        $representante->nombre = \Request::Input('nombre');
+        $representante->apellido = \Request::Input('apellido');
+        $representante->email = \Request::Input('email');
+        $representante->telefono = \Request::Input('telefono');
+        $representante->save();
+        $rep = $representante->id_representante;
+        $institucion = \Request::Input('institucion');
+        $departamento = \Request::Input('departamento');
+        foreach($institucion as $ins)
         {
-            $representante = new Representante();
-            $representante->cedula = \Request::Input('cedula');
-            $representante->nombre = \Request::Input('nombre');
-            $representante->apellido = \Request::Input('apellido');
-            $representante->email = \Request::Input('email');
-            $representante->telefono = \Request::Input('telefono');
-            $representante->save();
-            $rep = $representante->id_representante;
-            $institucion = \Request::Input('institucion');
-            $departamento = \Request::Input('departamento');
-            foreach($institucion as $ins)
+            foreach($departamento as $dep)
             {
-                foreach($departamento as $dep)
-                {
-                    $representante->institucion()->attach($ins, ['id_departamento'=>$dep], $rep);
-                }
+                $representante->institucion()->attach($ins, ['id_departamento'=>$dep], $rep);
             }
-            return redirect('representante')->with('message', 'Se ha agregado el representante con exito');
         }
-        catch(Exception $e)
-        {
-            return $e->getMessage();
-        }
+
+        return redirect('representante')->with('message', 'Se ha agregado el representante con exito');
     }
 
     public function edit($id)
     {
         $representante = Representante::find($id);
         $representanteInstitucion = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_institucion')
-                                                    ->toArray();
-        $representanteDepartamento = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_departamento')->toArray();
+                                    ->toArray();
+        $representanteDepartamento = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_departamento')
+                                    ->toArray();
         return view('representante.editar')->with(['representante'              =>  $representante,
                                                     'institucion'               =>  $this->institucion,
                                                     'departamento'              =>  $this->departamento,
@@ -132,6 +127,10 @@ class RepresentanteController extends Controller
 
     public function update($id)
     {
+        $representanteInstitucion = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_institucion')
+            ->toArray();
+        $representanteDepartamento = Representante::find($id)->institucion()->pluck('institucion_departamento_representante.id_departamento')
+            ->toArray();
         $representante = Representante::find($id);
         $representante->cedula=\Request::Input('cedula');
         $representante->nombre=\Request::Input('nombre');

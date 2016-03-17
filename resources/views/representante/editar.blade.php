@@ -48,11 +48,11 @@
             </div>
             <div class="col-md-6">
                 {{Form::label('institucion','Institución *')}}
-                {{Form::select('institucion[]',$institucion,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
+                {{Form::select('institucion[]',$institucion,$representanteInstitucion,['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
             </div>
             <div class="col-md-6">
                 {{Form::label('departamento','Departamento *')}}
-                {{Form::select('departamento[]',$departamento,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
+                {{Form::select('departamento[]',$departamento,$representanteDepartamento,['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
             </div>
 
         </div>

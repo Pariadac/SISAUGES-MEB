@@ -10,7 +10,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Institución</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Representante</label>
                 </li>
             </ol>
         </div>
