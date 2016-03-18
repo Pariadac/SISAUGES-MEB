@@ -40,11 +40,6 @@
                 <td>{{$rep->email}}</td>
                 <td class="misbotones">
                     {!! Html::link('representante/editar/'.$rep->id_representante, 'Editar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-
-                    {!! Form::open(array('url' =>'representante/eliminar/'.$rep->id_representante, 'method' => 'DELETE')) !!}
-                    <button type="submit" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</button>
-                    {!! Form::close() !!}
-
                 </td>
             </tr>
         @endforeach

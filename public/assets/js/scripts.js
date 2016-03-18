@@ -197,6 +197,14 @@ $(document).ready(function(){
 	});
 
 
+	$('.solomaximo').keyup(function (){
+	    var max=$(this).data('max');
+
+		if ($(this).val().length>max) {
+			$(this).val($(this).val().substr(0,max));
+		};
+	});
+
 
 	$('.alfanumericos').keyup(function (){
 
@@ -376,8 +384,6 @@ $(document).ready(function(){
     		borrar_img();
     	};
     }
-
-    setTimeout(borrar_img_iniciado(),5000);
 
 
 	$('#filebutton').on('change',function(){
@@ -617,8 +623,9 @@ $(document).ready(function(){
 
 			if ($(this).val()=="") {
 				error++;
+				var etiqueta=$(this).data('etiqueta');
 
-				$(this).attr('style','border-color:red;');
+				$('#etiquetarequerida-'+etiqueta).attr('style','color:red!important;');
 
 				if ($(this).attr('type')=='file') {
 

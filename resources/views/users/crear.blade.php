@@ -39,36 +39,36 @@
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-6">
-                    {{Form::label('nivelUsuario','Nivel Usuario*')}}
-                    {{Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple', 'title'=>'Seleccione una opcion'])}}
+                    {{Form::label('nivelUsuario','Nivel Usuario*',['id'=>"etiquetarequerida-1"])}}
+                    {{Form::select('nivelUsuario[]',$nivel,'',['class'=>'form-control selectpicker','multiple', 'title'=>'Seleccione una opcion', 'data-etiqueta'=>'1'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('cedula','Cedula*')}}
-                    {{Form::text('cedula',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('cedula','Cedula*',['id'=>"etiquetarequerida-2"])}}
+                    {{Form::text('cedula',null,['class'=>'form-control  camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'8', 'data-etiqueta'=>'2'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('nombre','Nombre*')}}
-                    {{Form::text('nombre',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('nombre','Nombre*',['id'=>"etiquetarequerida-3"])}}
+                    {{Form::text('nombre',null,['class'=>'form-control  camporequerido','type'=>'text', 'data-etiqueta'=>'3'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('apellido','Apellido*')}}
-                    {{Form::text('apellido',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('apellido','Apellido*',['id'=>"etiquetarequerida-4"])}}
+                    {{Form::text('apellido',null,['class'=>'form-control  camporequerido','type'=>'text', 'data-etiqueta'=>'4'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('email','Correo Electronico*')}}
-                    {{Form::text('email',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('email','Correo Electronico*',['id'=>"etiquetarequerida-5"])}}
+                    {{Form::text('email',null,['class'=>'form-control  camporequerido solomails','type'=>'text', 'data-etiqueta'=>'5'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('telefono','Telefono*')}}
-                    {{Form::text('telefono',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('telefono','Telefono*',['id'=>"etiquetarequerida-6"])}}
+                    {{Form::text('telefono',null,['class'=>'form-control  camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'11', 'data-etiqueta'=>'6'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('nombreUsuario','Nombre Usuario*')}}
-                    {{Form::text('nombreUsuario',null,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                    {{Form::label('nombreUsuario','Nombre Usuario*',['id'=>"etiquetarequerida-7"])}}
+                    {{Form::text('nombreUsuario',null,['class'=>'form-control  camporequerido','type'=>'text', 'data-etiqueta'=>'7'])}}
                 </div>
                 <div class="col-md-6">
-                    {{Form::label('contraseña','Contraseña*')}}
-                    {{Form::password('contraseña',['class'=>'form-control  camporequerido'])}}
+                    {{Form::label('contraseña','Contraseña*',['id'=>"etiquetarequerida-8"])}}
+                    {{Form::password('contraseña',['class'=>'form-control  camporequerido', 'data-etiqueta'=>'8'])}}
                 </div>
 
                 <div class="col-md-12 msnrequeridos">

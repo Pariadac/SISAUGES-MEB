@@ -21,7 +21,7 @@
     @if (Session::has('message'))
         <div class="alert alert-success">{{ Session::get('message') }}</div>
     @endif
-    <table class="table table-bordered table-responsive">
+    <table class="table table-responsive">
         <tr>
             <th>Cedula</th>
             <th>Nombre</th>

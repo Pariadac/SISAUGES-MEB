@@ -156,9 +156,6 @@
                             <li>
                                 <a href="{{ url('/login') }}">Iniciar Sesion</a>
                             </li>
-                            <li>
-                                <a href="{{ url('/register') }}">Registrarse</a>
-                            </li>
                             
                         @else
 
@@ -294,9 +291,6 @@
                             </li>
                         </ul>
                     </li>-->
-                    <li>
-                        <a href="blank-page.html"><i class="fa fa-fw fa-paste"></i>Reportes</a>
-                    </li>
                     </ul>
 
 

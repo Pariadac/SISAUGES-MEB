@@ -3,7 +3,9 @@
 @section('content')
 
 
-				<?php $murl='muestras/guardar'; ?>
+				<?php $murl='muestras/pdf'; 
+
+                ?>
 
 
 				<!-- Page Heading -->
@@ -22,64 +24,73 @@
                 <!-- /.row -->
 
 
+                {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform imgcontenedortemporal', 'enctype'=> "multipart/form-data"])!!}
+                <div class="panel panel-default">
+                        <div class="panel-body">
+                            <div class="row" id="espacio">
+                            	<div class="col-md-12">
+                                    <div class="col-md-4">
 
-                <div id="imgconttemp">
-                    {!!Form::open(['url' => $murl, 'method' => 'POST','class'=>'form-horizontal muestraform imgcontenedortemporal', 'enctype'=> "multipart/form-data"])!!}
-
-
-                        <?php
-
-                                
-                                echo '<input name="rutamuestra[]" type="hidden" value="'.url("/storage").'/'.$muestra->ruta_img_muestra.'">';
-
-
-                        ?>
-
-
-                    {!! Form::close() !!}
-                </div>
+                                        <div class="col-md-12 imgcargada" style="display:block!important;" >
+                                            <div class="alineador" style="margin-top:0px!important;">
+                                                <img src="<?php if ($muestra) {echo url('/storage').'/'.$muestra->ruta_img_muestra;} ?>" id="thumbnil">
+                                            </div>
+                                        </div>  
 
 
+                                    </div>
+                                    <div class="col-md-8" id="principal-suit">
+                                        <div class="col-md-4">
+                                            <label>Actividad</label>
+                                            <p><?php echo $mymuestra['actividad-d'][0]->nombre_actividad;?></p>
+                                            <input type="hidden" value="<?php echo $mymuestra['actividad-d'][0]->nombre_actividad;?>" name="actividad">
+                                        </div>
 
+                                        <div class="col-md-4">
+                                            <label>Institución</label>
+                                            <p><?php echo $mymuestra['institucion-d'][0]->nombre_institucion;?></p>
+                                            <input type="hidden" value="<?php echo $mymuestra['institucion-d'][0]->nombre_institucion;?>" name="indtitucion">
+                                        </div>
 
-                <div class="row" id="espacio">
-                	<div class="col-md-4">
+                                        <div class="col-md-4">
+                                            <label>Representante</label>
+                                            <p><?php echo $mymuestra['representante-d'][0]->nombre;?></p>
+                                            <input type="hidden" value="<?php echo $mymuestra['representante-d'][0]->nombre;?>" name="representante">
+                                        </div>
 
-                		<div class="col-md-12 imgcargada" style="display:block!important;" >
-                            <div class="alineador" style="margin-top:0px!important;">
-                                <img src="<?php if ($muestra) {echo url('/storage').'/'.$muestra->ruta_img_muestra;} ?>" id="thumbnil">
+                                        <div class="col-md-4">
+                                            <label>Tecnica de Estudio</label>
+                                            <p><?php echo $mymuestra['tecnica-d'][0]->descripcion_tecnica_estudio;?></p>
+                                            <input type="hidden" value="<?php echo $mymuestra['tecnica-d'][0]->descripcion_tecnica_estudio;?>" name="tecnica">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <label>Fecha Recepción</label>
+                                            <p><?php echo $muestra->fecha_recepcion; ?></p>
+                                            
+                                        </div>
+
+                                        <div class="col-md-4">
+                                            <label>Fecha de Analisis</label>
+                                            <p><?php echo $muestra->fecha_analisis; ?></p>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <label>Descripción</label>
+                                            <p><?php echo $muestra->descripcion_muestra; ?></p>
+                                        </div>          
+
+                                    </div>
+
+                                    <div class="col-md-12 botoneras">
+                                        <button class="btn btn-primary">Reporte</button>
+                                        <input type="hidden" value="<?php echo $muestra->id_muestra ?>" name="id_mues">
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>  
-
-
-                	</div>
-                	<div class="col-md-8" id="principal-suit">
-                		<div class="col-md-6">
-                			<label>Actividad</label>
-                			<p>LOREM</p>
-                		</div>
-                		<div class="col-md-6">
-                			<label>Codigo</label>
-                			<p><?php echo $muestra->codigo_muestra; ?></p>
-                		</div>
-                		<div class="col-md-6">
-                			<label>Fecha Recepción</label>
-                			<p><?php echo $muestra->fecha_recepcion; ?></p>
-                			
-                		</div>
-
-                		<div class="col-md-6">
-                			<label>Fecha de Analisis</label>
-                			<p><?php echo $muestra->fecha_analisis; ?></p>
-                		</div>
-
-                		<div class="col-md-12">
-                			<label>Descripción</label>
-                			<p><?php echo $muestra->descripcion_muestra; ?></p>
-                		</div>
-
-                	</div>
+                        </div>
                 </div>
+                {!! Form::close() !!}
 
                 <div class="row">
                 	<div class="col-md-10 col-md-offset-1 enfatizador">

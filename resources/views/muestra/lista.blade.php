@@ -34,13 +34,30 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Actividad</label>
-                                <input autocomplete="off" type="text" id="lock1" name="actividades_mues_bus_f" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
+
+                                <select class="my_select_box chosen-select" name="actividades_mues_bus">
+                                    <option value="">Seleccione...</option>
+                                    <?php                                     
+
+
+                                       foreach ($actividad as $key) {
+                                          
+                                            echo '<option value="'.$key->id_actividad.'">'.$key->nombre_actividad.'</option>';
+                                          
+                                        }
+
+                                    ?>
+
+                                </select>
+
+
+                                <!--<input autocomplete="off" type="text" id="lock1" name="actividades_mues_bus_f" class="form-control mi-chosen" data-location="1" placeholder="Actividad">
 
                                 <input type="hidden" name="actividades_mues_bus" id="t_lock1" value="">
 
                                 <ul class="oculto1" id="location1">
                                     
-                                </ul>
+                                </ul>-->
 
                             </div>
                             
@@ -49,12 +66,28 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label>Institucion</label>
-                                <input autocomplete="off" type="text" id="lock3" name="institucion_mues_bus_f" class="form-control mi-chosen" data-location="3" placeholder="Institución">
+
+                                <select class="my_select_box chosen-select" name="institucion_mues_bus">
+                                    <option value="">Seleccione...</option>
+                                    <?php                                     
+
+
+                                       foreach ($institucion as $key) {
+                                          
+                                            echo '<option value="'.$key->id_actividad.'">'.$key->nombre_institucion.'</option>';
+                                          
+                                        }
+
+                                    ?>
+
+                                </select>
+
+                                <!--<input autocomplete="off" type="text" id="lock3" name="institucion_mues_bus_f" class="form-control mi-chosen" data-location="3" placeholder="Institución">
                                 <input type="hidden" name="institucion_mues_bus" id="t_lock3" value="">
 
                                 <ul class="oculto1" id="location3">
                                     
-                                </ul>
+                                </ul>-->
 
                             </div>
                         </div>
@@ -63,7 +96,7 @@
                              <div class="form-group">
                                 <label>Tecnica de Estudio</label>
 
-                                <select id="tipo_muestra" name="tecnica_mues_bus" class="form-control">
+                                <select id="tipo_muestra" name="tecnica_mues_bus" class="my_select_box chosen-select">
                                   <option value="">Seleccione...</option>
                                   <?php
 

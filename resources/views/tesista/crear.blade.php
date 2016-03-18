@@ -37,36 +37,36 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('cedula','Cedula Tesista*')}}
-                {{Form::text('cedula',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('cedula','Cedula Tesista*',['id'=>"etiquetarequerida-1"])}}
+                {{Form::text('cedula',null,['class'=>'form-control camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'8', 'data-etiqueta'=>'1'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombre','Nombre Tesista*')}}
-                {{Form::text('nombre',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('nombre','Nombre Tesista*',['id'=>"etiquetarequerida-2"])}}
+                {{Form::text('nombre',null,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'2'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('apellido','Apellido Tesista*')}}
-                {{Form::text('apellido',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('apellido','Apellido Tesista*',['id'=>"etiquetarequerida-3"])}}
+                {{Form::text('apellido',null,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'3'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('email','Correo Electronico Tesista*')}}
-                {{Form::text('email',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('email','Correo Electronico Tesista*',['id'=>"etiquetarequerida-4"])}}
+                {{Form::text('email',null,['class'=>'form-control camporequerido solomails','type'=>'text', 'data-etiqueta'=>'4'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('telefono','Telefono Tesista*')}}
-                {{Form::text('telefono',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('telefono','Telefono Tesista*',['id'=>"etiquetarequerida-5"])}}
+                {{Form::text('telefono',null,['class'=>'form-control camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'11' , 'data-etiqueta'=>'5'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('carrera','Carrera Tesista*')}}
-                {{Form::text('carrera',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('carrera','Carrera Tesista*',['id'=>"etiquetarequerida-6"])}}
+                {{Form::text('carrera',null,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'6'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('semestre','Semestre/Año Tesista*')}}
-                {{Form::text('semestre',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('semestre','Semestre/Año Tesista*',['id'=>"etiquetarequerida-7"])}}
+                {{Form::text('semestre',null,['class'=>'form-control camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'4', 'data-etiqueta'=>'7'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('actividad','Actividad relacionada*')}}
-                {{Form::select('actividad',$actividad,null,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+                {{Form::label('actividad','Actividad relacionada*',['id'=>"etiquetarequerida-8"])}}
+                {{Form::select('actividad',$actividad,null,['class'=>'form-control selectpicker','title'=>'Seleccione una opcion', 'data-etiqueta'=>'8'])}}
             </div>
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>

@@ -36,33 +36,32 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('nombreActividad','Nombre de la Actividad*')}}
-                {{Form::text('nombreActividad',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('nombreActividad','Nombre de la Actividad*',['id'=>"etiquetarequerida-1"])}}
+                {{Form::text('nombreActividad',null,['class'=>'form-control camporequerido','type'=>'text','data-etiqueta'=>'1'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('sectorActividad','Sector Involucrado*')}}
-                {{Form::select('sectorActividad',$sectorActividad,'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+                {{Form::label('sectorActividad','Sector Involucrado*',['id'=>"etiquetarequerida-2"])}}
+                {{Form::select('sectorActividad',$sectorActividad,'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion', 'data-etiqueta'=>'2'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('statusActividad','Status Actividad*')}}
+                {{Form::label('statusActividad','Status Actividad*',['id'=>"etiquetarequerida-3"])}}
                 {{Form::select('statusActividad',['No iniciado' => 'No Iniciado',
                                                   'Iniciado'    => 'Iniciado',
                                                   'En progreso' => 'En Progreso',
-                                                  'Culminado'   => 'Culminado'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+                                                  'Culminado'   => 'Culminado'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion', 'data-etiqueta'=>'3'])}}
             </div>
 
             <div class="col-md-6">
-                {{Form::label('permisoActividad','Permisologia*')}}
+                {{Form::label('permisoActividad','Permisologia*',['id'=>"etiquetarequerida-4"])}}
                 {{Form::select('permisoActividad',['Publico'    => 'Publico',
-                                                   'Privado'    => 'Privado'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion'])}}
+                                                   'Privado'    => 'Privado'],'',['class'=>'form-control selectpicker','title'=>'Seleccione una opcion', 'data-etiqueta'=>'4'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('representante','Representante Actividad*')}}
-                {{Form::select('representante[]',$representante,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion'])}}
+                {{Form::label('representante','Representante Actividad*',['id'=>"etiquetarequerida-5"])}}
+                {{Form::select('representante[]',$representante,'',['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion', 'data-etiqueta'=>'5'])}}
             </div>
-
 
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>

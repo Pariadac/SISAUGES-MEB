@@ -39,23 +39,23 @@
         <div class="panel-body">
             
              <div class="col-md-6">
-                {{Form::label('Nombre de la institucion*')}}
-                {{Form::text('nomb_inst',$institucion->nombre_institucion,['class'=>'form-control  camporequerido','type'=>'text'])}}
+                {{Form::label('nomb_inst','Nombre de la institucion*',['id'=>"etiquetarequerida-1"])}}
+                {{Form::text('nomb_inst',$institucion->nombre_institucion,['class'=>'form-control  camporequerido','type'=>'text', 'data-etiqueta'=>'1'])}}
             </div>
            
             <div class="col-md-6">
-                {{Form::label('Direccion de la Institucion*')}}
-                {{Form::text('direccion_inst',$institucion->direccion_institucion,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('direccion_inst','Direccion de la Institucion*',['id'=>"etiquetarequerida-2"])}}
+                {{Form::text('direccion_inst',$institucion->direccion_institucion,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'2'])}}
             </div>
             
             <div class="col-md-6">
-                {{Form::label('Correo de la institucion*')}}
-                {{Form::text('correo_inst',$institucion->correo_institucional,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('correo_inst','Correo de la institucion*',['id'=>"etiquetarequerida-3"])}}
+                {{Form::text('correo_inst',$institucion->correo_institucional,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'3'])}}
             </div>
            
             <div class="col-md-6">
-                {{Form::label('Telefono de la institucion*')}}
-                {{Form::text('telefono_inst',$institucion->telefono_institucion,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('telefono_inst','Telefono de la institucion*',['id'=>"etiquetarequerida-4"])}}
+                {{Form::text('telefono_inst',$institucion->telefono_institucion,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'4'])}}
             </div>
            
         </div>

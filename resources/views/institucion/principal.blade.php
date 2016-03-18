@@ -60,9 +60,7 @@
                     <td>{{$m->telefono_institucion}}</td>
                     <td>
                         {!! Html::link('institucion/editar/'.$m->id_institucion,'Modificar', array('class' => 'glyphicon glyphicon-pencil btn btn-warning btn-xs')) !!}
-                        {!! Form::open(array('url'=> 'institucion/eliminar/'.$m->id_institucion, 'method'=> 'DELETE')) !!}
-                            <a href=".' " name="singlebutton" class="glyphicon glyphicon-trash btn btn-danger btn-xs">Eliminar</a>
-                        {!! Form::close() !!}
+
                     </td>
                 </tr>
             @endforeach

@@ -49,8 +49,8 @@
             <div class="panel-body">
                 
                  <div class="col-md-6">
-                    {{Form::label('Departamento*')}}
-                    {{Form::text('nomb',null,['class'=>'form-control camporequerido','type'=>'text'])}}
+                    {{Form::label('nomb','Departamento*',['id'=>"etiquetarequerida-1"])}}
+                    {{Form::text('nomb',null,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'1'])}}
                 </div>   
 
 

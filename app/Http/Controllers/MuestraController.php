@@ -41,6 +41,7 @@ use SISAUGES\Muestra;
 use SISAUGES\Actividad;
 use SISAUGES\TecnicaEstudio;
 use SISAUGES\Representante;
+use SISAUGES\Institucion;
 use Illuminate\Pagination\LengthAwarePaginator;
 use PDF;
 
@@ -113,7 +114,7 @@ class MuestraController extends Controller
 
         	foreach ($rep as $llave2) {
 
-        		$act=DB::table('institucion_departamento_representante')->where('id_representante',$llave2->id_representante)->get();
+        		$act=DB::table('institucion_departamento_representante')->where('id_representante','=',$llave2->id_representante)->get();
 
         		foreach ($act as $llave3) {
         			
@@ -123,6 +124,29 @@ class MuestraController extends Controller
 
         		}
         	}
+
+        }
+
+        return $aux; 
+
+    }
+
+
+    public function obtener_representante($valor){
+
+        $inst=DB::table('muestra_actividad')->where('id_muestra','=',$valor)->get();
+        $aux=array();
+
+        foreach ($inst as $llave1) {
+        
+            $rep=DB::table('representante_actividad')->where('id_actividad','=',$llave1->id_actividad)->get();
+
+            foreach ($rep as $llave2) {
+
+                $act=DB::table('representante')->where('id_representante','=',$llave2->id_representante)->get();
+
+                $aux=array_merge($aux,$act);
+            }
 
         }
 
@@ -540,13 +564,15 @@ class MuestraController extends Controller
 
 
         $tecnica=TecnicaEstudio::all();
+        $actividad=Actividad::all();
+        $institucion=Institucion::all();
 
 
         $paginador=new LengthAwarePaginator($itemsForCurrentPage, count($totaldatos), $perPage, $page, ['path' => 'lista']);
 
 
 
-    	return view('muestra.lista',compact('paginador','tecnica','itemsForCurrentPage'));
+    	return view('muestra.lista',compact('paginador','tecnica','itemsForCurrentPage','actividad','institucion'));
     }
 
 
@@ -775,12 +801,15 @@ class MuestraController extends Controller
 
 
         $tecnica=TecnicaEstudio::all();
+        $tecnica=TecnicaEstudio::all();
+        $actividad=Actividad::all();
+        $institucion=Institucion::all();
 
 
         $paginador=new LengthAwarePaginator($itemsForCurrentPage, $total_pages, $perPage, $page, ['path' => 'buscarfiltro','query' =>$query]);
 
 
-        return view('muestra.prueba',compact('paginador','tecnica','itemsForCurrentPage')); 
+        return view('muestra.prueba',compact('paginador','tecnica','itemsForCurrentPage','actividad','institucion')); 
 
 
     }
@@ -868,7 +897,15 @@ class MuestraController extends Controller
                     $muestra->fecha_recepcion=$data['truefecharep'];
                     $muestra->fecha_analisis=$data['truefechaana'];
 
-                    $muestra->save();
+                    $val=$muestra->save();
+
+                    if ($val) {
+                        
+                        DB::table('muestra_actividad')->where('id_muestra','=',$muestra->id_muestra)->update(['id_actividad'=>$data['trueactividad'],'id_muestra'=>$muestra->id_muestra]);
+
+                        DB::table('muestra_tecnica_estudio')->where('id_muestra','=',$muestra->id_muestra)->update(['id_tecnica_estudio'=>$data['truetecnic'],'id_muestra'=>$muestra->id_muestra]);
+
+                    }
 
                 }
 
@@ -919,6 +956,15 @@ class MuestraController extends Controller
 
         $releated=array();
 
+        $mymuestra=array();
+
+        $mymuestra['muestra-d']=$muestra;
+        $mymuestra['actividad-d']=$this->obtener_actividad($id);
+        $mymuestra['institucion-d']=$this->obtener_institucion($id);
+        $mymuestra['tecnica-d']=$this->obtener_tecnica($id);
+        $mymuestra['representante-d']=$this->obtener_representante($id);
+
+
         if (Storage::exists($muestra->ruta_img_muestra))
         {
             $muestracontenido=Storage::size($muestra->ruta_img_muestra);
@@ -931,16 +977,19 @@ class MuestraController extends Controller
 
             foreach ($muestras_related as $key => $value) {
                 
-                $muestras_related[$key]->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$value->ruta_img_muestra,$value->id_muestra);
+                if ($value->id_muestra!=$id) {
+                    $muestras_related[$key]->ruta_img_muestra=$this->generar_imagen_visible(public_path().'/storage/'.$value->ruta_img_muestra,$value->id_muestra);
 
-                DB::table('auximg')->insert(['description_img'=>$muestras_related[$key]->ruta_img_muestra,'orgpage_img'=>$value->ruta_img_muestra]);
+                    DB::table('auximg')->insert(['description_img'=>$muestras_related[$key]->ruta_img_muestra,'orgpage_img'=>$value->ruta_img_muestra]);
 
-                $valores['muestra-d']=$muestras_related[$key];
-                $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
-                $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
-                $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
-                
-                $releated[]=$valores;
+                    $valores['muestra-d']=$muestras_related[$key];
+                    $valores['actividad-d']=$this->obtener_actividad($value->id_muestra);
+                    $valores['institucion-d']=$this->obtener_institucion($value->id_muestra);
+                    $valores['tecnica-d']=$this->obtener_tecnica($value->id_muestra);
+                    $valores['representante-d']=$this->obtener_representante($value->id_muestra);
+                    
+                    $releated[]=$valores;
+                }
 
 
             }
@@ -963,7 +1012,7 @@ class MuestraController extends Controller
         $actividad=Actividad::all();
         $tecnica=TecnicaEstudio::all();
 
-        return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues','releated'));
+        return view('muestra.detail',compact('muestra','actividad','tecnica','muestracontenido','tecnica_estudio_mues','releated','mymuestra'));
 
     }
 
@@ -1007,27 +1056,40 @@ class MuestraController extends Controller
 
     }
 
-    public function generate_singlepdf(){
+    public function get_data($id){
 
-        $data = $this->getData();
-        $date = date('Y-m-d');
-        $invoice = "2222";
-        $view =  \View::make('pdf.invoice', compact('data', 'date', 'invoice'))->render();
-        $pdf = \App::make('dompdf.wrapper');
-        $pdf->loadHTML($view);
-        return $pdf->stream('invoice');
+        $this->eliminarimg_bdd();
+        
+        $muestra=Muestra::find($id);
+
+        $ruta_aux="";
+
+        if (Storage::exists($muestra->ruta_img_muestra))
+        {
+
+            $ruta_aux=$this->generar_imagen_visible(public_path().'/storage/'.$muestra->ruta_img_muestra,$muestra->id_muestra);
+
+            $muestra->tipo_muestra=$ruta_aux;
+
+            DB::table('auximg')->insert(['description_img'=>$ruta_aux,'orgpage_img'=>$muestra->ruta_img_muestra]);
+
+        }
+
+        return $muestra;
+
 
     }
 
-    public function getData() 
-    {
-        $data =  [
-            'quantity'      => '1' ,
-            'description'   => 'some ramdom text',
-            'price'   => '500',
-            'total'     => '500'
-        ];
-        return $data;
+    public function generate_singlepdf(Request $request){
+
+        $data1=$this->get_data($request->id_mues);
+        $date = date('Y-m-d');
+        $invoice = "2222";
+        $view =  \View::make('pdf.invoice', compact('date', 'invoice','data1','request'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('Muestra.pdf');
+
     }
 
 

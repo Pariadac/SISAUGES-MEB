@@ -24,6 +24,9 @@ p{
 	overflow-x:hidden;
 }
 
+.imgcargada{
+	margin-bottom: 40px;
+}
 div#miniaturas .col-md-6 {
     margin-bottom: 5px;
 }
@@ -35,6 +38,10 @@ div#miniaturas .col-md-6 {
 	overflow: hidden;
 	border: solid 4px #365073;
 
+}
+
+.botoneras{
+	text-align: center;
 }
 
 #miniaturas span{
@@ -266,6 +273,13 @@ div#miniaturas .col-md-6 {
 
 .cabezera img{
 	width: 100%;
+}
+
+#mycontenedor{
+	width: 100%;
+    overflow: hidden;
+    border: solid 2px grey;
+    padding: 10px;
 }
 
 .alineador{

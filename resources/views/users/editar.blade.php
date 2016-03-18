@@ -38,37 +38,37 @@
     <div class="panel panel-default">
         <div class="panel-body">
             <div class="col-md-6">
-                {{Form::label('nivelUsuario','Nivel Usuario*')}}
-                {{Form::select('nivelUsuario[]',$nivel,$usuarioSeleccionado,['class'=>'form-control selectpicker','multiple'])}}
+                {{Form::label('nivelUsuario','Nivel Usuario*',['id'=>"etiquetarequerida-1"])}}
+                {{Form::select('nivelUsuario[]',$nivel,$usuarioSeleccionado,['class'=>'form-control selectpicker','multiple','title'=>'Seleccione una opcion', 'data-etiqueta'=>'1'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('cedula','Cedula Usuario*')}}
-                {{Form::text('cedula',\Crypt::decrypt($usuario->cedula),['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('cedula','Cedula Usuario*',['id'=>"etiquetarequerida-2"])}}
+                {{Form::text('cedula',\Crypt::decrypt($usuario->cedula),['class'=>'form-control camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'8', 'data-etiqueta'=>'2'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombre','Nombre*')}}
-                {{Form::text('nombre',$usuario->nombre,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('nombre','Nombre*',['id'=>"etiquetarequerida-3"])}}
+                {{Form::text('nombre',$usuario->nombre,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'3'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('apellido','Apellido*')}}
-                {{Form::text('apellido',$usuario->apellido,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('apellido','Apellido*',['id'=>"etiquetarequerida-4"])}}
+                {{Form::text('apellido',$usuario->apellido,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'4'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('email','Correo Electronico*')}}
-                {{Form::text('email',$usuario->email,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('email','Correo Electronico*',['id'=>"etiquetarequerida-5"])}}
+                {{Form::text('email',$usuario->email,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'5'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('telefono','Telefono*')}}
-                {{Form::text('telefono',$usuario->telefono,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('telefono','Telefono*',['id'=>"etiquetarequerida-6"])}}
+                {{Form::text('telefono',$usuario->telefono,['class'=>'form-control camporequerido solo-numero solomaximo','type'=>'text', 'data-max'=>'11', 'data-etiqueta'=>'6'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('nombreUsuario','Nombre de Acceso*')}}
-                {{Form::text('nombreUsuario',$usuario->username,['class'=>'form-control camporequerido','type'=>'text'])}}
+                {{Form::label('nombreUsuario','Nombre de Acceso*',['id'=>"etiquetarequerida-7"])}}
+                {{Form::text('nombreUsuario',$usuario->username,['class'=>'form-control camporequerido','type'=>'text', 'data-etiqueta'=>'7'])}}
             </div>
             <div class="col-md-6">
-                {{Form::label('password','Contraseña*')}}
+                {{Form::label('password','Contraseña*',['id'=>"etiquetarequerida-8"])}}
                 {{Form::password('password',['class'=>'form-control camporequerido',
-                                            'placeholder'=> 'Introduzca nueva contraseña'])}}
+                                            'placeholder'=> 'Introduzca nueva contraseña', 'data-etiqueta'=>'8'])}}
             </div>
             <div class="col-md-12 msnrequeridos">
                 <p>Todos los campos con (*) son obligatorios</p>
