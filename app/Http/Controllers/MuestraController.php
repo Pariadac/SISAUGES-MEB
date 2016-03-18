@@ -42,6 +42,7 @@ use SISAUGES\Actividad;
 use SISAUGES\TecnicaEstudio;
 use SISAUGES\Representante;
 use Illuminate\Pagination\LengthAwarePaginator;
+use PDF;
 
 
 
@@ -263,6 +264,36 @@ class MuestraController extends Controller
             }  
 
         }
+
+
+    }
+
+
+    public function eliminarsingle(){
+
+        $request=Input::all();
+
+        $rutas=DB::table('auximg')->where('orgpage_img','=',$request['file'])->get();
+        var_dump($rutas);
+
+        if ($rutas) {
+
+            if (Storage::exists($rutas[0]->orgpage_img))
+            {
+                $retorno=Storage::delete($rutas[0]->orgpage_img);
+            }
+            if (Storage::exists($rutas[0]->description_img))
+            {
+                $retorno=Storage::delete($rutas[0]->description_img);
+            }
+
+            DB::table('auximg')->where('auxid', '=', $rutas[0]->auxid)->delete();
+
+        }
+
+        return response()->json([
+            'respuesta'=>'true'
+        ]);
 
 
     }
@@ -975,6 +1006,30 @@ class MuestraController extends Controller
         ]);
 
     }
+
+    public function generate_singlepdf(){
+
+        $data = $this->getData();
+        $date = date('Y-m-d');
+        $invoice = "2222";
+        $view =  \View::make('pdf.invoice', compact('data', 'date', 'invoice'))->render();
+        $pdf = \App::make('dompdf.wrapper');
+        $pdf->loadHTML($view);
+        return $pdf->stream('invoice');
+
+    }
+
+    public function getData() 
+    {
+        $data =  [
+            'quantity'      => '1' ,
+            'description'   => 'some ramdom text',
+            'price'   => '500',
+            'total'     => '500'
+        ];
+        return $data;
+    }
+
 
     public function destroy($id)
     {

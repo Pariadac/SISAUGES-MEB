@@ -37,6 +37,26 @@ div#miniaturas .col-md-6 {
 
 }
 
+#miniaturas span{
+
+    color: #fff;
+    background-color:#D00000  ;
+    padding: 3px;
+    text-align: center;
+    position: absolute;
+    right: 0;
+    border-radius: 0px 5px 5px 0px;
+
+}
+
+#miniaturas span:hover{
+
+    color: #fff;
+    background-color: #000;
+    cursor: pointer;
+
+}
+
 .select-si{
 	border: solid 4px #449d44!important;
 }

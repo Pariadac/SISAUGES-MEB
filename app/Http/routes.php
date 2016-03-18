@@ -124,6 +124,7 @@ Route::group(['middleware' => ['web','su']], function () {
     Route::get('muestras/editar/{id}','MuestraController@edit');
     Route::get('muestras/detalles/{id}','MuestraController@details');
     Route::post('muestras/edita/{id}','MuestraController@update');
+    Route::post('muestras/ajaxborrarsingle','MuestraController@eliminarsingle');
     Route::delete('muestras/eliminar{id}','MuestraController@destroy');
     Route::get('muestras/pru','MuestraController@generate_singlepdf');
 });

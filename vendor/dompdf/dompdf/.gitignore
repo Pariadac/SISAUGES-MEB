@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .DS_Store
 composer.lock
 vendor
@@ -6,3 +7,13 @@ vendor
 lib/fonts/*.afm.php
 lib/fonts/*.ufm.php
 lib/fonts/log.htm
+=======
+.DS_Store
+composer.lock
+vendor
+.idea
+.project
+lib/fonts/*.afm.php
+lib/fonts/*.ufm.php
+lib/fonts/log.htm
+>>>>>>> dbbef35a41cbe3b6e1b028410b971efc090a6a00
