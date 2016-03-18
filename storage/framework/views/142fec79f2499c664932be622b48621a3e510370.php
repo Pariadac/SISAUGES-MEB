@@ -9,7 +9,7 @@
             </h1>
             <ol class="breadcrumb">
                 <li class="active">
-                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label>Usuarios/Editar</label>
+                    <i class="fa fa-dashboard"></i> Ubicacion:/ <label><a href="<?php echo e(url('/usuario')); ?>">Usuarios</a>/Editar</label>
                 </li>
             </ol>
         </div>
@@ -40,7 +40,7 @@
             <div class="col-md-6">
                 <?php echo e(Form::label('nivelUsuario','Nivel Usuario*')); ?>
 
-                <?php echo e(Form::select('nivelUsuario[]',$nivel,$usuario_seleccionado,['class'=>'form-control selectpicker','multiple'])); ?>
+                <?php echo e(Form::select('nivelUsuario[]',$nivel,$usuarioSeleccionado,['class'=>'form-control selectpicker','multiple'])); ?>
 
             </div>
             <div class="col-md-6">

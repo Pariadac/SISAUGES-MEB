@@ -50,7 +50,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'su' => \SISAUGES\Http\Middleware\SuperuserMiddleware::class,
         'admin' => \SISAUGES\Http\Middleware\AdministradorMiddleware::class,
-        'operador' => \SISAUGES\Http\Middleware\OperadorMiddleware::class,
+        'oper' => \SISAUGES\Http\Middleware\OperadorMiddleware::class,
         'user' => \SISAUGES\Http\Middleware\UsuarioMiddleware::class
     ];
 }

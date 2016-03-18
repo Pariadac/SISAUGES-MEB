@@ -4,6 +4,7 @@ namespace SISAUGES\Http\Middleware;
 
 use Closure;
 use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Support\Facades\Auth;
 use SISAUGES\Http\Requests\Request;
 
 class AdministradorMiddleware
@@ -22,12 +23,16 @@ class AdministradorMiddleware
      * @param  \Closure  $next
      * @return mixed
      */
+
     public function handle($request, Closure $next)
     {
-//        if($this->auth->user()->id_nivel_de_usuario != 1)
-//        {
-//            dd($this->auth);
-//        }
+        if($this->auth->user())
+        {
+            if($this->auth->user()->nivelUsuarios->keyBy('id_nivel_de_usuario')->has(2) != true)
+            {
+                return redirect('/');
+            }
+        }
         return $next($request);
     }
 }

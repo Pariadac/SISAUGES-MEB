@@ -66,7 +66,7 @@ class AuthController extends Controller
     {
         Auth::guard($this->getGuard())->logout();
 
-        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : '/login');
+        return redirect(property_exists($this, 'redirectAfterLogout') ? $this->redirectAfterLogout : 'login');
     }
 
     /**
