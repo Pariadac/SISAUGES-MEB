@@ -35,7 +35,7 @@ class Authenticate
      */
     public function handle($request, Closure $next)
     {
-        if ($this->auth->guest())
+        /*if ($this->auth->guest())
         {
             if ($request->ajax() || $request->wantsJson())
             {
@@ -45,7 +45,7 @@ class Authenticate
             {
                 return redirect()->guest('login');
             }
-        }
+        }*/
 
         return $next($request);
     }

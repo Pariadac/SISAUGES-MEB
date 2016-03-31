@@ -87,7 +87,13 @@ class RepresentanteController extends Controller
         return view('representante.crear')->with(['departamento'=>$this->departamento,
                                                   'institucion'=>$this->institucion]);
     }
-
+    /**
+     * Metodo diseñado para almacenar el representantes en la base de datos
+     *
+     * @param void
+     *
+     * @return $menssage retorna el resultado de la operación
+     */
     public function store()
     {
         $representante = new Representante();
@@ -110,7 +116,17 @@ class RepresentanteController extends Controller
 
         return redirect('representante')->with('message', 'Se ha agregado el representante con exito');
     }
-
+    /**
+     * Metodo diseñado para direccionar a la pantalla de editar un Representante
+     *
+     * Este metodo redirige a la pantalla editar Representante
+     * la cual mostrara un formulario con los datos del representate seleccionado,
+     * con los campos necesarios para almacenar en la base de datos
+     *
+     * @param $id codigo de asociación del representante en la base de datos
+     *
+     * @return $array un arreglo de objetos de los datos del representante
+     */
     public function edit($id)
     {
         $representante = Representante::find($id);
@@ -124,7 +140,13 @@ class RepresentanteController extends Controller
                                                     'representanteInstitucion'  =>  $representanteInstitucion,
                                                     'representanteDepartamento' =>  $representanteDepartamento]);
     }
-
+    /**
+     * Metodo diseñado para actualizar los datos de un representante en la base de datos
+     *
+     * @param $id codigo de asociación del representante en la base de datos, $request datos enviados atravez del formulario
+     *
+     * @return $menssage retorna el resultado de la operación.
+     */
     public function update($id)
     {
         $representante = Representante::find($id);
@@ -147,7 +169,13 @@ class RepresentanteController extends Controller
         }
         return redirect('representante')->with('message','El representante N°'.$id.' ha sido editado');
     }
-
+    /**
+     * Metodo diseñado para eliminar los datos de un representante en la base de datos
+     *
+     * @param $id codigo de asociación del representante en la base de datos
+     *
+     * @return $menssage retorna el resultado de la operación.
+     */
     public function destroy($id)
     {
         $representante = Representante::find($id);
